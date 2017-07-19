@@ -20,4 +20,4 @@ def find_quantity_by_country_origin(countryOrigin, StartingYear, FinalYear):
 
     :rtype: Dict[str, int]
     """
-    return 54545
+    return 5454577
