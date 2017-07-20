@@ -44,7 +44,7 @@ class UtilidadesMatriz:
         elif columnas[posicion] == 'Ciudad_Destino':
             valores = tuples.Ciudad_Destino
         else: 
-            print 'El valor"',columnas[posicion],'" no existe'
+            print ('El valor"',columnas[posicion],'" no existe')
             
         listaValores = self.obtenerValoresLista(valores)
         
@@ -95,7 +95,7 @@ class UtilidadesMatriz:
         elif columnas[posValores] == 'Numero_Vuelos':
             valores = tuples.Numero_Vuelos
         else:
-            print 'El valor',columnas[posValores],' no existe'
+            print ('El valor',columnas[posValores],' no existe')
             
         return valores
     
@@ -107,7 +107,6 @@ class UtilidadesMatriz:
         dataFromDB = list(cursor.fetchall())     
         lista = list()
         tuplas = DataFrame(dataFromDB, columns = columnasCursor)
-        print tuplas.columns
         matriz = []
    
         if num_columns == 2:

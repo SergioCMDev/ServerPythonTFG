@@ -4,10 +4,12 @@ Created on Sat Jul  1 12:28:06 2017
 
 @author: wesrok
 """
-import pymysql
-
+#import pymysql
+import mysql.connector
 
 class MySQLAccess:
+    
+    connection = mysql.connector.connect(user='root', host='127.0.0.1', database='tfgtesting')
     def __init__(self):
 #        super(MySQLAccess, self).__init__()
         print("Clase MYSQL Cargada Correctamente ")
@@ -41,12 +43,13 @@ class MySQLAccess:
 
     #Muestra el mumero de vuelos entrantes en PaisDestino entre MinYear y MaxYear
     def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
-        cursor = connection.cursor()
-        select = str("SELECT YEAR(ava.date) AS Anio, SUM(ava.flights) AS Cantidad FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id WHERE countryDestino.name = '"+ PaisDestino +"' AND year(ava.date) >= '"+ MinYear +"' AND year(ava.date) <= '"+MaxYear+"' GROUP BY YEAR(ava.date), countryDestino.name")
-        cursor.execute(select)
-        return cursor
+        
+        self.cursor = self.connection.cursor()
+        self.query = "SELECT YEAR(ava.date) AS Anio, SUM(ava.flights) AS Cantidad FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id WHERE countryDestino.name = %s AND year(ava.date) >=  %s AND year(ava.date) <= %s GROUP BY YEAR(ava.date), countryDestino.name"
+        self.cursor.execute(self.query,(PaisDestino, MinYear , MaxYear) )  
+        return self.cursor
 
+    #TODO ORGANIZR CODIGO
 
     #Muestra todos los vuelos entrantes en PaisDestino organizados mensualmente  desde minYear hasta MaxYear
     def ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #OK

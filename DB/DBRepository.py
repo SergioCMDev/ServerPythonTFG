@@ -4,15 +4,54 @@ Created on Sun Jun 25 12:50:46 2017
 
 @author: wesrok
 """
-from ..DB.MySQL import MySQLAccess as DBContext
+from ..DB.MySQL import MySQLAccess as DBContext #Server
+#from DB.MySQL import MySQLAccess as DBContext #Local
+import mysql.connector
 
 class DBRepository():
+    
+    def ObtenerNumeroMesDadoNombre(self, Mes):
+        if Mes == 'Enero':
+            return '1'
+        elif Mes == 'Febrero':
+            return '2'
+        elif Mes == 'Marzo':
+            return '3'
+        elif Mes == 'Abril':
+            return '4'
+        elif Mes == 'Mayo':
+            return '5'
+        elif Mes == 'Junio':
+            return '6'
+        elif Mes == 'Julio':
+            return '7'
+        elif Mes == 'Agosto':
+            return '8'
+        elif Mes == 'Septiembre':
+            return '9'
+        elif Mes == 'Octubre':
+            return '10'
+        elif Mes == 'Noviembre':
+            return '11'
+        elif Mes == 'Diciembre':
+            return '12'
+    
+    
+    
+    
+    
     ###################################################AENA###################################################
     #######################################################VUELOS ENTRANTES####################################################
     def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(self, pais, anioInicio, anioFin):
-        db = DBContext()
-        labels   = ['Anio', 'Cantidad']
-        return (db.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax( pais, str(anioInicio), str(anioFin)), labels ) 
+        self.db = DBContext()
+
+        self.labels   = ['Anio', 'Cantidad']
+        return (self.db.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax( pais, str(anioInicio), str(anioFin)), self.labels ) 
+#        self.cnx = mysql.connector.connect(user='root', host='127.0.0.1', database='tfgtesting')
+#        self.cursor = self.cnx.cursor()
+#        self.query = "SELECT YEAR(ava.date) AS Anio, SUM(ava.flights) AS Cantidad FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id WHERE countryDestino.name = %s AND year(ava.date) >=  %s AND year(ava.date) <= %s GROUP BY YEAR(ava.date), countryDestino.name"
+#        self.cursor.execute(self.query,(pais, anioInicio , anioFin) )  
+#        return self.cursor, self.labels
     
     def ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnioMinMax(self, pais, anioInicio, anioFin):
         db = DBContext()

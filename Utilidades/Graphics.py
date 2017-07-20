@@ -20,8 +20,7 @@ class Graphics():
          
     def showOutliersInliers(self, datosOriginales, datosATestear):
         max_Y = np.amax(datosOriginales)
-        print type(datosOriginales)
-        print type(datosATestear)
+
 
     #   Obtenemos las fronteras de datos basandonos en los datos originales
         xx1, yy1 = np.meshgrid(np.linspace(-1, 13, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        

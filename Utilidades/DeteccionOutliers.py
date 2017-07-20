@@ -1,5 +1,5 @@
 import numpy as np
-from Graphics import Graphics as Graphics
+from Utilidades.Graphics import Graphics as Graphics
 from sklearn.covariance import EllipticEnvelope
 
 from sklearn.svm import OneClassSVM
@@ -70,8 +70,6 @@ class DeteccionOutliers:
         datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest)
         
         graphics = Graphics()
-        print type(datosOriginales)
-        print type(datosATestear)
         
         graphics.showOutliersInliers(datosOriginales, datosATestear)
 

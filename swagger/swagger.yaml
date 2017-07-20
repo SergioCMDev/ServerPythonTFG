@@ -47,8 +47,7 @@ paths:
         in: "path"
         description: "Status values that need to be considered for filter"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       - name: "StartingYear"
         in: "query"
         description: "Starting Year"

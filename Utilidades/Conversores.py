@@ -19,15 +19,23 @@ class ConversorCursorJson:
             return str(obj)
         raise TypeError
         
-    @staticmethod
-    def convertirAJson(self, cursor):
+    def convertirAJson(self, data):
 #        retval =  json.dumps(cursor, use_decimal = True)
-        retval =  json.dumps(cursor, default=self.default)
+        retval =  json.dumps(data, default=self.default)
 
         return retval 
+    
+    def ConvertirCursorToTuplasAnioCantidad(self, cursor):
+        retVal = list()
+        for (Anio, Cantidad) in cursor:
+            tuples = Anio, Cantidad
+            retVal.append(tuples)
+        return retVal
+
 
 class DecimalEncoder(json.JSONEncoder):
     def _iterencode(self, obj, markers=None):
          if isinstance(obj, Decimal):
             return str(obj)
          raise TypeError
+         

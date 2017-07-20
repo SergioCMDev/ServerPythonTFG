@@ -1,13 +1,23 @@
-import connexion
+#import connexion
 from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
 from ..DB.DBRepository import DBRepository as DBRepository
+from ..Utilidades.Conversores import ConversorCursorJson as Conversor
+import mysql.connector
+
+
 
 def find_quantity_by_country_origin(countryOrigin, StartingYear, FinalYear):
+    conversor = Conversor()
     repository = DBRepository()
-    repository.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(countryOrigin, StartingYear, FinalYear)
+
+    cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(countryOrigin, StartingYear, FinalYear)
+
+    lista =  conversor.ConvertirCursorToTuplasAnioCantidad(cursor)
+
+    retval = conversor.convertirAJson(lista)
     """
     Finds Incomingflights by Country Origin
     Fin number Of Tourist given a country of origin
@@ -20,4 +30,5 @@ def find_quantity_by_country_origin(countryOrigin, StartingYear, FinalYear):
 
     :rtype: Dict[str, int]
     """
-    return 5454577
+#    return retval
+    return retval
