@@ -3,7 +3,7 @@ from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
-from ..DBRepository import DBRepository as DBRepository
+from ..DB.DBRepository import DBRepository as DBRepository
 
 def find_quantity_by_country_origin(countryOrigin, StartingYear, FinalYear):
     repository = DBRepository()

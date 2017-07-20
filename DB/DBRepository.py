@@ -4,7 +4,8 @@ Created on Sun Jun 25 12:50:46 2017
 
 @author: wesrok
 """
-from Utilidades.MySQL import MySQLAccess as DBContext
+from ..DB.MySQL import MySQLAccess as DBContext
+
 class DBRepository():
     ###################################################AENA###################################################
     #######################################################VUELOS ENTRANTES####################################################
