@@ -12,18 +12,17 @@ class DBRepository():
     
     ###################################################AENA###################################################
     #######################################################VUELOS ENTRANTES####################################################
-    def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(self, paisDestino, anioInicio, anioFin):
+    def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(self, paisDestino, anioInicio, anioFin): ###
         self.db = DBContext()
         self.labels   = ['Anio', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax( paisDestino, str(anioInicio), str(anioFin)), self.labels ) 
 
-    
-    def ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnioMinMax(self, paisDestino, anioInicio, anioFin):
+    def ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnioMinMax(self, paisDestino, anioInicio, anioFin): ###
         self.db = DBContext()
         self.labels   = ['Anio', 'Mes', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnioMinMax( paisDestino, str(anioInicio), str(anioFin)), self.labels ) 
 
-    def ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoMesAnioMinMax(self, paisDestino, mes, anioInicio, anioFin):
+    def ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoMesAnioMinMax(self, paisDestino, mes, anioInicio, anioFin): ###
         self.db = DBContext()
         self.labels   = ['Anio', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoMesAnioMinMax( paisDestino, mes, str(anioInicio), str(anioFin)), self.labels )
@@ -38,32 +37,33 @@ class DBRepository():
         self.labels   = ['Anio', 'Ciudad', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaDivididosPorCiudadesDadoPaisDestinoAnioMinMax( paisDestino, str(anioInicio), str(anioFin)), self.labels )
 
-    def ObtenerDatosVuelosEntrantesEnUnMesAenaDivididosPorCiudadesDadoPaisDestinoMesAnioMinMax(self, paisDestino, mes,anioInicio, anioFin):
+
+    def ObtenerDatosVuelosEntrantesEnUnMesAenaDivididosPorCiudadesDadoPaisDestinoMesAnioMinMax(self, paisDestino, mes, anioInicio, anioFin):
         self.db = DBContext()
         self.labels   = ['Anio', 'Ciudad', 'Cantidad']
-        return (self.db.ObtenerDatosVuelosEntrantesEnUnMesAenaDivididosPorCiudadesDadoPaisDestinoMesAnioMinMax( paisDestino, mes, str(anioInicio), str(anioFin)), self.labels )
+        return (self.db.ObtenerDatosVuelosEntrantesEnUnMesAenaDivididosPorCiudadesDadoPaisDestinoMesAnioMinMax(paisDestino, mes, str(anioInicio), str(anioFin)), self.labels )
 
-    def ObtenerDatosVuelosEntrantesAenaEnUnAnioDivididosPorCiudadDadoPaisDestinoAnio(self, paisDestino, anio):
+    def ObtenerDatosVuelosEntrantesAenaEnUnAnioDivididosPorCiudadDadoPaisDestinoAnio(self, paisDestino, anio): ####
         self.db = DBContext()
         self.labels   = ['Anio', 'Ciudad', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaEnUnAnioDivididosPorCiudadDadoPaisDestinoAnio( paisDestino, str(anio)), self.labels )
 
-    def ObtenerDatosVuelosEntrantesAenaMensualmenteDivididosPorCiudadDadoPaisDestinoMesAnio(self, paisDestino, mes, Anio):
+    def ObtenerDatosVuelosEntrantesAenaMensualmenteDivididosPorCiudadDadoPaisDestinoMesAnio(self, paisDestino, mes, Anio): ##
         self.db = DBContext()
         self.labels   = ['Ciudad', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaMensualmenteDivididosPorCiudadDadoPaisDestinoMesAnio( paisDestino, mes, str(Anio)), self.labels )
 
-    def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoCiudadDestinoAnioMinMax(self, paisDestino, CiudadDestino, anioInicio, anioFin):
+    def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoCiudadDestinoAnioMinMax(self, paisDestino, CiudadDestino, anioInicio, anioFin): ###
         self.db = DBContext()
         self.labels   = ['Anio','Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoCiudadDestinoAnioMinMax( paisDestino,CiudadDestino, str(anioInicio), str(anioFin)), self.labels )
 
-    def ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoCiudadDestinoMesAnioMinMax(self, paisDestino, CiudadDestino, mes, anioInicio, anioFin):
+    def ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoCiudadDestinoMesAnioMinMax(self, paisDestino, CiudadDestino, mes, anioInicio, anioFin): ###
         self.db = DBContext()
         self.labels   = ['Anio', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoCiudadDestinoMesAnioMinMax(paisDestino, CiudadDestino, mes, str(anioInicio), str(anioFin)), self.labels )
 
-    def ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(self, paisDestino, CiudadDestino, Anio):
+    def ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(self, paisDestino, CiudadDestino, Anio): ###
         self.db = DBContext()
         self.labels   = ['Mes', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(paisDestino, CiudadDestino, str(Anio)), self.labels )

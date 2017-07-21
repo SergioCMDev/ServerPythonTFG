@@ -94,7 +94,7 @@ def obtener_cantidad_ciudad(Pais, Ciudad, AnioInicio, AnioFin): #OK
 
     :rtype: None
     """
-
+#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 
@@ -117,7 +117,7 @@ def obtener_cantidad_mensual(Pais, Anio): #OK
 
     :rtype: None
     """
-
+#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 
@@ -144,7 +144,7 @@ def obtener_cantidad_mensualmente(Pais, AnioInicio, AnioFin): #OK?
 
     :rtype: None
     """
-
+#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 
@@ -158,7 +158,7 @@ def obtener_cantidad_mensualmente(Pais, AnioInicio, AnioFin): #OK?
 
 
 
-def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin): #OK
+def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes durante el mismo mes en un rango de años
     Obtiene la cantidad de vuelos en un mes durante los años seleccionados
@@ -187,7 +187,7 @@ def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin): #OK
 
 
 
-def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes): #OK
+def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes):
     """
     Obtener cantidad de vuelos entrantes en las ciudades del pais durante el mes del año seleccionado
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
@@ -200,7 +200,7 @@ def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes): #OK
 
     :rtype: None
     """
-
+#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 
@@ -214,7 +214,7 @@ def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes): #OK
 
 
 
-def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin): #OK
+def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes en la ciudad del pais durante el mes del rango de años seleccionado
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
@@ -231,6 +231,7 @@ def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin): #OK
 
     :rtype: None
     """
+#    return 'do some magic!'
 
     conversor = Conversor()
     repository = DBRepository()
@@ -244,7 +245,7 @@ def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin): #OK
 
 
 
-def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes): #OK
+def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes):
     """
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años durante un mismo mes
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años durante el mismo
@@ -259,7 +260,7 @@ def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes): #OK
 
     :rtype: None
     """
-
+#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 
@@ -272,7 +273,7 @@ def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes): #OK
 
 
 
-def obtener_cantidad_por_ciudades(Pais, AnioInicio, AnioFin): #OK
+def obtener_cantidad_por_ciudades(Pais, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
@@ -285,7 +286,7 @@ def obtener_cantidad_por_ciudades(Pais, AnioInicio, AnioFin): #OK
 
     :rtype: None
     """
-
+#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 

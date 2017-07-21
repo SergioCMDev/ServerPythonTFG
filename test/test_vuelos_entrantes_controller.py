@@ -14,7 +14,7 @@ class TestVuelosEntrantesController(BaseTestCase):
         """
         Test case for obtener_cantidad_anio_ciudad
 
-        Obtener cantidad de vuelos entrantes en las ciudades de un pais durante el mes del año seleccionado
+        Obtener cantidades de vuelos entrantes en la ciudad del pais divididas por meses
         """
         query_string = [('Ciudad', 'Ciudad_example'),
                         ('Anio', 789)]
@@ -80,7 +80,7 @@ class TestVuelosEntrantesController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes de forma mensual dado un pais destino y un rango de años
         """
-        query_string = [('Anio_Fin', 789),
+        query_string = [('AnioInicio', 789),
                         ('AnioFin', 789)]
         response = self.client.open('/server/VuelosEntrantes/ObtenerCantidadMensualmente/{Pais}'.format(Pais='Pais_example'),
                                     method='GET',
@@ -93,7 +93,7 @@ class TestVuelosEntrantesController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes durante el mismo mes en un rango de años
         """
-        query_string = [('Mes', 789),
+        query_string = [('Mes', 'Mes_example'),
                         ('AnioInicio', 789),
                         ('AnioFin', 789)]
         response = self.client.open('/server/VuelosEntrantes/ObtenerCantidadMes/{Pais}'.format(Pais='Pais_example'),
@@ -108,7 +108,7 @@ class TestVuelosEntrantesController(BaseTestCase):
         Obtener cantidad de vuelos entrantes en las ciudades del pais durante el mes del año seleccionado
         """
         query_string = [('Anio', 789),
-                        ('Mes', 789)]
+                        ('Mes', 'Mes_example')]
         response = self.client.open('/server/VuelosEntrantes/ObtenerCantidadMesAnioPorCiudades/{Pais}'.format(Pais='Pais_example'),
                                     method='GET',
                                     query_string=query_string)
@@ -137,7 +137,7 @@ class TestVuelosEntrantesController(BaseTestCase):
         """
         query_string = [('AnioInicio', 789),
                         ('AnioFin', 789),
-                        ('Mes', 789)]
+                        ('Mes', 'Mes_example')]
         response = self.client.open('/server/VuelosEntrantes/ObtenerCantidadMesPorCiudades/{Pais}'.format(Pais='Pais_example'),
                                     method='GET',
                                     query_string=query_string)
@@ -149,8 +149,8 @@ class TestVuelosEntrantesController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
         """
-        query_string = [('Anio_Inicio', 789),
-                        ('AnioInicio', 789)]
+        query_string = [('AnioInicio', 789),
+                        ('AnioFin', 789)]
         response = self.client.open('/server/VuelosEntrantes/ObtenerCantidadPorCiudades/{Pais}'.format(Pais='Pais_example'),
                                     method='GET',
                                     query_string=query_string)

@@ -81,7 +81,7 @@ paths:
         description: "Pais"
         required: true
         type: "string"
-      - name: "Anio_Fin"
+      - name: "AnioInicio"
         in: "query"
         description: "Anio Inicio"
         required: true
@@ -120,8 +120,7 @@ paths:
         in: "query"
         description: "Mes"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       - name: "AnioInicio"
         in: "query"
         description: "Año Inicio"
@@ -187,15 +186,15 @@ paths:
         description: "Pais"
         required: true
         type: "string"
-      - name: "Anio_Inicio"
+      - name: "AnioInicio"
         in: "query"
-        description: "Anio"
+        description: "Anio Inicio"
         required: true
         type: "integer"
         format: "int64"
-      - name: "AnioInicio"
+      - name: "AnioFin"
         in: "query"
-        description: "AnioFin"
+        description: "Anio Fin"
         required: true
         type: "integer"
         format: "int64"
@@ -239,8 +238,7 @@ paths:
         in: "query"
         description: "Mes"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -305,8 +303,7 @@ paths:
         in: "query"
         description: "Mes"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -319,7 +316,7 @@ paths:
       - "VuelosEntrantes"
       summary: "Obtener cantidad de vuelos entrantes en una ciudad de un pais durante\
         \ el rango de años seleccionado"
-      description: "Obtener cantidad de vuelos entrantes totales en las ciduad de\
+      description: "Obtener cantidad de vuelos entrantes totales en las ciudades de\
         \ un pais durante un rango de años"
       operationId: "obtener_cantidad_ciudad"
       produces:
@@ -404,10 +401,10 @@ paths:
     get:
       tags:
       - "VuelosEntrantes"
-      summary: "Obtener cantidad de vuelos entrantes en las ciudades de un pais durante\
-        \ el mes del año seleccionado"
+      summary: "Obtener cantidades de vuelos entrantes en la ciudad del pais divididas\
+        \ por meses"
       description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
-        \ durante un año"
+        \ de divididas por meses"
       operationId: "obtener_cantidad_anio_ciudad"
       produces:
       - "application/xml"

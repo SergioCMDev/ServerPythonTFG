@@ -25,11 +25,22 @@ class ConversorCursorJson:
 
         return retval 
     
-    def ConvertirCursorToTuplasAnioCantidad(self, cursor):
+    def ConvertirCursorToTuplas(self, cursor, labels):
         retVal = list()
-        for (Anio, Cantidad) in cursor:
-            tuples = Anio, Cantidad
+        listaCursor = list()
+        for elem in cursor.description:
+            listaCursor.append(elem[0])
+        
+#        print(listaCursor)
+#        print (cursor.description[0])
+#        for (Anio, Cantidad) in cursor:
+#            tuples = Anio, Cantidad
+#            retVal.append(tuples)
+#        return retVal
+        for (listaCursor) in cursor:
+            tuples = listaCursor
             retVal.append(tuples)
+            
         return retVal
 
 
