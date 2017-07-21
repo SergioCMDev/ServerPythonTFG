@@ -1,10 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: "This is a sample server Petstore server.  You can find out more about\
-    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
-    \ #swagger](http://swagger.io/irc/).      For this sample, you can use the api\
-    \ key `special-key` to test the authorization     filters."
+  description: ""
   version: "1.0.0"
   title: "Big Data Aplication"
   termsOfService: "http://swagger.io/terms/"
@@ -14,49 +11,45 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "127.0.0.1:8080"
-basePath: "/v2"
+basePath: "/server"
 tags:
-- name: "Tourists"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
-- name: "Vuelos"
-  description: "Access to Petstore orders"
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
+- name: "Turistas Entrantes"
+  description: "Metodos relacionados con turistas entrantes"
+- name: "Turistas Sallientes"
+  description: "Metodos relacionados con turistas Sallientes"
+- name: "Vuelos Salientes"
+  description: "Obtener datos acerca de los vuelos salientes desde un pais determinado"
+- name: "VuelosEntrantes"
+  description: "Obtener datos acerca de los vuelos entrantes hacia un pais determinado"
 schemes:
 - "http"
 paths:
-  /Incomingflights/findQuantityByCountryOriginBetweenYears/{countryOrigin}:
+  /VuelosEntrantes/ObtenerCantidadAnualmente/{Pais}:
     get:
       tags:
-      - "Incomingflights"
-      summary: "Finds Incomingflights by Country Origin"
-      description: "Fin number Of Tourist given a country of origin"
-      operationId: "find_quantity_by_country_origin"
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes anualmente dado un pais destino\
+        \ y un rango de años"
+      description: "Obtiene la cantidad total de vuelos entrantes de cada año"
+      operationId: "obtener_cantidad_anualmente"
       produces:
       - "application/xml"
       - "application/json"
-      - "integer"
       parameters:
-      - name: "countryOrigin"
+      - name: "Pais"
         in: "path"
-        description: "Status values that need to be considered for filter"
+        description: "Pais"
         required: true
         type: "string"
-      - name: "StartingYear"
+      - name: "AnioInicio"
         in: "query"
-        description: "Starting Year"
+        description: "Anio Inicio"
         required: true
         type: "integer"
         format: "int64"
-      - name: "FinalYear"
+      - name: "AnioFin"
         in: "query"
-        description: "Final Year"
+        description: "Anio Fin"
         required: true
         type: "integer"
         format: "int64"
@@ -70,5 +63,376 @@ paths:
               format: "int32"
         400:
           description: "Invalid country value"
-      x-swagger-router-controller: "swagger_server.controllers.incomingflights_controller"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadMensualmente/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes de forma mensual dado un pais\
+        \ destino y un rango de años"
+      description: "Obtiene la cantidad de vuelos en cada mes durante los años seleccionados"
+      operationId: "obtener_cantidad_mensualmente"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio_Fin"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadMes/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes durante el mismo mes en un rango\
+        \ de años"
+      description: "Obtiene la cantidad de vuelos en un mes durante los años seleccionados"
+      operationId: "obtener_cantidad_mes"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Año Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Año Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadMensual/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes durante los meses de un año "
+      description: "Obtiene la cantidad de vuelos totales de cada mes durante un añ\
+        o seleccionado"
+      operationId: "obtener_cantidad_mensual"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadPorCiudades/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en las ciudades de un pais durante\
+        \ un rango de años"
+      description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
+        \ durante un rango de años"
+      operationId: "obtener_cantidad_por_ciudades"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio_Inicio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioInicio"
+        in: "query"
+        description: "AnioFin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadMesPorCiudades/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en las ciudades de un pais durante\
+        \ un rango de años durante un mismo mes"
+      description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
+        \ durante un rango de años durante el mismo"
+      operationId: "obtener_cantidad_mes_por_ciudades"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "AnioInicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "AnioFin"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadAnioPorCiudades/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en las ciudades de un pais durante\
+        \ un año"
+      description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
+        \ durante un año"
+      operationId: "obtener_cantidad_anio_por_ciudades"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadMesAnioPorCiudades/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en las ciudades del pais durante\
+        \ el mes del año seleccionado"
+      description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
+        \ durante un año"
+      operationId: "obtener_cantidad_mes_anio_por_ciudades"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadCiudad/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en una ciudad de un pais durante\
+        \ el rango de años seleccionado"
+      description: "Obtener cantidad de vuelos entrantes totales en las ciduad de\
+        \ un pais durante un rango de años"
+      operationId: "obtener_cantidad_ciudad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadMesCiudad/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en la ciudad del pais durante\
+        \ el mes del rango de años seleccionado"
+      description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
+        \ durante un año"
+      operationId: "obtener_cantidad_mes_ciudad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
+  /VuelosEntrantes/ObtenerCantidadAnioCiudad/{Pais}:
+    get:
+      tags:
+      - "VuelosEntrantes"
+      summary: "Obtener cantidad de vuelos entrantes en las ciudades de un pais durante\
+        \ el mes del año seleccionado"
+      description: "Obtener cantidad de vuelos entrantes en las ciudades de un pais\
+        \ durante un año"
+      operationId: "obtener_cantidad_anio_ciudad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos_entrantes_controller"
 definitions: {}

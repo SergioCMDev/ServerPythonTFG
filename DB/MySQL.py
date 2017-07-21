@@ -53,7 +53,7 @@ class MySQLAccess:
 
     #Muestra todos los vuelos entrantes en PaisDestino organizados mensualmente  desde minYear hasta MaxYear
     def ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, MONTH(date) AS Mes, SUM(ava.flights) AS Cantidad  "+
                     "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id "+
@@ -63,7 +63,7 @@ class MySQLAccess:
 
     #Muestra todos los vuelos entrantes en PaisDestino durante los Meses Mes desde minYear hasta MaxYear
     def ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoMesAnioMinMax(self, PaisDestino, Mes, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT YEAR(`date`) AS Anio, SUM(ava.flights) AS Cantidad  "+
@@ -73,7 +73,7 @@ class MySQLAccess:
         return cursor
     #Muestra todos los vuelos entrantes en PaisDestino Durante Year organizado mensualmente
     def ObtenerDatosVuelosEntrantesAenaMensualmenteDadoPaisDestinoAnio(self, PaisDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT MONTH(`date`) AS Mes, SUM(ava.flights) AS Cantidad "+
                     "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id "+
@@ -82,7 +82,7 @@ class MySQLAccess:
         return cursor
     #Muestra las ciudades origen y el numero de vuelos organizados anualmente entre MinYear y MaxYear que llegan a PaisDestino
     def ObtenerDatosVuelosEntrantesAenaDivididosPorCiudadesDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #Datos Generales
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, city.name AS Ciudad , SUM(ava.flights) AS Cantidad " +
         "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id JOIN city ON city.id = ap_destino.city_id "+
@@ -92,7 +92,7 @@ class MySQLAccess:
 
     #Muestra las ciudades origen y el numero de vuelos durante un mismo Mes entre MinYear y MaxYear que llegan a PaisDestino
     def ObtenerDatosVuelosEntrantesEnUnMesAenaDivididosPorCiudadesDadoPaisDestinoMesAnioMinMax(self, PaisDestino, Mes, MinYear, MaxYear): #Datos Generales
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT YEAR(`date`) AS Anio, city.name AS Ciudad, SUM(ava.flights) AS Cantidad " +
@@ -103,7 +103,7 @@ class MySQLAccess:
 
     #Muestra las ciudades origen y el numero de vuelos que llegan a PaisDestino organizados en el Anio Year 
     def ObtenerDatosVuelosEntrantesAenaEnUnAnioDivididosPorCiudadDadoPaisDestinoAnio(self, PaisDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, city.name AS Ciudad, SUM(ava.flights) AS Cantidad " +
         "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country countryDestino ON ap_destino.country_id = countryDestino.id JOIN city ON city.id = ap_destino.city_id "+
@@ -113,7 +113,7 @@ class MySQLAccess:
 
     #Muestra las ciudades origen y el numero de vuelos que llegan a PaisDestino organizados en el Anio Year En un mes dado
     def ObtenerDatosVuelosEntrantesAenaMensualmenteDivididosPorCiudadDadoPaisDestinoMesAnio(self, PaisDestino, Mes, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT city.name AS Ciudad, SUM(ava.flights) AS Cantidad " +
@@ -124,7 +124,7 @@ class MySQLAccess:
 
     #Muestra el numero de vuelos que llegan a una ciudad destino entre Minyear y MaxYears organizado por Anios
     def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoCiudadDestinoAnioMinMax(self, PaisDestino, cityDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, SUM(ava.flights) AS Cantidad " +
         "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id JOIN city cityDestino ON cityDestino.id = ap_destino.city_id "+
@@ -134,7 +134,7 @@ class MySQLAccess:
 
     #Muestra el numero de vuelos que llegan a cityDestino durante un mismo mes Mes entre Minyear y MaxYears organizado por Anios
     def ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoCiudadDestinoMesAnioMinMax(self, PaisDestino, cityDestino, Mes, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT YEAR(ava.date) AS Anio, SUM(ava.flights) AS Cantidad " +
@@ -145,7 +145,7 @@ class MySQLAccess:
 
     #Muestra el numero de vuelos que llegan a cityDestino en un un Anio Year
     def ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoCiudadDestinoAnio(self, PaisDestino, cityDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, SUM(ava.flights) AS Cantidad " +
         "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id JOIN city cityDestino ON cityDestino.id = ap_destino.city_id "+
@@ -155,7 +155,7 @@ class MySQLAccess:
 
     #Mostrar el numero de vuelos que llegan a cityDestino de forma mensual durante un Anio Year
     def ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(self, PaisDestino, cityDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT MONTH(`date`) AS Mes, SUM(ava.flights) AS Cantidad " +
         "FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id JOIN city cityDestino ON cityDestino.id = ap_destino.city_id "+
@@ -166,7 +166,7 @@ class MySQLAccess:
     ############################TURISTAS HACIA PAIS DESTINO###############################################################################
     #Muestra todos los turistas que entran a PaisDestino entre MinYear y MaxYear separando las ciudades
     def ObtenerPaisOrigenYNumeroTuristasAenaAnualmenteDadoPaisDestinoAnioMinMaxSeparadoPorCiudades(self, PaisDestino, MinYear, MaxYear): 
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio, country_origin.name AS Pais_Origen, city_origin.name AS Ciudad_Origen, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+MaxYear+"' GROUP BY YEAR(AV.date), city_origin.name")
         cursor.execute(select)
@@ -174,7 +174,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino entre MinYear y MaxYear separando las ciudades y meses
     def ObtenerPaisOrigenYNumeroTuristasAenaAnualmenteDadoPaisDestinoAnioMinMaxSeparadoPorCiudadesYMeses(self, PaisDestino, MinYear, MaxYear): 
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio,MONTH(AV.date) AS Mes, country_origin.name AS Pais_origen, city_origin.name AS Ciudad_Origen, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+MaxYear+"' GROUP BY YEAR(AV.date), city_origin.name, MONTH(AV.date)")
         cursor.execute(select)
@@ -182,7 +182,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino entre MinYear y MaxYear 
     def ObtenerNumeroTuristasAenaAnualmenteDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+MaxYear+"' GROUP BY YEAR(AV.date)")
         cursor.execute(select)
@@ -191,7 +191,7 @@ class MySQLAccess:
 
             #Muestra todos los turistas que entran a PaisDestino y ciudad destino entre MinYear y MaxYear 
     def ObtenerNumeroTuristasAenaAnualmenteDadoPaisDestinoAnioMinMaxSeparadoPorMeses(self, PaisDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio, MONTH(AV.date) AS Mes, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+MaxYear+"' GROUP BY YEAR(AV.date), MONTH(AV.date)")
         cursor.execute(select)
@@ -199,7 +199,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino entre MinYear y MaxYear 
     def ObtenerPaisOrigenYNumeroTuristasAenaAnualmenteDadoPaisDestinoCiudadDestinoAnioMinMax(self, PaisDestino, CiudadDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio, country_origin.name AS Pais_Origen, city_origin.name AS Ciudad_Origen,  SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND city_destino.name = '"+CiudadDestino+"'  AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+MaxYear+"' GROUP BY YEAR(AV.date), city_origin.name")
         cursor.execute(select)
@@ -208,7 +208,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino entre MinYear y MaxYear 
     def ObtenerPaisOrigenYNumeroTuristasAenaAnualmenteDadoPaisDestinoCiudadDestinoMesAnioMinMax(self, PaisDestino, CiudadDestino, Mes, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT YEAR(AV.date) AS Anio, country_origin.name AS Pais_Origen, city_origin.name AS Ciudad_Origen, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND MONTH(AV.date) = '"+Mes+"' AND city_destino.name = '"+CiudadDestino+"'  AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+MaxYear+"' GROUP BY YEAR(AV.date), city_origin.name")
@@ -217,7 +217,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino en year de forma total
     def ObtenerPaisOrigenYNumeroTuristasAenaTotalesEnUnAnioDadoPaisDestinoCiudadDestinoMesAnioMinMax(self, PaisDestino, CiudadDestino, Mes, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT country_origin.name AS Pais_Origen, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND MONTH(AV.date) = '"+Mes+"' AND city_destino.name = '"+CiudadDestino+" AND YEAR(AV.date) = '"+Year+"' GROUP BY YEAR(AV.date)")
@@ -226,7 +226,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino en year de forma total
     def ObtenerNumeroTuristasYPaisOrigenAenaTotalesEnUnAnioDadoPaisDestinoCiudadDestinoMesAnioMinMax(self, PaisDestino, CiudadDestino, Mes, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT country_origin.name AS Pais_Origen, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND MONTH(AV.date) = '"+Mes+"' AND city_destino.name = '"+CiudadDestino+"' AND YEAR(AV.date) = '"+Year+"' GROUP BY country_origin.name, MONTH(AV.date)")
@@ -235,7 +235,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino en year de forma mensual
     def ObtenerOrigenYNumeroTuristasAenaMensualmenteEnUnAnioDadoPaisDestinoCiudadDestinoAnioMinMax(self, PaisDestino, CiudadDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT MONTH(AV.date) AS Mes, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND city_destino.name = '"+CiudadDestino+"' AND YEAR(AV.date) = '"+Year+"' GROUP BY MONTH(AV.date)")
         cursor.execute(select)
@@ -243,7 +243,7 @@ class MySQLAccess:
 
     #Muestra todos los turistas que entran a PaisDestino y ciudad destino en year de forma total
     def ObtenerPaisOrigenYNumeroTuristasAenaMensualmenteEnUnAnioTotalesDadoPaisDestinoAnio(self, PaisDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT country_origin.name AS Pais_Origen, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND YEAR(AV.date) = '"+Year+"' GROUP BY country_origin.name")
         cursor.execute(select)
@@ -251,7 +251,7 @@ class MySQLAccess:
 
         #Muestra todos los turistas que entran a PaisDestino y ciudad destino en year de forma mensual
     def ObtenerPaisOrigenYNumeroTuristasAenaMensualmenteEnUnAnioDadoPaisDestinoAnio(self, PaisDestino, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT country_origin.name  AS Pais_Origen, MONTH(AV.date) AS Mes, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND YEAR(AV.date) = '"+Year+"'GROUP BY country_origin.name, MONTH(AV.date)")
         cursor.execute(select)
@@ -259,14 +259,14 @@ class MySQLAccess:
 
         #Muestra todos los turistas que entran a PaisDestino y ciudad destino en year de forma mensual dado un pais destino y origen
     def ObtenerNumeroTuristasAenaMensualmenteEnUnAnioDadoPaisDestinoAnioYPaisOrigen(self, PaisDestino, PaisOrigen, Year): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT MONTH(AV.date) AS Me, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND country_origin.name ='"+PaisOrigen +"' AND YEAR(AV.date) = '"+Year+"'GROUP BY country_origin.name, MONTH(AV.date)")
         cursor.execute(select)
         return cursor
 
     def ObtenerNumeroTuristasAenaMensualmenteDadoPaisDestinoAnioPaisOrigenAnioMinMax(self, PaisDestino, PaisOrigen, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR('AV.date') AS Anio, MONTH(AV.date) AS Me, SUM(AV.travelers) AS Numero_Turistas FROM `aena_vuelos` AV JOIN airport Airport_destino on Airport_destino.id = AV.destination_id JOIN city city_destino on Airport_destino.city_id = city_destino.id Join country country_Destino ON city_destino.country_id = country_Destino.id JOIN airport Airport_origen on Airport_origen.id = AV.origin_id JOIN city city_origin on Airport_origen.city_id = city_origin.id JOIN  country country_origin on city_origin.country_id = country_origin.id where country_Destino.name ='"+PaisDestino+"' AND country_origin.name ='"+PaisOrigen +"' AND YEAR(AV.date) >= '"+MinYear+"' AND YEAR(AV.date) <= '"+ MaxYear +"' GROUP BY country_origin.name,YEAR('AV.date'), MONTH(AV.date)")
         cursor.execute(select)
@@ -276,7 +276,7 @@ class MySQLAccess:
     #Mostrar numero de turistas que viajan a PaisDestino entre MinYear y Maxyear
 
     def ObtenerNumeroTuristasAenaDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, SUM(travelers) AS Numero_Turistas FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id WHERE country_Destino.name = '"+ PaisDestino +"' AND year(`date`) >= '"+ MinYear +"' AND year(`date`) <= '"+ MaxYear+"' GROUP BY YEAR(`date`), country_Destino.name")
         cursor.execute(select)
@@ -288,7 +288,7 @@ class MySQLAccess:
 
     #Mostrar numero de turistas que viajan desde un PaisDestino a city entre MinYear y MaxYear ANTES 
     def ObtenerDatosTuristasAenaDadoPaisDestinoCiudadDestinoAnioMinMax(self, PaisDestino, cityDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, SUM(travelers) AS Numero_Turistas FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id JOIN city city_destino ON city_destino.id = ap_destino.city_id WHERE country_Destino.name = '"+ PaisDestino +"' AND year(`date`) >= '"+MinYear+
         "' AND year(`date`) <= '"+MaxYear+"' AND city_destino.name='"+cityDestino+"' GROUP BY YEAR(`date`), city_destino.name")
@@ -298,7 +298,7 @@ class MySQLAccess:
 
     #Mostrar numero de turistas que viajan a un PaisDestino a city en Year separado en meses
     def ObtenerDatosTuristasMensualmenteAenaDadoPaisDestinoCiudadAnio(self, PaisDestino, cityDestino, Year): #MIRAR
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(`date`) AS Anio, Month(`date`) AS Mes, SUM(travelers) AS Numero_Turistas"+
             " FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id JOIN city city_destino ON city_destino.id = ap_destino.city_id"
@@ -308,7 +308,7 @@ class MySQLAccess:
 
     #Mostrar numero de turistas que viajan desde un PaisDestino a city entre MinYear y MaxYear en un MismoMes
     def ObtenerDatosTuristasAenaDadoPaisCiudadMesAnioMinMax(self, PaisDestino, cityDestino, Mes, MinYear, MaxYear): #MIRAR
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)        
         select = str("SELECT YEAR(`date`) AS Anio, SUm(travelers)  AS Numero_Turistas FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id "+
@@ -322,7 +322,7 @@ class MySQLAccess:
 
     #Mostrar numero de vuelos salientes desde un paisOrigen entre Minyear y MaxYear
     def ObtenerDatosVuelosSalientesAenaDadoPaisOrigenAnioMinMax(self, PaisOrigen, MinYear, MaxYear): #MIRAR
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT country_Destino.name AS Pais_Destino, city_destino.name AS Ciudad_Destino, Year(AV.date) AS ANIO , SUM(AV.flights) AS Numero_Vuelos "+
             "FROM aena_vuelos AV JOIN airport AP_origen on AV.origin_id = AP_origen.id JOIN country country_origen ON AP_origen.country_id = country_origen.id "+
@@ -336,7 +336,7 @@ class MySQLAccess:
 
     #Mostrar numero de vuelos salientes desde un paisOrigen hacia cityDestino en un mismo mes entre Minyear y MaxYear
     def ObtenerDatosVuelosSalientesMensualmenteAenaEnUnaCiudadDadoPaisOrigenCiudadDestinoAnioMinMax(self, PaisOrigen, PaisDestino,  cityDestino, MinYear, MaxYear): #MIRAR
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio ,MONTH(AV.date) AS Mes, SUM(AV.flights) AS Numero_Vuelos "+
             "FROM aena_vuelos AV JOIN airport AP_origen on AV.origin_id = AP_origen.id JOIN country country_origen ON AP_origen.country_id = country_origen.id "+
@@ -349,7 +349,7 @@ class MySQLAccess:
 
     #Mostrar numero vuelos salientes desde paisOrigen a cityDestino en Year (valor)
     def ObtenerNumeroVuelosSalientesAenaDadoPaisOrigenCiudadDestinoAnio(self, PaisOrigen, cityDestino, Year):
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio , SUM(AV.flights) AS Numero_Vuelos "+
             "FROM aena_vuelos AV JOIN airport AP_origen on AV.origin_id = AP_origen.id JOIN country country_origen ON AP_origen.country_id = country_origen.id "+
@@ -362,7 +362,7 @@ class MySQLAccess:
         
     #Mostrar numero vuelos salientes desde paisOrigen a cityDestino en Year agrupados por meses
     def ObtenerDatosVuelosSalientesMensualmenteAenaDadoPaisOrigenCiudadDestinoAnio(self, PaisOrigen, cityDestino, Year):
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT MONTH(AV.date) AS Mes , SUM(AV.flights) AS Numero_Vuelos "+
             "FROM aena_vuelos AV JOIN airport AP_origen on AV.origin_id = AP_origen.id JOIN country country_origen ON AP_origen.country_id = country_origen.id "+
@@ -376,7 +376,7 @@ class MySQLAccess:
 
     #Obtener numero vuelos entre PaisOrigen y cityDestino entre MinYear y MaxYear
     def ObtenerDatosVuelosAenaEntreDosPaisesDadoPaisOrigenPaisDestinoCiudadDestinoAniosMinMax(self, PaisOrigen, PaisDestino, cityDestino, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio , SUM(AV.flights) AS Numero_Vuelos "+
         " FROM aena_vuelos AV JOIN airport AP_origen on AV.origin_id = AP_origen.id JOIN country country_origen ON AP_origen.country_id = country_origen.id "+
@@ -389,7 +389,7 @@ class MySQLAccess:
 
     #Mostrar numero vuelosEntrantes desde paisOrigen a cityDestino durante los Anios entre MinYear y Maxyear en el mes Mes
     def ObtenerDatosVuelosAenaEntreDosPaisesEnUnMesDadoPaisOrigenPaisDestinoCiudadDestinoAniosMinMax(self, PaisOrigen, PaisDestino, cityDestino, Mes, MinYear, MaxYear): 
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)
         select = str("SELECT YEAR(AV.date) AS Anio , SUM(AV.flights) AS Numero_Vuelos "+
@@ -403,7 +403,7 @@ class MySQLAccess:
 
     #Obtener numero de vuelos salientes desde un PaisOrigen mostrando pais destino y ciudad destino entre MinYear y MaxYear
     def ObtenerDatosVuelosSalientesAenaPaisesAlosQueSeViajaSeparadosPorAniosYCiudadesDadoPaisOrigenAniosMinMax(self, PaisOrigen, MinYear, MaxYear): #OK
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+#        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         cursor = connection.cursor()
         select = str("SELECT YEAR(AV.date) AS Anio, country_Destino.name AS Pais_Destino, city_destino.name  AS Ciudad_Destino, SUM(AV.flights) AS Numero_Vuelos "+
         " FROM aena_vuelos AV JOIN airport AP_origen on AV.origin_id = AP_origen.id JOIN country country_origen ON AP_origen.country_id = country_origen.id "+
