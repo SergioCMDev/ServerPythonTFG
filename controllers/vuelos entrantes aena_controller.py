@@ -7,10 +7,11 @@ from ..DB.DBRepository import DBRepository as DBRepository
 from ..Utilidades.Conversores import ConversorCursorJson as Conversor
 import mysql.connector
 
-def obtener_cantidad_anio_ciudad(Pais, Ciudad, Anio): #OK
+
+def obtener_cantidad_anio_ciudad(Pais, Ciudad, Anio):
     """
-    Obtener cantidad de vuelos entrantes en las ciudades de un pais durante el mes del año seleccionado
-    Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
+    Obtener cantidades de vuelos entrantes en la ciudad del pais divididas por meses
+    Obtener cantidad de vuelos entrantes en las ciudades de un pais de divididas por meses
     :param Pais: Pais
     :type Pais: str
     :param Ciudad: Ciudad
@@ -30,7 +31,8 @@ def obtener_cantidad_anio_ciudad(Pais, Ciudad, Anio): #OK
     return retval
 
 
-def obtener_cantidad_anio_por_ciudades(Pais, Anio): #OK
+
+def obtener_cantidad_anio_por_ciudades(Pais, Anio):
     """
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
@@ -49,13 +51,9 @@ def obtener_cantidad_anio_por_ciudades(Pais, Anio): #OK
     retval = conversor.convertirAJson(lista)
     
     return retval
-    
-    
-    
-    return 'do some magic!'
 
 
-def obtener_cantidad_anualmente(Pais, AnioInicio, AnioFin): #OK 
+def obtener_cantidad_anualmente(Pais, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes anualmente dado un pais destino y un rango de años
     Obtiene la cantidad total de vuelos entrantes de cada año
@@ -79,10 +77,10 @@ def obtener_cantidad_anualmente(Pais, AnioInicio, AnioFin): #OK
     return retval
 
 
-def obtener_cantidad_ciudad(Pais, Ciudad, AnioInicio, AnioFin): #OK
+def obtener_cantidad_ciudad(Pais, Ciudad, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes en una ciudad de un pais durante el rango de años seleccionado
-    Obtener cantidad de vuelos entrantes totales en las ci de un pais durante un rango de años
+    Obtener cantidad de vuelos entrantes totales en las ciudades de un pais durante un rango de años
     :param Pais: Pais
     :type Pais: str
     :param Ciudad: Ciudad
@@ -94,7 +92,6 @@ def obtener_cantidad_ciudad(Pais, Ciudad, AnioInicio, AnioFin): #OK
 
     :rtype: None
     """
-
     conversor = Conversor()
     repository = DBRepository()
 
@@ -106,7 +103,31 @@ def obtener_cantidad_ciudad(Pais, Ciudad, AnioInicio, AnioFin): #OK
     return retval
 
 
-def obtener_cantidad_mensual(Pais, Anio): #OK
+def obtener_cantidad_entrantes_por_ciudades(Pais, AnioInicio, AnioFin):
+    """
+    Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
+    Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
+    :param Pais: Pais
+    :type Pais: str
+    :param AnioInicio: Anio Inicio
+    :type AnioInicio: int
+    :param AnioFin: Anio Fin
+    :type AnioFin: int
+
+    :rtype: None
+    """
+    conversor = Conversor()
+    repository = DBRepository()
+
+    cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaDadoPaisDestinoAnioMinMax(Pais, AnioInicio, AnioFin)
+
+    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+
+    retval = conversor.convertirAJson(lista)
+    return retval
+
+
+def obtener_cantidad_mensual(Pais, Anio):
     """
     Obtener cantidad de vuelos entrantes durante los meses de un año 
     Obtiene la cantidad de vuelos totales de cada mes durante un año seleccionado
@@ -117,7 +138,6 @@ def obtener_cantidad_mensual(Pais, Anio): #OK
 
     :rtype: None
     """
-
     conversor = Conversor()
     repository = DBRepository()
 
@@ -130,21 +150,19 @@ def obtener_cantidad_mensual(Pais, Anio): #OK
 
 
 
-
-def obtener_cantidad_mensualmente(Pais, AnioInicio, AnioFin): #OK?
+def obtener_cantidad_mensualmente(Pais, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes de forma mensual dado un pais destino y un rango de años
     Obtiene la cantidad de vuelos en cada mes durante los años seleccionados
     :param Pais: Pais
     :type Pais: str
-    :param Anio_Fin: Anio Inicio
-    :type Anio_Fin: int
+    :param AnioInicio: Anio Inicio
+    :type AnioInicio: int
     :param AnioFin: Anio Fin
     :type AnioFin: int
 
     :rtype: None
     """
-
     conversor = Conversor()
     repository = DBRepository()
 
@@ -156,16 +174,14 @@ def obtener_cantidad_mensualmente(Pais, AnioInicio, AnioFin): #OK?
     return retval
 
 
-
-
-def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin): #OK
+def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes durante el mismo mes en un rango de años
     Obtiene la cantidad de vuelos en un mes durante los años seleccionados
     :param Pais: Pais
     :type Pais: str
     :param Mes: Mes
-    :type Mes: int
+    :type Mes: str
     :param AnioInicio: Año Inicio
     :type AnioInicio: int
     :param AnioFin: Año Fin
@@ -173,7 +189,6 @@ def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin): #OK
 
     :rtype: None
     """
-#    return 'do some magic!'
     conversor = Conversor()
     repository = DBRepository()
 
@@ -185,9 +200,7 @@ def obtener_cantidad_mes(Pais, Mes, AnioInicio, AnioFin): #OK
     return retval
 
 
-
-
-def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes): #OK
+def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes):
     """
     Obtener cantidad de vuelos entrantes en las ciudades del pais durante el mes del año seleccionado
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
@@ -196,11 +209,10 @@ def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes): #OK
     :param Anio: Anio
     :type Anio: int
     :param Mes: Mes
-    :type Mes: int
+    :type Mes: str
 
     :rtype: None
     """
-
     conversor = Conversor()
     repository = DBRepository()
 
@@ -213,8 +225,7 @@ def obtener_cantidad_mes_anio_por_ciudades(Pais, Anio, Mes): #OK
     return retval
 
 
-
-def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin): #OK
+def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin):
     """
     Obtener cantidad de vuelos entrantes en la ciudad del pais durante el mes del rango de años seleccionado
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
@@ -231,7 +242,6 @@ def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin): #OK
 
     :rtype: None
     """
-
     conversor = Conversor()
     repository = DBRepository()
 
@@ -243,8 +253,7 @@ def obtener_cantidad_mes_ciudad(Pais, Ciudad, Mes, AnioInicio, AnioFin): #OK
     return retval
 
 
-
-def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes): #OK
+def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes):
     """
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años durante un mismo mes
     Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años durante el mismo
@@ -255,41 +264,14 @@ def obtener_cantidad_mes_por_ciudades(Pais, AnioInicio, AnioFin, Mes): #OK
     :param AnioFin: AnioFin
     :type AnioFin: int
     :param Mes: Mes
-    :type Mes: int
+    :type Mes: str
 
     :rtype: None
     """
-
     conversor = Conversor()
     repository = DBRepository()
 
     cursor, labels = repository.ObtenerDatosVuelosEntrantesEnUnMesAenaDivididosPorCiudadesDadoPaisDestinoMesAnioMinMax(Pais, Mes, AnioInicio, AnioFin)
-
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
-
-    retval = conversor.convertirAJson(lista)
-    return retval
-
-
-
-def obtener_cantidad_por_ciudades(Pais, AnioInicio, AnioFin): #OK
-    """
-    Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
-    Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
-    :param Pais: Pais
-    :type Pais: str
-    :param AnioInicio: Anio
-    :type AnioInicio: int
-    :param AnioFin: AnioFin
-    :type AnioFin: int
-
-    :rtype: None
-    """
-
-    conversor = Conversor()
-    repository = DBRepository()
-
-    cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaDivididosPorCiudadesDadoPaisDestinoAnioMinMax(Pais, AnioInicio, AnioFin)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
