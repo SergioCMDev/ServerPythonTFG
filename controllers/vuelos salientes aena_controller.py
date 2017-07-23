@@ -3,7 +3,7 @@ from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
-from ..DB.DBRepository import DBRepository as DBRepository
+from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
 from ..Utilidades.Conversores import ConversorCursorJson as Conversor
 import mysql.connector
 
