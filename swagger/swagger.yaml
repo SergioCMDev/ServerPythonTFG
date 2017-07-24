@@ -13,16 +13,26 @@ info:
 host: "127.0.0.1:8080"
 basePath: "/server"
 tags:
-- name: "Turistas Entrantes"
-  description: "Metodos relacionados con turistas entrantes"
-- name: "Turistas Sallientes"
-  description: "Metodos relacionados con turistas Sallientes"
+- name: "Turistas Entrantes Aena"
+  description: "Metodos relacionados con turistas entrantes de la BD de Aena"
+- name: "Turistas Salientes Aena"
+  description: "Metodos relacionados con turistas salientes de la BD de Aena"
 - name: "Vuelos Salientes Aena"
   description: "Obtener datos acerca de los vuelos salientes desde un pais determinado\
     \ usando la base de datos de AENA"
 - name: "Vuelos Entrantes Aena"
   description: "Obtener datos acerca de los vuelos entrantes hacia un pais determinado\
     \ usando la base de datos de AENA"
+- name: "Turistas Entrantes Amadeus"
+  description: "Metodos relacionados con turistas entrantes de la BD de Amadeus"
+- name: "Turistas Salientes Amadeus"
+  description: "Metodos relacionados con turistas salientes de la BD de Amadeus"
+- name: "Vuelos Salientes Amadeus"
+  description: "Obtener datos acerca de los vuelos salientes desde un pais determinado\
+    \ usando la base de datos de Amadeus"
+- name: "Vuelos Entrantes Amadeus"
+  description: "Obtener datos acerca de los vuelos entrantes hacia un pais determinado\
+    \ usando la base de datos de Amadeus"
 schemes:
 - "http"
 paths:
@@ -434,42 +444,6 @@ paths:
         400:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes aena_controller"
-  /Aena/VuelosSalientes/ObtenerCantidadCiudades/{Pais}:
-    get:
-      tags:
-      - "Vuelos Salientes Aena"
-      summary: "Obtener cantidad de vuelos salientes de un pais en un rango de añ\
-        os"
-      description: "Obtener cantidad de vuelos salientes de un pais en un rango de\
-        \ años"
-      operationId: "obtener_cantidad_ciudades"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "Pais"
-        in: "path"
-        description: "Pais"
-        required: true
-        type: "string"
-      - name: "AnioInicio"
-        in: "query"
-        description: "Año Inicio"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "AnioFin"
-        in: "query"
-        description: "Año Fin"
-        required: true
-        type: "integer"
-        format: "int64"
-      responses:
-        200:
-          description: "successful operation"
-        400:
-          description: "Invalid country value"
-      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes aena_controller"
   /Aena/VuelosSalientes/ObtenerCantidadCiudad/{Pais}:
     get:
       tags:
@@ -523,42 +497,6 @@ paths:
         description: "Pais"
         required: true
         type: "string"
-      responses:
-        200:
-          description: "successful operation"
-        400:
-          description: "Invalid country value"
-      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes aena_controller"
-  /Aena/VuelosSalientes/ObtenerCantidadPorCiudades/{Pais}:
-    get:
-      tags:
-      - "Vuelos Salientes Aena"
-      summary: "Obtener cantidad de vuelos salientes totales en las ciudades de un\
-        \ pais durante un rango de años"
-      description: "Obtener cantidad de vuelos salientes en las ciudades de un pais\
-        \ durante un año separando por meses"
-      operationId: "obtener_cantidad_salientes_por_ciudades"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "Pais"
-        in: "path"
-        description: "Pais"
-        required: true
-        type: "string"
-      - name: "AnioInicio"
-        in: "query"
-        description: "Anio Inicio"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "AnioFin"
-        in: "query"
-        description: "Anio Fin"
-        required: true
-        type: "integer"
-        format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -753,4 +691,1741 @@ paths:
         400:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.vuelos salientes aena_controller"
+  /Aena/TuristasSalientes/ObtenerCantidadSalientesRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Aena"
+      summary: "Obtiene la cantidad de personas que salen de un pais durante un rango\
+        \ de años y lo organizas anualmente"
+      description: "Obtiene la cantidad de personas que salen de un pais durante un\
+        \ rango de años y lo organizas mensualmente"
+      operationId: "obtener_cantidad_salientes_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ aena_controller"
+  /Aena/TuristasSalientes/ObtenerCantidadAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Aena"
+      summary: "Obtiene la cantidad de personas que salen de un pais en un años y\
+        \ devuelve la cantidad"
+      description: "Obtiene la cantidad de personas que salen de un pais durante un\
+        \ rango de años y lo organizamos mensualmente"
+      operationId: "obtener_cantidad_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ aena_controller"
+  /Aena/TuristasSalientes/ObtenerCantidadCiudadRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Aena"
+      summary: "Obtiene la cantidad de personas que van hacia una ciudad durante un\
+        \ rango de años"
+      description: "Obtiene la cantidad de personas que van hacia una ciudad durante\
+        \ un rango de años"
+      operationId: "obtener_cantidad_ciudad_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ aena_controller"
+  /Aena/TuristasSalientes/ObtenerCantidadCiudadEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Aena"
+      summary: "Obtiene la cantidad de personas que salen de un pais en un años y\
+        \ devuelve la cantidad"
+      description: "Obtiene la cantidad de personas que salen de un pais durante un\
+        \ rango de años y lo organizamos mensualmente"
+      operationId: "obtener_cantidad_ciudad_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ aena_controller"
+  /Aena/TuristasEntrantes/ObtenerCantidadOrigenRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Aena"
+      summary: "Dado un pais destino obtiene la cantidad de personas que viajan hacia\
+        \ el y sus localizaciones organizado por años"
+      description: "Dado un pais destino obtiene la cantidad de personas que viajan\
+        \ hacia el y sus localizaciones"
+      operationId: "obtener_cantidad_origen_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ aena_controller"
+  /Aena/TuristasEntrantes/ObtenerCantidadOrigenRangoAniosMeses/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Aena"
+      summary: "Dado un pais destino obtiene la cantidad de personas que viajan hacia\
+        \ el y sus localizaciones organizado por años y meses"
+      description: "Dado un pais destino obtiene la cantidad de personas que viajan\
+        \ hacia el y sus localizaciones organizado por años y meses"
+      operationId: "obtener_cantidad_origen_rango_anios_meses"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ aena_controller"
+  /Aena/TuristasEntrantes/ObtenerCantidadEntrantesRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Aena"
+      summary: "Dado un pais destino obtiene la cantidad de personas que viajan hacia\
+        \ el organizado por años"
+      description: "Dado un pais destino obtiene la cantidad de personas que viajan\
+        \ hacia el y sus localizaciones organizado por años"
+      operationId: "obtener_cantidad_entrantes_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ aena_controller"
+  /Aena/TuristasEntrantes/ObtenerCantidadRangoAniosMeses/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Aena"
+      summary: "Dado un pais destino obtiene la cantidad de personas que viajan hacia\
+        \ el organizado por años"
+      description: "Dado un pais destino obtiene la cantidad de personas que viajan\
+        \ hacia el y sus localizaciones organizado por años y meses"
+      operationId: "obtener_cantidad_rango_anios_meses"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ aena_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadCiudadesRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen obtiene la cantidad de vuelos que salen de dicho\
+        \ pais y las ciudades hacia las que se dirigen durante un rango de años"
+      description: "Dado un pais origen obtiene la cantidad de vuelos que salen de\
+        \ dicho pais y las ciudades hacia las que se dirigen durante un rango de añ\
+        os"
+      operationId: "obtener_cantidad_ciudades_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadCiudadesMensualRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen obtiene la cantidad de vuelos que salen de dicho\
+        \ pais y las ciudades hacia las que se dirigen durante un rango de años diviendo\
+        \ por meses"
+      description: "Dado un pais origen obtiene la cantidad de vuelos que salen de\
+        \ dicho pais y las ciudades hacia las que se dirigen durante un rango de añ\
+        os diviendo por meses"
+      operationId: "obtener_cantidad_ciudades_mensual_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadAnual/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen obtiene la cantidad de vuelos que salen de dicho\
+        \ pais durante un rango de años"
+      description: "Dado un pais origen obtiene la cantidad de vuelos que salen de\
+        \ dicho pais durante un rango de años"
+      operationId: "obtener_cantidad_anual"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadVuelosSalientesCiudadRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos\
+        \ que salen de dicha ciudad durante un rango de años"
+      description: "Dado un pais origen y una ciudad origen obtiene la cantidad de\
+        \ vuelos que salen de dicha ciudad durante un rango de años"
+      operationId: "obtener_cantidad_vuelos_salientes_ciudad_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadCiudadMensualRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos\
+        \ que salen de dicha ciudad durante un rango de años organzido mensualmente"
+      description: "Dado un pais origen y una ciudad origen obtiene la cantidad de\
+        \ vuelos que salen de dicha ciudad durante un rango de años organzido mensualmente"
+      operationId: "obtener_cantidad_ciudad_mensual_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadCiudadMesRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos\
+        \ que salen de dicha ciudad durante un rango de años durante un mes"
+      description: "Dado un pais origen y una ciudad origen obtiene la cantidad de\
+        \ vuelos que salen de dicha ciudad durante un rango de años durante un mes"
+      operationId: "obtener_cantidad_ciudad_mes_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadMensualmenteEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen y un anio obtiene la cantidad de vuelos que salen\
+        \ de dicho pais durante ese año de forma mensual"
+      description: "Dado un pais origen y un anio obtiene la cantidad de vuelos que\
+        \ salen de dicho pais durante ese año de forma mensual"
+      operationId: "obtener_cantidad_mensualmente_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadVuelosSalienesCiudadesEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen y un anio obtiene la cantidad de vuelos que salen\
+        \ de dicho pais durante ese año dividiendo por ciudades"
+      description: "Dado un pais origen y un anio obtiene la cantidad de vuelos que\
+        \ salen de dicho pais durante ese año dividiendo por ciudades"
+      operationId: "obtener_cantidad_vuelos_salienes_ciudades_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/VuelosSalientes/ObtenerCantidadMesEnAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Salientes Amadeus"
+      summary: "Dado un pais origen, un mes y un rango de años obtiene la cantidad\
+        \ de vuelos salientes durante ese rango de años en ese mes"
+      description: "Dado un pais origen, un mes y un rango de años obtiene la cantidad\
+        \ de vuelos salientes durante ese rango de años en ese mes"
+      operationId: "obtener_cantidad_mes_en_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "AnioFin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnCiudadEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen, una ciudad y un rango de años obtiene la cantidad\
+        \ de turistas que salen de ese pais durante ese rango de años de esa ciudad"
+      description: "Dado un pais origen, una ciudad y un rango de años obtiene la\
+        \ cantidad de vuelos salientes durante ese rango de años de esa ciudad"
+      operationId: "obtener_cantidad_en_ciudad_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "AnioFin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnPaisEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen y un anio obtiene la cantidad de turistas que\
+        \ salen de dicho pais durante ese año"
+      description: "Dado un pais origen y un anio obtiene la cantidad de turistas\
+        \ que salen de dicho pais durante ese año dividiendo por ciudades"
+      operationId: "obtener_cantidad_en_pais_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnCiudadesMensualmenteEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen y un rango de años obtiene la cantidad de turistas\
+        \ salientes de ese pais durante esos años divididos por ciudad y mes"
+      description: "Dado un pais origen y un rango de años obtiene la cantidad de\
+        \ turistas salientes de ese pais durante esos años divididos por ciudad y\
+        \ mes"
+      operationId: "obtener_cantidad_en_ciudades_mensualmente_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnPaisEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen y un rango de años obtiene la cantidad de turistas\
+        \ salientes de ese pais durante esos años"
+      description: "Dado un pais origen y un rango de años obtiene la cantidad de\
+        \ turistas salientes de ese pais durante esos años"
+      operationId: "obtener_cantidad_en_pais_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnPaisEnMesEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen, un mes y un rango de años obtiene la cantidad\
+        \ de turistas salientes de ese pais durante esos años y ese mes"
+      description: "Dado un pais origen, un mes y un rango de años obtiene la cantidad\
+        \ de turistas salientes de ese pais durante esos años y ese mes"
+      operationId: "obtener_cantidad_en_pais_en_mes_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnPaisEnCiudadesEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen y un año obtiene la cantidad de turistas salientes\
+        \ de ese pais durante ese año dividido por ciudades origen"
+      description: "Dado un pais origen y un año obtiene la cantidad de turistas salientes\
+        \ de ese pais durante ese año dividido por ciudades origen"
+      operationId: "obtener_cantidad_en_pais_en_ciudades_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadEnPaisEnAnioMensualmente/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen y un año obtiene la cantidad de turistas salientes\
+        \ de ese pais durante ese año dividido por meses"
+      description: "Dado un pais origen y un año obtiene la cantidad de turistas salientes\
+        \ de ese pais durante ese año dividido por meses"
+      operationId: "obtener_cantidad_en_pais_en_anio_mensualmente"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/TuristasSalientes/ObtenerCantidadCiudadDuranteMesEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Salientes Amadeus"
+      summary: "Dado un pais origen, una ciudad, un mes y un rango de años obtiene\
+        \ la cantidad de turistas salientes de ese pais diviendo por meses y años"
+      description: "Dado un pais origen, una ciudad, un mes y un rango de años obtiene\
+        \ la cantidad de turistas salientes de ese pais diviendo por meses y años"
+      operationId: "obtener_cantidad_ciudad_durante_mes_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas salientes\
+        \ amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais y un rango de años obtiene la cantidad de vuelos que\
+        \ llegan a ese pais diviendo por años"
+      description: "Dado un pais y un rango de años obtiene la cantidad de vuelos\
+        \ que llegan a ese pais diviendo por años"
+      operationId: "obtener_cantidad_vuelos_pais_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais y un año obtiene la cantidad de vuelos que llegan a ese\
+        \ pais durante ese año"
+      description: "Dado un pais y un año obtiene la cantidad de vuelos que llegan\
+        \ a ese pais durante ese año"
+      operationId: "obtener_cantidad_vuelos_pais_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnMesEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, un mes y un rango de años obtiene la cantidad total\
+        \ de vuelos que llegan a ese pais durante esos años"
+      description: "Dado un pais, un mes y un rango de años obtiene la cantidad total\
+        \ de vuelos que llegan a ese pais durante esos años"
+      operationId: "obtener_cantidad_vuelos_pais_en_mes_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadesPaisEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais y un año obtiene la cantidad de vuelos que llegan a ese\
+        \ pais durante ese año divividos por ciudades"
+      description: "Dado un pais y un año obtiene la cantidad de vuelos que llegan\
+        \ a ese pais durante ese año divividos por ciudades"
+      operationId: "obtener_cantidad_vuelos_ciudades_pais_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad y un rango de años obtiene la cantidad total\
+        \ de vuelos que llegan a esa ciudad durante esos años"
+      description: "Dado un pais, una ciudad y un rango de años obtiene la cantidad\
+        \ total de vuelos que llegan a esa ciudad durante esos años"
+      operationId: "obtener_cantidad_vuelos_pais_en_ciudad_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadMensualEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad y un rango de años obtiene la cantidad total\
+        \ de vuelos que llegan a esa ciudad durante esos años separado por meses"
+      description: "Dado un pais, una ciudad y un rango de años obtiene la cantidad\
+        \ total de vuelos que llegan a esa ciudad durante esos años separado por meses"
+      operationId: "obtener_cantidad_vuelos_pais_en_ciudad_mensual_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadEnMesEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad, un mes y un rango de años obtiene la cantidad\
+        \ total de vuelos que llegan a esa ciudad durante esos años y mes"
+      description: "Dado un pais, una ciudad y un rango de años obtiene la cantidad\
+        \ total de vuelos que llegan a esa ciudad durante esos años separado por meses\
+        \ y mes"
+      operationId: "obtener_cantidad_vuelos_pais_en_ciudad_en_mes_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosPaisEnCiudadEnMesEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad, un mes y un año obtiene la cantidad total\
+        \ de vuelos que llegan a esa ciudad durante ese año y mes"
+      description: "Dado un pais, una ciudad, un mes y un año obtiene la cantidad\
+        \ total de vuelos que llegan a esa ciudad durante ese año y mes"
+      operationId: "obtener_cantidad_total_vuelos_pais_en_ciudad_en_mes_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosTotalesPaisEnMesEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, un mes y un año obtiene la cantidad total de vuelos\
+        \ que llegan a ese pais durante ese año y mes"
+      description: "Dado un pais, un mes y un año obtiene la cantidad total de vuelos\
+        \ que llegan a ese pais durante ese año y mes"
+      operationId: "obtener_cantidad_total_vuelos_totales_pais_en_mes_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosTotalesPaisEnCiudadEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad y un año obtiene la cantidad total de vuelos\
+        \ que llegan a esa ciudad durante ese año"
+      description: "Dado un pais, una ciudad y un año obtiene la cantidad total de\
+        \ vuelos que llegan a esa ciudad durante ese año"
+      operationId: "obtener_cantidad_total_vuelos_totales_pais_en_ciudad_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosPaisEnCiudadMensualEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad y un año obtiene la cantidad total de vuelos\
+        \ que llegan a esa ciudad durante ese año separando por meses"
+      description: "Dado un pais, una ciudad y un año obtiene la cantidad total de\
+        \ vuelos que llegan a esa ciudad durante ese año separando por meses"
+      operationId: "obtener_cantidad_total_vuelos_pais_en_ciudad_mensual_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadEnMesEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, un mes y un rango de años obtiene la cantidad total\
+        \ de vuelos que llegan a ese pais durante ese mes y ese rango de años separando\
+        \ por ciudades"
+      description: "Dado un pais, un mes y un rango de años obtiene la cantidad total\
+        \ de vuelos que llegan a ese pais durante ese mes y ese rango de años separando\
+        \ por ciudades"
+      operationId: "obtener_cantidad_vuelos_ciudad_en_mes_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadPaisEnMesEnAnio/{Pais}:
+    get:
+      tags:
+      - "Vuelos Entrantes Amadeus"
+      summary: "Dado un pais, un mes y un año obtiene la cantidad total de vuelos\
+        \ que llegan a esa ciudad durante ese mes y ese año separando por ciudades"
+      description: "Dado un pais, un mes y un año obtiene la cantidad total de vuelos\
+        \ que llegan a esa ciudad durante ese mes y ese año separando por ciudades"
+      operationId: "obtener_cantidad_vuelos_ciudad_pais_en_mes_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasEnCiudadesMensualEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por ciudades, meses y años"
+      description: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por ciudades, meses y años"
+      operationId: "obtener_cantidad_turistas_en_ciudades_mensual_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasEnPaisEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por años"
+      description: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por años"
+      operationId: "obtener_cantidad_turistas_en_pais_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnPaisEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad y un rango de años obtiene la cantidad total\
+        \ de personas que llegan a esa ciudad separando por años,paises y ciudades\
+        \ de origen"
+      description: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por años"
+      operationId: "obtener_cantidad_turistas_y_ciudades_origen_en_pais_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnCiudadEnMesEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad, un mes y un rango de años obtiene la cantidad\
+        \ total de personas que llegan a esa ciudad separando por años,paises y ciudades\
+        \ de origen"
+      description: "Dado un pais, una ciudad, un mes y un rango de años obtiene la\
+        \ cantidad total de personas que llegan a esa ciudad separando por años,paises\
+        \ y ciudades de origen"
+      operationId: "obtener_cantidad_turistas_y_ciudades_origen_en_ciudad_en_mes_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnCiudadEnRangoAnios/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a esa ciudad separando por años, paises y ciudades de origen"
+      description: "Dado un pais, una ciudad, un mes y un rango de años obtiene la\
+        \ cantidad total de personas que llegan a esa ciudad separando por años,paises\
+        \ y ciudades de origen"
+      operationId: "obtener_cantidad_turistas_y_ciudades_origen_en_ciudad_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisOrigenEnCiudadEnMesEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais, una ciudad destino, un mes y un año obtiene la cantidad\
+        \ total de personas que llegan a esa ciudad separando por pais de origen"
+      description: "Dado un pais, una ciudad destino, un mes y un año obtiene la cantidad\
+        \ total de personas que llegan a esa ciudad separando por pais de origen"
+      operationId: "obtener_cantidad_turistas_y_pais_origen_en_ciudad_en_mes_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Ciudad"
+        in: "query"
+        description: "Ciudad"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Mes"
+        required: true
+        type: "string"
+      - name: "Anio"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisesEnpaisEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais y un año obtiene la cantidad total de personas que llegan\
+        \ a ese pais en ese año"
+      description: "Dado un pais, una ciudad destino y un año obtiene la cantidad\
+        \ total de personas que llegan a esa ciudad separando por meses"
+      operationId: "obtener_cantidad_turistas_y_paises_enpais_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisesMensualEnpaisEnAnio/{Pais}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais y un año obtiene la cantidad total de personas que llegan\
+        \ a ese pais en ese año separadas por meses"
+      description: "Dado un pais, una ciudad destino y un año obtiene la cantidad\
+        \ total de personas que llegan a esa ciudad separando por meses"
+      operationId: "obtener_cantidad_turistas_y_paises_mensual_enpais_en_anio"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "Pais"
+        in: "path"
+        description: "Pais"
+        required: true
+        type: "string"
+      - name: "Mes"
+        in: "query"
+        description: "Anio"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
 definitions: {}

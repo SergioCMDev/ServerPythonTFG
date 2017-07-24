@@ -38,19 +38,6 @@ class TestVuelosSalientesAenaController(BaseTestCase):
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
-    def test_obtener_cantidad_ciudades(self):
-        """
-        Test case for obtener_cantidad_ciudades
-
-        Obtener cantidad de vuelos salientes de un pais en un rango de años
-        """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudades/{Pais}'.format(Pais='Pais_example'),
-                                    method='GET',
-                                    query_string=query_string)
-        self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
-
     def test_obtener_cantidad_ciudades_durante_un_mes_en_rango_anios(self):
         """
         Test case for obtener_cantidad_ciudades_durante_un_mes_en_rango_anios
@@ -109,19 +96,6 @@ class TestVuelosSalientesAenaController(BaseTestCase):
         query_string = [('Ciudad', 'Ciudad_example'),
                         ('Anio', 789)]
         response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudad/{Pais}'.format(Pais='Pais_example'),
-                                    method='GET',
-                                    query_string=query_string)
-        self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
-
-    def test_obtener_cantidad_salientes_por_ciudades(self):
-        """
-        Test case for obtener_cantidad_salientes_por_ciudades
-
-        Obtener cantidad de vuelos salientes totales en las ciudades de un pais durante un rango de años
-        """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadPorCiudades/{Pais}'.format(Pais='Pais_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

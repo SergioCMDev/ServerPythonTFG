@@ -1,11 +1,5 @@
-import connexion
-from datetime import date, datetime
-from typing import List, Dict
-from six import iteritems
-from ..util import deserialize_date, deserialize_datetime
-from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
+from ..DB.DBRepositoryAmadeus import DBRepositoryAmadeus as DBRepository
 from ..Utilidades.Conversores import ConversorCursorJson as Conversor
-import mysql.connector
 
 
 def obtener_cantidad_anio_ciudad(Pais, Ciudad, Anio):
