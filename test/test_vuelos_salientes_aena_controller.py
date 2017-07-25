@@ -16,9 +16,9 @@ class TestVuelosSalientesAenaController(BaseTestCase):
 
         Obtiene la cantidad de vuelos salientes en una ciudad de un pais durante un año de forma mensual
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('Anio', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadAnualmenteMensualmente/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadOrigen', 'Valencia'),
+                        ('Anio', 2009)]
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadAnualmenteMensualmente/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -29,11 +29,11 @@ class TestVuelosSalientesAenaController(BaseTestCase):
 
         Obtiene la cantidad de vuelos salientes de desde un pais hacia una ciudad destino durante un rango de años y lo organizamos mensualmente
         """
-        query_string = [('PaisDestino', 'PaisDestino_example'),
-                        ('Ciudad', 'Ciudad_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadMensualmente/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('PaisDestino', 'Belgium'),
+                        ('CiudadDestino', 'Amberes'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadMensualmente/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -44,10 +44,10 @@ class TestVuelosSalientesAenaController(BaseTestCase):
 
         Obtiene la cantidad de vuelos salientes en todas las ciudades de un pais durante un mes en un rango de años
         """
-        query_string = [('Mes', 'Mes_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadesDuranteUnMesEnRangoAnios/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Mes', 'Enero'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadesDuranteUnMesEnRangoAnios/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -58,8 +58,8 @@ class TestVuelosSalientesAenaController(BaseTestCase):
 
         Obtiene la cantidad de vuelos salientes en todas las ciudades de un pais durante un anio
         """
-        query_string = [('Anio', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadesEnAnio/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Anio', 2009)]
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudadesEnAnio/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -68,9 +68,9 @@ class TestVuelosSalientesAenaController(BaseTestCase):
         """
         Test case for obtener_cantidad_por_ciudades_mensualmente
 
-        Obtener cantidad de vuelos salientes en una ciudad de un pais durante un año de forma mensual
+        Obtener cantidad de vuelos salientes por ciudades de un pais de forma mensual
         """
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadPorCiudadesMensualmente/{Pais}'.format(Pais='Pais_example'),
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadPorCiudadesMensualmente/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET')
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
@@ -80,9 +80,9 @@ class TestVuelosSalientesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos salientes totales en todas las ciudad de un pais durante un rango de años separando por meses
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadPorCiudadesMensualmenteyAnualmente/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadPorCiudadesMensualmenteyAnualmente/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -93,9 +93,9 @@ class TestVuelosSalientesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos salientes en una ciudad de un pais durante un año
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('Anio', 789)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudad/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadOrigen', 'Valencia'),
+                        ('Anio', 2009)]
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudad/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

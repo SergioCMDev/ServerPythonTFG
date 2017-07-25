@@ -16,9 +16,9 @@ class TestTuristasEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais y un rango de años obtiene la cantidad total de personas que llegan a ese pais separando por ciudades, meses y años
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasEnCiudadesMensualEnRangoAnios/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasEnCiudadesMensualEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -29,9 +29,9 @@ class TestTuristasEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais y un rango de años obtiene la cantidad total de personas que llegan a ese pais separando por años
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasEnPaisEnRangoAnios/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasEnPaisEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -42,11 +42,11 @@ class TestTuristasEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais, una ciudad, un mes y un rango de años obtiene la cantidad total de personas que llegan a esa ciudad separando por años,paises y ciudades de origen
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('Mes', 'Mes_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnCiudadEnMesEnRangoAnios/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadDestino', 'Amberes'),
+                        ('Mes', 'Enero'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnCiudadEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -57,9 +57,9 @@ class TestTuristasEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais y un rango de años obtiene la cantidad total de personas que llegan a esa ciudad separando por años, paises y ciudades de origen
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnCiudadEnRangoAnios/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnCiudadEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -70,10 +70,10 @@ class TestTuristasEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais, una ciudad y un rango de años obtiene la cantidad total de personas que llegan a esa ciudad separando por años,paises y ciudades de origen
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnPaisEnRangoAnios/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadDestino', 'Amberes'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnPaisEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -84,34 +84,34 @@ class TestTuristasEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais, una ciudad destino, un mes y un año obtiene la cantidad total de personas que llegan a esa ciudad separando por pais de origen
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('Mes', 'Mes_example'),
-                        ('Anio', 789)]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisOrigenEnCiudadEnMesEnAnio/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadDestino', 'Amberes'),
+                        ('Mes', 'Enero'),
+                        ('Anio', 2009)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisOrigenEnCiudadEnMesEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
-    def test_obtener_cantidad_turistas_y_paises_enpais_en_anio(self):
+    def test_obtener_cantidad_turistas_y_paises_en_pais_en_anio(self):
         """
-        Test case for obtener_cantidad_turistas_y_paises_enpais_en_anio
+        Test case for obtener_cantidad_turistas_y_paises_en_pais_en_anio
 
         Dado un pais y un año obtiene la cantidad total de personas que llegan a ese pais en ese año
         """
-        query_string = [('Mes', 'Mes_example')]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisesEnpaisEnAnio/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Anio', 2009)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisesEnPaisEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
-    def test_obtener_cantidad_turistas_y_paises_mensual_enpais_en_anio(self):
+    def test_obtener_cantidad_turistas_y_paises_mensual_en_pais_en_anio(self):
         """
-        Test case for obtener_cantidad_turistas_y_paises_mensual_enpais_en_anio
+        Test case for obtener_cantidad_turistas_y_paises_mensual_en_pais_en_anio
 
         Dado un pais y un año obtiene la cantidad total de personas que llegan a ese pais en ese año separadas por meses
         """
-        query_string = [('Mes', 'Mes_example')]
-        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisesMensualEnpaisEnAnio/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Anio', 2009)]
+        response = self.client.open('/server/Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYPaisesMensualEnPaisEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

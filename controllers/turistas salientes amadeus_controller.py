@@ -1,16 +1,16 @@
 from ..DB.DBRepositoryAmadeus import DBRepositoryAmadeus as DBRepository
 from ..Utilidades.Conversores import ConversorCursorJson as Conversor
 
-def obtener_cantidad_ciudad_durante_mes_en_rango_anios(Pais, Mes, Ciudad, AnioInicio, AnioFin):
+def obtener_cantidad_ciudad_durante_mes_en_rango_anios(PaisOrigen, Mes, CiudadOrigen, AnioInicio, AnioFin):
     """
     Dado un pais origen, una ciudad, un mes y un rango de años obtiene la cantidad de turistas salientes de ese pais diviendo por meses y años
     Dado un pais origen, una ciudad, un mes y un rango de años obtiene la cantidad de turistas salientes de ese pais diviendo por meses y años
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param Mes: Mes
     :type Mes: str
-    :param Ciudad: Ciudad
-    :type Ciudad: str
+    :param CiudadOrigen: Ciudad de la que salen los turistas
+    :type CiudadOrigen: str
     :param AnioInicio: Anio Inicio
     :type AnioInicio: int
     :param AnioFin: Anio Fin
@@ -21,7 +21,7 @@ def obtener_cantidad_ciudad_durante_mes_en_rango_anios(Pais, Mes, Ciudad, AnioIn
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerCantidadCiudadDuranteMesEnRangoAnios(Pais, Mes, Ciudad, AnioInicio, AnioFin)
+    cursor, labels = repository.ObtenerCantidadCiudadDuranteMesEnRangoAnios(PaisOrigen, Mes, CiudadOrigen, AnioInicio, AnioFin)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -29,16 +29,16 @@ def obtener_cantidad_ciudad_durante_mes_en_rango_anios(Pais, Mes, Ciudad, AnioIn
     return retval
 
 
-def obtener_cantidad_en_ciudad_en_rango_anios(Pais, Mes, AnioInicio, AnioFin):
+def obtener_cantidad_en_ciudad_en_rango_anios(PaisOrigen, CiudadOrigen, AnioInicio, AnioFin):
     """
     Dado un pais origen, una ciudad y un rango de años obtiene la cantidad de turistas que salen de ese pais durante ese rango de años de esa ciudad
     Dado un pais origen, una ciudad y un rango de años obtiene la cantidad de vuelos salientes durante ese rango de años de esa ciudad
-    :param Pais: Pais
-    :type Pais: str
-    :param Mes: Ciudad
-    :type Mes: str
-    :param Anio_Inicio: AnioInicio
-    :type Anio_Inicio: int
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
+    :param CiudadOrigen: Ciudad de la que salen los turistas
+    :type CiudadOrigen: str
+    :param AnioInicio: Anio Inicio
+    :type AnioInicio: int
     :param AnioFin: AnioFin
     :type AnioFin: int
 
@@ -49,7 +49,7 @@ def obtener_cantidad_en_ciudad_en_rango_anios(Pais, Mes, AnioInicio, AnioFin):
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerCantidadEnCiudadEnRangoAnios(Pais, Mes, AnioInicio, AnioFin)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusDadoPaisOrigenCiudadOrigenAnioMinMax(PaisOrigen, CiudadOrigen, AnioInicio, AnioFin)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -57,12 +57,12 @@ def obtener_cantidad_en_ciudad_en_rango_anios(Pais, Mes, AnioInicio, AnioFin):
     return retval
 
 
-def obtener_cantidad_en_ciudades_mensualmente_en_anio(Pais, AnioInicio, AnioFin):
+def obtener_cantidad_en_ciudades_mensualmente_en_anio(PaisOrigen, AnioInicio, AnioFin):
     """
     Dado un pais origen y un rango de años obtiene la cantidad de turistas salientes de ese pais durante esos años divididos por ciudad y mes
     Dado un pais origen y un rango de años obtiene la cantidad de turistas salientes de ese pais durante esos años divididos por ciudad y mes
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param AnioInicio: Anio Inicio
     :type AnioInicio: int
     :param AnioFin: Anio Fin
@@ -73,7 +73,7 @@ def obtener_cantidad_en_ciudades_mensualmente_en_anio(Pais, AnioInicio, AnioFin)
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusSeparadoPorCiudadesMensualmenteDadoPaisOrigenAnioMinMax(Pais, AnioInicio, AnioFin)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusSeparadoPorCiudadesMensualmenteDadoPaisOrigenAnioMinMax(PaisOrigen, AnioInicio, AnioFin)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -81,12 +81,12 @@ def obtener_cantidad_en_ciudades_mensualmente_en_anio(Pais, AnioInicio, AnioFin)
     return retval
 
 
-def obtener_cantidad_en_pais_en_anio(Pais, Anio):
+def obtener_cantidad_en_pais_en_anio(PaisOrigen, Anio):
     """
     Dado un pais origen y un anio obtiene la cantidad de turistas que salen de dicho pais durante ese año
     Dado un pais origen y un anio obtiene la cantidad de turistas que salen de dicho pais durante ese año dividiendo por ciudades
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param Anio: Anio
     :type Anio: int
 
@@ -95,7 +95,7 @@ def obtener_cantidad_en_pais_en_anio(Pais, Anio):
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusEnUnAnioDadoPaisOrigenAnio(Pais, Anio)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusEnUnAnioDadoPaisOrigenAnio(PaisOrigen, Anio)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -103,12 +103,12 @@ def obtener_cantidad_en_pais_en_anio(Pais, Anio):
     return retval
 
 
-def obtener_cantidad_en_pais_en_anio_mensualmente(Pais, Anio):
+def obtener_cantidad_en_pais_en_anio_mensualmente(PaisOrigen, Anio):
     """
     Dado un pais origen y un año obtiene la cantidad de turistas salientes de ese pais durante ese año dividido por meses
     Dado un pais origen y un año obtiene la cantidad de turistas salientes de ese pais durante ese año dividido por meses
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param Anio: Anio
     :type Anio: int
 
@@ -117,7 +117,7 @@ def obtener_cantidad_en_pais_en_anio_mensualmente(Pais, Anio):
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerCantidadEnPaisEnAnioMensualmente(Pais, Anio)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusEnUnAnioDadoPaisOrigenAnioMensualmente(PaisOrigen, Anio)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -125,12 +125,12 @@ def obtener_cantidad_en_pais_en_anio_mensualmente(Pais, Anio):
     return retval
 
 
-def obtener_cantidad_en_pais_en_ciudades_en_anio(Pais, Anio):
+def obtener_cantidad_en_pais_en_ciudades_en_anio(PaisOrigen, Anio):
     """
     Dado un pais origen y un año obtiene la cantidad de turistas salientes de ese pais durante ese año dividido por ciudades origen
     Dado un pais origen y un año obtiene la cantidad de turistas salientes de ese pais durante ese año dividido por ciudades origen
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param Anio: Anio
     :type Anio: int
 
@@ -139,7 +139,7 @@ def obtener_cantidad_en_pais_en_ciudades_en_anio(Pais, Anio):
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerCantidadEnPaisEnCiudadesEnAnio(Pais, Anio)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusEnUnAnioDadoPaisOrigenAnioSeparandoPorCiudades(PaisOrigen, Anio)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -147,12 +147,12 @@ def obtener_cantidad_en_pais_en_ciudades_en_anio(Pais, Anio):
     return retval
 
 
-def obtener_cantidad_en_pais_en_mes_en_rango_anios(Pais, Mes, AnioInicio, AnioFin):
+def obtener_cantidad_en_pais_en_mes_en_rango_anios(PaisOrigen, Mes, AnioInicio, AnioFin):
     """
     Dado un pais origen, un mes y un rango de años obtiene la cantidad de turistas salientes de ese pais durante esos años y ese mes
     Dado un pais origen, un mes y un rango de años obtiene la cantidad de turistas salientes de ese pais durante esos años y ese mes
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param Mes: Mes
     :type Mes: str
     :param AnioInicio: Anio Inicio
@@ -165,7 +165,7 @@ def obtener_cantidad_en_pais_en_mes_en_rango_anios(Pais, Mes, AnioInicio, AnioFi
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerCantidadEnPaisEnMesEnRangoAnios(Pais, Mes, AnioInicio, AnioFin)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusAnualmenteEnUnMesDadoPaisOrigenMesAnioMinMax(PaisOrigen, Mes, AnioInicio, AnioFin)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 
@@ -173,12 +173,12 @@ def obtener_cantidad_en_pais_en_mes_en_rango_anios(Pais, Mes, AnioInicio, AnioFi
     return retval
 
 
-def obtener_cantidad_en_pais_en_rango_anios(Pais, AnioInicio, AnioFin):
+def obtener_cantidad_en_pais_en_rango_anios(PaisOrigen, AnioInicio, AnioFin):
     """
     Dado un pais origen y un rango de años obtiene la cantidad de turistas salientes de ese pais durante esos años
     Dado un pais origen y un rango de años obtiene la cantidad de turistas salientes de ese pais durante esos años
-    :param Pais: Pais
-    :type Pais: str
+    :param PaisOrigen: Pais del que salen los turistas
+    :type PaisOrigen: str
     :param AnioInicio: Anio Inicio
     :type AnioInicio: int
     :param AnioFin: Anio Fin
@@ -189,7 +189,7 @@ def obtener_cantidad_en_pais_en_rango_anios(Pais, AnioInicio, AnioFin):
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerCantidadEnPaisEnRangoAnios(Pais, AnioInicio, AnioFin)
+    cursor, labels = repository.ObtenerDatosTuristasSalientesAmadeusAnualmenteDadoPaisOrigenAnioMinMax(PaisOrigen, AnioInicio, AnioFin)
 
     lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
 

@@ -16,9 +16,9 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidades de vuelos entrantes en la ciudad del pais divididas por meses
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('Anio', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioCiudad/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadDestino', 'Valencia'),
+                        ('Anio', 2009)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioCiudad/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -29,8 +29,8 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
         """
-        query_string = [('Anio', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioPorCiudades/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Anio', 2009)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -41,9 +41,9 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes anualmente dado un pais destino y un rango de años
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnualmente/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnualmente/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -54,10 +54,10 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en una ciudad de un pais durante el rango de años seleccionado
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadCiudad/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadDestino', 'Valencia'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadCiudad/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -68,9 +68,9 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadPorCiudades/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -81,8 +81,8 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes durante los meses de un año 
         """
-        query_string = [('Anio', 789)]
-        response = self.client.open('/server/AenaVuelosEntrantes//ObtenerCantidadMensual/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Anio', 2009)]
+        response = self.client.open('/server/Aena/VuelosEntrantes//ObtenerCantidadMensual/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -93,9 +93,9 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes de forma mensual dado un pais destino y un rango de años
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMensualmente/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMensualmente/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -104,12 +104,12 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         """
         Test case for obtener_cantidad_mes
 
-        Obtener cantidad de vuelos entrantes durante el mismo mes en un rango de años
+        Obtener cantidad de vuelos entrantes durante el mismo mes en un rango de años para el pais destino
         """
-        query_string = [('Mes', 'Mes_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMes/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Mes', 'Enero'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMes/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -120,9 +120,9 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en las ciudades del pais durante el mes del año seleccionado
         """
-        query_string = [('Anio', 789),
-                        ('Mes', 'Mes_example')]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesAnioPorCiudades/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('Anio', 2009),
+                        ('Mes', 'Enero')]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesAnioPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -133,11 +133,11 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en la ciudad del pais durante el mes del rango de años seleccionado
         """
-        query_string = [('Ciudad', 'Ciudad_example'),
-                        ('Mes', 'Mes_example'),
-                        ('AnioInicio', 789),
-                        ('AnioFin', 789)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesCiudad/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('CiudadDestino', 'Valencia'),
+                        ('Mes', 'Enero'),
+                        ('AnioInicio', 2009),
+                        ('AnioFin', 2015)]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesCiudad/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -148,10 +148,10 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
 
         Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un rango de años durante un mismo mes
         """
-        query_string = [('AnioInicio', 789),
-                        ('AnioFin', 789),
-                        ('Mes', 'Mes_example')]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesPorCiudades/{Pais}'.format(Pais='Pais_example'),
+        query_string = [('AnioInicio', 2009),
+                        ('AnioFin', 2015),
+                        ('Mes', 'Enero')]
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
