@@ -1,13 +1,12 @@
 import pylab
-import Constants
+from ..Utilidades.Constantes import Constantes
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.covariance import EllipticEnvelope
 
-from pylab import plot, title, xlabel, ylabel, savefig, legend, array
 class Graphics():
     def __init__(self):
-        print("Clase Graph Cargada Correctamente ")
+        print("Clase Graphics Cargada Correctamente")
 
 
     def obtenerValoresLista(self, valores):
@@ -67,7 +66,7 @@ class Graphics():
 #        posicion = 1
         valores = list()
         if labels[posicion] == 'Mes': #OK
-            valores = Constants.Meses
+            valores = Constantes.Meses
         elif labels[posicion] == 'Ciudad': #OK
             valores = matriz.Ciudad
         elif labels[posicion] == 'Cantidad': #OK

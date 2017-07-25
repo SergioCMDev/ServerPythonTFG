@@ -1,5 +1,5 @@
-from ..DB.DBRepositoryAmadeus import DBRepositoryAmadeus as DBRepository
-from ..Utilidades.Conversores import ConversorCursorJson as Conversor
+from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
+from ..Utilidades.Conversores import Conversores as Conversor
 
 
 def obtener_cantidad_anio(PaisOrigen, Anio):
@@ -18,9 +18,10 @@ def obtener_cantidad_anio(PaisOrigen, Anio):
 
     cursor, labels = repository.ObtenerDatosTuristasAenaEnUnAnioDadoPaisDestinoAnio(PaisOrigen, Anio)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -44,19 +45,20 @@ def obtener_cantidad_ciudad_en_anio(PaisOrigen, CiudadOrigen, Anio):
 
     cursor, labels = repository.ObtenerDatosTuristasAenaEnUnAnioDadoPaisDestinoCiudadDestinoAnio(PaisOrigen, CiudadOrigen, Anio)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
-def obtener_cantidad_ciudad_rango_anios(Pais, Ciudad, AnioInicio, AnioFin):
+def obtener_cantidad_ciudad_rango_anios(PaisDestino, CiudadDestino, AnioInicio, AnioFin):
     """
     Obtiene la cantidad de personas que van hacia una ciudad durante un rango de años
     Obtiene la cantidad de personas que van hacia una ciudad durante un rango de años
-    :param Pais: Pais
-    :type Pais: str
-    :param Ciudad: Ciudad
-    :type Ciudad: str
+    :param PaisDestino: Pais
+    :type PaisDestino: str
+    :param CiudadDestino: Ciudad
+    :type CiudadDestino: str
     :param AnioInicio: Anio Inicio
     :type AnioInicio: int
     :param AnioFin: Anio Fin
@@ -68,11 +70,12 @@ def obtener_cantidad_ciudad_rango_anios(Pais, Ciudad, AnioInicio, AnioFin):
     conversor = Conversor()
     repository = DBRepository()
 
-    cursor, labels = repository.ObtenerDatosTuristasAenaDadoPaisDestinoCiudadDestinoAnioMinMax(Pais, Ciudad, AnioInicio, AnioFin )
+    cursor, labels = repository.ObtenerDatosTuristasAenaDadoPaisDestinoCiudadDestinoAnioMinMax(PaisDestino, CiudadDestino, AnioInicio, AnioFin )
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -96,7 +99,8 @@ def obtener_cantidad_salientes_rango_anios(PaisOrigen, AnioInicio, AnioFin):
 
     cursor, labels = repository.ObtenerNumeroTuristasAenaDadoPaisDestinoAnioMinMax(PaisOrigen, AnioInicio, AnioFin)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval

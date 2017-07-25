@@ -2,8 +2,7 @@ import numpy as np
 from Utilidades.Graphics import Graphics as Graphics
 from sklearn.covariance import EllipticEnvelope
 
-from sklearn.svm import OneClassSVM
-import matplotlib.pyplot as plt
+
 import pandas as pd
 
 class DeteccionOutliers:

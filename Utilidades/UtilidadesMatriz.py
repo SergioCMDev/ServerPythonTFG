@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # ! python3
-
-import Constants
+"""
+@author: wesrok
+"""
+from ..Utilidades.Constantes import Constantes
 import numpy as np
 from pandas import DataFrame
 
@@ -11,7 +13,7 @@ class UtilidadesMatriz:
     
     separator = ';'
     def __init__(self):
-        print("Clase TuplaToMatrix Cargada Correctamente")
+        print("Clase UtilidadesMatriz Cargada Correctamente")
 
 
     def obtenerValoresLista(self, valores):
@@ -28,7 +30,7 @@ class UtilidadesMatriz:
         listaValores = list()
         
         if columnas[posicion] == 'Mes': #OK
-            valores = Constants.Meses
+            valores = Constantes.Meses
         elif columnas[posicion] == 'Ciudad': #OK
             valores = tuples.Ciudad
         elif columnas[posicion] == 'Anio': #OK
@@ -101,12 +103,13 @@ class UtilidadesMatriz:
     
     
     
-    def getMatrizDatos(self, cursor, columnas, anioInicio, anioFin):
-        columnasCursor = [i[0] for i in cursor.description]
+    def getMatrizDatos(self, tuplas, columnas, anioInicio, anioFin):
+#        print (tuplas)
+#        columnasCursor = [i[0] for i in cursor.description]
         num_columns = len(columnas)
-        dataFromDB = list(cursor.fetchall())     
+#        dataFromDB = list(cursor.fetchall())     
         lista = list()
-        tuplas = DataFrame(dataFromDB, columns = columnasCursor)
+#        tuplas = DataFrame(dataFromDB, columns = columnasCursor)
         matriz = []
    
         if num_columns == 2:

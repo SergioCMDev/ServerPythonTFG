@@ -1,5 +1,5 @@
 from ..DB.DBRepositoryAmadeus import DBRepositoryAmadeus as DBRepository
-from ..Utilidades.Conversores import ConversorCursorJson as Conversor
+from ..Utilidades.Conversores import Conversores as Conversor
 
 def obtener_cantidad_turistas_en_ciudades_mensual_en_rango_anios(PaisDestino, AnioInicio, AnioFin):
     """
@@ -19,9 +19,10 @@ def obtener_cantidad_turistas_en_ciudades_mensual_en_rango_anios(PaisDestino, An
 
     cursor, labels = repository.ObtenerPaisOrigenYNumeroTuristasAmadeusAnualmenteDadoPaisDestinoAnioMinMaxSeparadoPorCiudadesYMeses(PaisDestino, AnioInicio, AnioFin)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -44,9 +45,10 @@ def obtener_cantidad_turistas_en_pais_en_rango_anios(PaisDestino, AnioInicio, An
 
     cursor, labels = repository.ObtenerNumeroTuristasAmadeusAnualmenteDadoPaisDestinoAnioMinMax(PaisDestino, AnioInicio, AnioFin)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -72,9 +74,10 @@ def obtener_cantidad_turistas_y_ciudades_origen_en_ciudad_en_mes_en_rango_anios(
 
     cursor, labels = repository.ObtenerPaisOrigenYNumeroTuristasAmadeusAnualmenteDadoPaisDestinoCiudadDestinoMesAnioMinMax(PaisDestino, CiudadDestino, Mes, AnioInicio, AnioFin)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -97,9 +100,10 @@ def obtener_cantidad_turistas_y_ciudades_origen_en_ciudad_en_rango_anios(PaisDes
 
     cursor, labels = repository.ObtenerPaisOrigenYNumeroTuristasAmadeusSeparadoPorCiudadesAnualmenteDadoPaisDestinoAnioMinMax(PaisDestino, AnioInicio, AnioFin)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -123,9 +127,10 @@ def obtener_cantidad_turistas_y_ciudades_origen_en_pais_en_rango_anios(PaisDesti
 
     cursor, labels = repository.ObtenerPaisOrigenYNumeroTuristasAmadeusAnualmenteDadoPaisDestinoCiudadDestinoAnioMinMax(PaisDestino, CiudadDestino, AnioInicio, AnioFin)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -151,9 +156,10 @@ def obtener_cantidad_turistas_y_pais_origen_en_ciudad_en_mes_en_anio(PaisDestino
 
     cursor, labels = repository.ObtenerPaisOrigenYNumeroTuristasAmadeusTotalesEnUnAnioDadoPaisDestinoCiudadDestinoMesAnio(PaisDestino, CiudadDestino, Mes, Anio)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -174,9 +180,10 @@ def obtener_cantidad_turistas_y_paises_en_pais_en_anio(PaisDestino, Anio):
 
     cursor, labels = repository.ObtenerPaisOrigenYNumeroTuristasAmadeusMensualmenteEnUnAnioTotalesDadoPaisDestinoAnio(PaisDestino, Anio)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
@@ -196,7 +203,8 @@ def obtener_cantidad_turistas_y_paises_mensual_en_pais_en_anio(PaisDestino, Anio
 
     cursor, labels = repository.ObtenerCantidadTuristasYPaisesMensualEnpaisEnAnio(PaisDestino, Anio)
 
-    lista =  conversor.ConvertirCursorToTuplas(cursor, labels)
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(lista)
+
+    retval = conversor.convertirAJson(arrayTuplas)
     return retval

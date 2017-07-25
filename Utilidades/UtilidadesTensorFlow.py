@@ -5,12 +5,11 @@ from __future__ import print_function
 
 
 import numpy as np
-from six.moves import urllib
-from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
-import UtilidadesStrings as UtilidadesStrings
+from ..Utilidades.Conversores import Conversores 
+conversor = Conversores()
 
-# Parameters
+# Parametros
 learning_rate = 0.01
 training_epochs = 1000
 display_step = 50
@@ -20,40 +19,44 @@ batch_size = 25
 class UtilidadesTensorFlow():
 
     def __init__(self):
-        print("Clase UtilsTensorFlow Cargada Correctamente")
+        print("Clase UtilidadesTensorFlow Cargada Correctamente")
 
-    def obtenerProgresionLineal(self, cursor, year):
-            tf =  UtilidadesTensorFlow.UtilidadesTensorFlow()
-            utils = UtilidadesStrings.UtilidadesString()
-            prediccion = tf.ObtenerPrediccionYear(utils.save_data(cursor), year)
-            print('La prediccion para el año',year,' es ',str(int(prediccion)))
+    def ObtenerProgresionLineal(self, tuplas, anio):
+
+            prediccion = self.ObtenerPrediccionAnio(tuplas, anio)
+
+            print('La prediccion para el año',anio,' es ',str(int(prediccion)))
 
 
 
-    def ObtenerPrediccionYear(self, data, year):
-        # Create graph
+    def ObtenerPrediccionAnio(self, data, year):
+        # Creamos el grafo
         sess = tf.Session()
-        print(data)
-        # Create the data
-        x_vals = np.asarray(data[0], dtype=np.float64)
-        y_vals = np.asarray(data[1], dtype=np.float64)
+
+        # Obtenemos los valores de las componentes X e Y de las tuplas
+        x_vals, y_vals = conversor.GetComponentesXY(data)
+
+        #Convertimos los valores a float64 para que TF pueda trabajar con ellos        
+        x_vals = np.asarray(x_vals, dtype=np.float64)
+        y_vals = np.asarray(y_vals, dtype=np.float64)
 
         #mostrarDatos
-        #print(x_vals)
-        #print(y_vals)
-        # Create design matrix
+#        print(x_vals)
+#        print(y_vals)
+
+        # Creamos el diseño de la matriz
         x_vals_column = np.transpose(np.matrix(x_vals))
         ones_column = np.transpose(np.matrix(np.repeat(1, len(x_vals))))
         A = np.column_stack((x_vals_column, ones_column))
 
-        # Create b matrix
+        # Creamos la matriz b 
         b = np.transpose(np.matrix(y_vals))
 
-        # Create tensors
+        # Creamos tensores
         A_tensor = tf.constant(A)
         b_tensor = tf.constant(b)
 
-        # Matrix inverse solution
+        # Resolvemos mediante la solucion de matriz inversa 
         tA_A = tf.matmul(tf.transpose(A_tensor), A_tensor)
         tA_A_inv = tf.matrix_inverse(tA_A)
         product = tf.matmul(tA_A_inv, tf.transpose(A_tensor))
@@ -61,14 +64,14 @@ class UtilidadesTensorFlow():
 
         solution_eval = sess.run(solution)
 
-        # Extract coefficients
+        # Extraemos los coeficientes
         slope = solution_eval[0][0]
         y_intercept = solution_eval[1][0]
 
-        print('slope: ' + str(slope))
-        print('y_intercept: ' + str(y_intercept))
+#        print('slope: ' + str(slope))
+#        print('y_intercept: ' + str(y_intercept))
 
-        # Get best fit line
+        # Obtenemos la mejor linea best fit line
         best_fit = []
         for i in x_vals:
             resValue = slope * i + y_intercept
