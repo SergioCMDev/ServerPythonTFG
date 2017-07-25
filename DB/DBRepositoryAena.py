@@ -6,7 +6,6 @@ Created on Sun Jun 25 12:50:46 2017
 """
 from ..DB.MySQL_Aena import MySQLAccessAena as DBContext #Server
 #from self.db.MySQL import MySQLAccess as DBContext #Local
-import mysql.connector
 
 class DBRepositoryAena():
     

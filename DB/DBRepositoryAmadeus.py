@@ -6,7 +6,7 @@ Created on Sun Jun 25 12:50:46 2017
 """
 from ..DB.MySQL_Amadeus import MySQLAccessAmadeus as DBContext #Server
 #from self.db.MySQL import MySQLAccess as DBContext #Local
-import mysql.connector
+
 
 class DBRepositoryAmadeus():
     
@@ -176,10 +176,12 @@ class DBRepositoryAmadeus():
         self.labels   = ['Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAmadeusEnUnMesEnUnAnioDadoPaisDestinoCiudadDestinoAnio(PaisDestino, CiudadDestino, mes, str(Anio)), self.labels ) 
     
+    
     def ObtenerDatosVuelosEntrantesAmadeusEnUnMesEnUnAnioDadoPaisDestinoAnio(self, PaisDestino, mes, Anio):
         self.db = DBContext()
         self.labels   = ['Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAmadeusEnUnMesEnUnAnioDadoPaisDestinoAnio(PaisDestino, mes, str(Anio)), self.labels ) 
+    
     
     def ObtenerDatosVuelosEntrantesAmadeusEnUnAnioDadoPaisDestinoCiudadDestinoAnio(self, PaisDestino, CiudadDestino, Anio):
         self.db = DBContext()
@@ -191,6 +193,7 @@ class DBRepositoryAmadeus():
         self.db = DBContext()
         self.labels   = ['Mes', 'Cantidad']
         return (self.db.ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoCiudadDestinoAnio(PaisDestino, CiudadDestino, str(Anio)), self.labels ) 
+    
     
     def ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoAnio(self, PaisDestino, Anio):
         self.db = DBContext()

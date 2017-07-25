@@ -17,7 +17,7 @@ class TestTuristasSalientesAenaController(BaseTestCase):
         Obtiene la cantidad de personas que salen de un pais en un años y devuelve la cantidad
         """
         query_string = [('Anio', 2009)]
-        response = self.client.open('/server/Aena/TuristasSalientes/ObtenerCantidadAnio/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
+        response = self.client.open('/server/Aena/TuristasSalientes/ObtenerCantidadAnio/{PaisOrigen}'.format(PaisOrigen='Spain'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -30,7 +30,7 @@ class TestTuristasSalientesAenaController(BaseTestCase):
         """
         query_string = [('CiudadOrigen', 'Valencia'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Aena/TuristasSalientes/ObtenerCantidadCiudadEnAnio/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
+        response = self.client.open('/server/Aena/TuristasSalientes/ObtenerCantidadCiudadEnAnio/{PaisOrigen}'.format(PaisOrigen='Spain'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -43,7 +43,7 @@ class TestTuristasSalientesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/TuristasSalientes/ObtenerCantidadSalientesRangoAnios/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
+        response = self.client.open('/server/Aena/TuristasSalientes/ObtenerCantidadSalientesRangoAnios/{PaisOrigen}'.format(PaisOrigen='Spain'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
