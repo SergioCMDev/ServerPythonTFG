@@ -11,7 +11,6 @@ from pandas import DataFrame
 
 class UtilidadesMatriz:
     
-    separator = ';'
     def __init__(self):
         print("Clase UtilidadesMatriz Cargada Correctamente")
 
@@ -19,8 +18,9 @@ class UtilidadesMatriz:
     def obtenerValoresLista(self, valores):
         listaFilas = list()
         for valor in valores:
+            
                 if (valor not in listaFilas):
-                   listaFilas.append(valor)
+                    listaFilas.append(valor)
                    
         return listaFilas
     
@@ -38,6 +38,8 @@ class UtilidadesMatriz:
         elif columnas[posicion] == 'Cantidad': #OK
             valores = ['Cantidad']
         elif columnas[posicion] == 'Numero_Vuelos':
+            valores = ['Numero_Vuelos']
+        elif columnas[posicion] == 'Numero_Turistas':
             valores = ['Numero_Vuelos']
         elif columnas[posicion] == 'Pais_Origen':
             valores = tuples.Pais_Origen
@@ -60,10 +62,17 @@ class UtilidadesMatriz:
         
         #Obtenemos datos de columnas
         listaColumnas = self.ObtenerParametros(columnas, tuples, 1)
-
+        np.set_printoptions(threshold='nan')
         #Obtenemos valores a introducir en matriz
         posValores = len(columnas)-1
         valores = self.obtenerValoresMatriz(tuples, posValores, columnas)
+#        print(listaFilas)
+#        print("\n")
+#        print(len(listaColumnas))
+#        print("\n")
+#        print(valores)
+#        print("\n")
+        np.set_printoptions(threshold='nan')
 
         #Creamos y Rellenamos matriz
         matrizRellena = self.rellenarMatriz(listaFilas, listaColumnas, valores)
@@ -80,12 +89,13 @@ class UtilidadesMatriz:
         for f in np.arange(0, len(listaFilas),1):
             matriz.append([f] * len(listaColumnas))
             
+            
         #Rellenamos matriz
         for filas in np.arange(0, len(listaFilas), 1):
             for columnas in np.arange(0, len(listaColumnas),1):
                 pos = filas * len(listaColumnas) + columnas
+#                print(filas,  columnas, valores[pos])
                 matriz[filas][columnas] = int(valores[pos])
-                    
         return matriz
     
     
@@ -110,11 +120,11 @@ class UtilidadesMatriz:
         matriz = []
    
         if num_columns == 2:
-             if ('Anio' in columnas[0] or 'Ciudad_Destino' in columnas[0] or 'Ciudad' in columnas[0] or 'Mes' in columnas[0])  and ('Cantidad' in columnas[1] or 'Numero_Vuelos' in columnas[1]):
+             if ('Anio' in columnas[0] or 'Ciudad_Destino' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Mes' in columnas[0])  and ('Cantidad' in columnas[1] or 'Numero_Vuelos' in columnas[1] or 'Numero_Turistas' in columnas[1]):
                  matriz, lista =  self.createMatrizCantidad(tuplas, anioInicio, anioFin, columnas)
 
         elif  num_columns == 3:
-            if ('Anio' in columnas[0] or 'Ciudad' in columnas[0])  and  ('Mes' in columnas[1] or 'Ciudad' in columnas[1]) and ('Cantidad' in columnas[2] or 'Numero_Turistas' in columnas[2]):
+            if ('Anio' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Ciudad_Destino' in columnas[0])  and  ('Mes' in columnas[1] or 'Ciudad_Origen' in columnas[1] or 'Ciudad_Destino' in columnas[1]) and ('Cantidad' in columnas[2] or 'Numero_Turistas' in columnas[2] or 'Numero_Vuelos' in columnas[2]):
                matriz, lista =  self.createMatrizCantidad(tuplas, anioInicio, anioFin, columnas)
                
         return matriz, lista

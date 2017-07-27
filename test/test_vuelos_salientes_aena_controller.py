@@ -87,15 +87,15 @@ class TestVuelosSalientesAenaController(BaseTestCase):
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
-    def test_obtener_cantidad_salientes_ciudad(self):
+ def test_obtener_cantidad_entrantes_ciudad(self):
         """
-        Test case for obtener_cantidad_salientes_ciudad
+        Test case for obtener_cantidad_entrantes_ciudad
 
-        Obtener cantidad de vuelos salientes en una ciudad de un pais durante un año
+        Obtener cantidad de vuelos salientes hacia una ciudad desde un pais durante un año
         """
-        query_string = [('CiudadOrigen', 'Valencia'),
+        query_string = [('CiudaDestino', 'Valencia'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadCiudad/{PaisOrigen}'.format(PaisOrigen='PaisOrigen_example'),
+        response = self.client.open('/server/Aena/VuelosSalientes/ObtenerCantidadEntrantesCiudad/{PaisOrigen}'.format(PaisOrigen='Belgium'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

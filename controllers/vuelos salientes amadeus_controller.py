@@ -3,7 +3,7 @@ from ..Utilidades.Conversores import Conversores as Conversor
 
 
 
-def obtener_cantidad_anual(PaisOrigen, AnioInicio, AnioFin):
+def obtener_cantidad_anual(PaisOrigen, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen obtiene la cantidad de vuelos que salen de dicho pais durante un rango de años
     Dado un pais origen obtiene la cantidad de vuelos que salen de dicho pais durante un rango de años
@@ -24,11 +24,19 @@ def obtener_cantidad_anual(PaisOrigen, AnioInicio, AnioFin):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
-def obtener_cantidad_ciudad_mensual_rango_anios(PaisOrigen, CiudadOrigen, AnioInicio, AnioFin):
+
+
+def obtener_cantidad_ciudad_mensual_rango_anios(PaisOrigen, CiudadOrigen, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos que salen de dicha ciudad durante un rango de años organizado mensualmente
     Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos que salen de dicha ciudad durante un rango de años organizado mensualmente
@@ -50,12 +58,22 @@ def obtener_cantidad_ciudad_mensual_rango_anios(PaisOrigen, CiudadOrigen, AnioIn
 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
+#    print(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    print(arrayTuplas)
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
-def obtener_cantidad_ciudad_mes_rango_anios(PaisOrigen, CiudadOrigen, Mes, AnioInicio, AnioFin):
+
+
+def obtener_cantidad_ciudad_mes_rango_anios(PaisOrigen, CiudadOrigen, Mes, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos que salen de dicha ciudad durante un rango de años durante un mes
     Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos que salen de dicha ciudad durante un rango de años durante un mes
@@ -80,11 +98,19 @@ def obtener_cantidad_ciudad_mes_rango_anios(PaisOrigen, CiudadOrigen, Mes, AnioI
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
-def obtener_cantidad_ciudades_mensual_rango_anios(PaisOrigen, AnioInicio, AnioFin):
+
+
+def obtener_cantidad_ciudades_mensual_rango_anios(PaisOrigen, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen obtiene la cantidad de vuelos que salen de dicho pais y las ciudades hacia las que se dirigen durante un rango de años diviendo por meses
     Dado un pais origen obtiene la cantidad de vuelos que salen de dicho pais y las ciudades hacia las que se dirigen durante un rango de años diviendo por meses
@@ -105,11 +131,19 @@ def obtener_cantidad_ciudades_mensual_rango_anios(PaisOrigen, AnioInicio, AnioFi
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
+    ##Mostrar JSON Extendido
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    retval = conversor.ObtenerDataJSONExtendido(matriz)
+#
+#    return retval
+
+    ##Mostrar JSON Reducido
     retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
-def obtener_cantidad_ciudades_rango_anios(PaisOrigen, AnioInicio, AnioFin):
+
+def obtener_cantidad_ciudades_rango_anios(PaisOrigen, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen obtiene la cantidad de vuelos que salen de dicho pais y las ciudades hacia las que se dirigen durante un rango de años
     Dado un pais origen obtiene la cantidad de vuelos que salen de dicho pais y las ciudades hacia las que se dirigen durante un rango de años
@@ -126,14 +160,20 @@ def obtener_cantidad_ciudades_rango_anios(PaisOrigen, AnioInicio, AnioFin):
     repository = DBRepository()
 
     cursor, labels = repository.ObtenerDatosVuelosSalientesAmadeusDadoPaisOrigenAnioMinMaxSeparadoPorCiudades(PaisOrigen, AnioInicio, AnioFin)
-
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
+    ##Mostrar JSON Extendido
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    retval = conversor.ObtenerDataJSONExtendido(matriz)
+#
+#    return retval
 
+    ##Mostrar JSON Reducido
     retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
-def obtener_cantidad_mensualmente_en_anio(PaisOrigen, Anio):
+
+def obtener_cantidad_mensualmente_en_anio(PaisOrigen, Anio): #OK
     """
     Dado un pais origen y un anio obtiene la cantidad de vuelos que salen de dicho pais durante ese año de forma mensual
     Dado un pais origen y un anio obtiene la cantidad de vuelos que salen de dicho pais durante ese año de forma mensual
@@ -152,10 +192,18 @@ def obtener_cantidad_mensualmente_en_anio(PaisOrigen, Anio):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
-def obtener_cantidad_mes_en_anios(PaisOrigen, Mes, AnioInicio, AnioFin):
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
+
+
+def obtener_cantidad_mes_en_rango_anios(PaisOrigen, Mes, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen, un mes y un rango de años obtiene la cantidad de vuelos salientes durante ese rango de años en ese mes
     Dado un pais origen, un mes y un rango de años obtiene la cantidad de vuelos salientes durante ese rango de años en ese mes
@@ -178,11 +226,19 @@ def obtener_cantidad_mes_en_anios(PaisOrigen, Mes, AnioInicio, AnioFin):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
-def obtener_cantidad_vuelos_salienes_ciudades_en_anio(PaisOrigen, Anio):
+
+
+def obtener_cantidad_vuelos_salienes_ciudades_en_anio(PaisOrigen, Anio): #OK
     """
     Dado un pais origen y un anio obtiene la cantidad de vuelos que salen de dicho pais durante ese año dividiendo por ciudades
     Dado un pais origen y un anio obtiene la cantidad de vuelos que salen de dicho pais durante ese año dividiendo por ciudades
@@ -201,11 +257,19 @@ def obtener_cantidad_vuelos_salienes_ciudades_en_anio(PaisOrigen, Anio):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
-def obtener_cantidad_vuelos_salientes_ciudad_rango_anios(PaisOrigen, CiudadOrigen, AnioInicio, AnioFin):
+
+
+def obtener_cantidad_vuelos_salientes_ciudad_rango_anios(PaisOrigen, CiudadOrigen, AnioInicio, AnioFin): #OK
     """
     Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos que salen de dicha ciudad durante un rango de años
     Dado un pais origen y una ciudad origen obtiene la cantidad de vuelos que salen de dicha ciudad durante un rango de años
@@ -228,5 +292,13 @@ def obtener_cantidad_vuelos_salientes_ciudad_rango_anios(PaisOrigen, CiudadOrige
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
+
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
+

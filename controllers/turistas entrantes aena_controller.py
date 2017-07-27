@@ -1,4 +1,4 @@
-from ..DB.DBRepositoryAmadeus import DBRepositoryAmadeus as DBRepository
+from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
 from ..Utilidades.Conversores import Conversores as Conversor
 
 def obtener_cantidad_ciudad_rango_anios(PaisDestino, CiudadDestino, AnioInicio, AnioFin):
@@ -20,11 +20,17 @@ def obtener_cantidad_ciudad_rango_anios(PaisDestino, CiudadDestino, AnioInicio, 
     repository = DBRepository()
 
     cursor, labels = repository.ObtenerDatosTuristasAenaDadoPaisDestinoCiudadDestinoAnioMinMax(PaisDestino, CiudadDestino, AnioInicio, AnioFin)
-
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
+
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
 
 
@@ -48,11 +54,18 @@ def obtener_cantidad_entrantes_rango_anios(PaisDestino, AnioInicio, AnioFin):
 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
 
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
 
-def obtener_cantidad_origen_rango_anios(PaisDestino, AnioInicio, AnioFin):
+
+def obtener_cantidad_origen_rango_anios(PaisDestino, AnioInicio, AnioFin): ##MATRIZ MAS DE 4 VARIABLES
     """
     Dado un pais destino obtiene la cantidad de personas que viajan hacia el y sus localizaciones organizado por años
     Dado un pais destino obtiene la cantidad de personas que viajan hacia el y sus localizaciones
@@ -72,11 +85,17 @@ def obtener_cantidad_origen_rango_anios(PaisDestino, AnioInicio, AnioFin):
 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
+    ##Mostrar JSON Extendido
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    retval = conversor.ObtenerDataJSONExtendido(matriz)
+#    return retval
+
+    ##Mostrar JSON Reducido
     retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
 
-def obtener_cantidad_origen_rango_anios_meses(PaisDestino, AnioInicio, AnioFin):
+def obtener_cantidad_origen_rango_anios_meses(PaisDestino, AnioInicio, AnioFin): ##MATRIZ MAS DE 4 VARIABLES
     """
     Dado un pais destino obtiene la cantidad de personas que viajan hacia el y sus localizaciones organizado por años y meses
     Dado un pais destino obtiene la cantidad de personas que viajan hacia el y sus localizaciones organizado por años y meses
@@ -97,6 +116,12 @@ def obtener_cantidad_origen_rango_anios_meses(PaisDestino, AnioInicio, AnioFin):
 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
+    ##Mostrar JSON Extendido
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    retval = conversor.ObtenerDataJSONExtendido(matriz)
+#    return retval
+
+    ##Mostrar JSON Reducido
     retval = conversor.convertirAJson(arrayTuplas)
     return retval
 
@@ -122,5 +147,12 @@ def obtener_cantidad_rango_anios_meses(PaisDestino, AnioInicio, AnioFin):
 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
-    retval = conversor.convertirAJson(arrayTuplas)
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
     return retval
+
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval

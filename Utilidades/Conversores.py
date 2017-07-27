@@ -26,20 +26,36 @@ class Conversores:
 
         return retval 
     
+    def ObtenerDataJSONExtendido(self, matriz):
+        #    print(matriz)
+        data = matriz.to_json(orient ='table')
+#        print(test+"\n")
+        pos = data.find('"data": ')
+#    print(pos)
+        tamRestante = len(data) - pos
+#    print(tamRestante)
+        data = data[pos+8 :pos + tamRestante-1]
+        return data
+    
     def ConvertirCursorToTuplas(self, cursor):
         retVal = list()
         listaCursor = list()
         for elem in cursor.description:
             listaCursor.append(elem[0])
         
+
         for (listaCursor) in cursor:
             tuples = listaCursor
+#            print(tuples)
             retVal.append(tuples)
-
+        
         return retVal
 
     def ConvertirTuplasToMatriz(self, tuplas, labels, anioInicio, anioFin):
         tuplasMatriz = DataFrame(tuplas, columns = labels)
+        
+        print(tuplasMatriz)
+        
         matriz, lista = matrix.getMatrizDatos(tuplasMatriz, labels, anioInicio, anioFin)
         return matriz, lista
 
