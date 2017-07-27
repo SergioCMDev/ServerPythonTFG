@@ -18,7 +18,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         """
         query_string = [('CiudadDestino', 'Valencia'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioCiudad/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioCiudad/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -30,7 +30,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         Obtener cantidad de vuelos entrantes en las ciudades de un pais durante un año
         """
         query_string = [('Anio', 2009)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioPorCiudades/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnioPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -43,7 +43,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnualmente/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadAnualmente/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -57,7 +57,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         query_string = [('CiudadDestino', 'Valencia'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadCiudad/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadCiudad/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -70,7 +70,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadPorCiudades/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -82,7 +82,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         Obtener cantidad de vuelos entrantes durante los meses de un año 
         """
         query_string = [('Anio', 2009)]
-        response = self.client.open('/server/Aena/VuelosEntrantes//ObtenerCantidadMensual/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMensual/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -95,7 +95,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMensualmente/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMensualmente/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -109,7 +109,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         query_string = [('Mes', 'Enero'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMes/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMes/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -122,7 +122,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         """
         query_string = [('Anio', 2009),
                         ('Mes', 'Enero')]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesAnioPorCiudades/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesAnioPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -137,7 +137,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
                         ('Mes', 'Enero'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesCiudad/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesCiudad/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -151,7 +151,7 @@ class TestVuelosEntrantesAenaController(BaseTestCase):
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015),
                         ('Mes', 'Enero')]
-        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesPorCiudades/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/VuelosEntrantes/ObtenerCantidadMesPorCiudades/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

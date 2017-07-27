@@ -70,7 +70,7 @@ class UtilidadesMatriz:
         
         #Creamos DataFrame de la matriz
         retval = DataFrame(matrizRellena, index = listaFilas, columns = listaColumnas)
-        
+        retval.index.name = columnas[0]
         return retval, listaFilas     
     
 
@@ -84,7 +84,7 @@ class UtilidadesMatriz:
         for filas in np.arange(0, len(listaFilas), 1):
             for columnas in np.arange(0, len(listaColumnas),1):
                 pos = filas * len(listaColumnas) + columnas
-                matriz[filas][columnas] = valores[pos]
+                matriz[filas][columnas] = int(valores[pos])
                     
         return matriz
     
@@ -104,12 +104,9 @@ class UtilidadesMatriz:
     
     
     def getMatrizDatos(self, tuplas, columnas, anioInicio, anioFin):
-#        print (tuplas)
-#        columnasCursor = [i[0] for i in cursor.description]
+
         num_columns = len(columnas)
-#        dataFromDB = list(cursor.fetchall())     
         lista = list()
-#        tuplas = DataFrame(dataFromDB, columns = columnasCursor)
         matriz = []
    
         if num_columns == 2:

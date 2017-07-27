@@ -4,7 +4,6 @@ Created on Sat Jul  1 12:28:06 2017
 
 @author: wesrok
 """
-#import pymysql
 import mysql.connector
 
 class MySQLAccessAmadeus:
@@ -140,9 +139,10 @@ class MySQLAccessAmadeus:
 
 
 
-
+####################################################################################################################################
 #################### VUELOS ENTRANTES##########################################
-##Numero de vuelos/turistas que viajan a un pais dado mostrando datos de su origen
+####################################################################################################################################
+##Numero de vuelos que viajan a un pais dado mostrando datos de su origen
         
     #Muestra todos los vuelos entrantes a PaisDestino entre MinYear y MaxYear separando las ciudades
     def ObtenerDatosVuelosEntrantesAmadeusDadoPaisDestinoAnioMinMaxSeparandoPorCiudades(self, PaisDestino, MinYear, MaxYear): #OK
@@ -294,8 +294,9 @@ class MySQLAccessAmadeus:
 
 
 
-
-#################################TURISTAS SALIENTES###################################################################
+####################################################################################################################################
+    #################################TURISTAS SALIENTES###################################################################
+####################################################################################################################################
 
     #Muestra todos los vuelos salientes de PaisOrigen entre MinYear y MaxYear separando las ciudades
     def ObtenerDatosTuristasSalientesAmadeusSeparadoPorCiudadesDadoPaisOrigenAnioMinMax(self, PaisOrigen, MinYear, MaxYear): #OK
@@ -378,9 +379,9 @@ class MySQLAccessAmadeus:
         self.cursor.execute(self.query,(PaisOrigen, CiudadOrigen, Mes,  MinYear, MaxYear))
         return self.cursor
 
-#####################################################################################
+    #####################################################################################
 
-##########################################TODO ORIGEN TURISTAS HACIA PAIS DESTIN ##########################################
+    ########################################## ORIGEN TURISTAS HACIA PAIS DESTIN ##########################################
     #Muestra todos los turistas que entran a PaisDestino entre MinYear y MaxYear separando las ciudades
     def ObtenerPaisOrigenYNumeroTuristasAmadeusSeparadoPorCiudadesAnualmenteDadoPaisDestinoAnioMinMax(self, PaisDestino, MinYear, MaxYear): #OK
         #connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
@@ -467,4 +468,3 @@ class MySQLAccessAmadeus:
 
 
 
-    ##########################################TODO VUELOS ENTRE DOS PAISES DADOS##########################################

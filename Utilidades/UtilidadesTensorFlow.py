@@ -24,8 +24,8 @@ class UtilidadesTensorFlow():
     def ObtenerProgresionLineal(self, tuplas, anio):
 
             prediccion = self.ObtenerPrediccionAnio(tuplas, anio)
-
-            print('La prediccion para el año',anio,' es ',str(int(prediccion)))
+#            print('La prediccion para el año',anio,' es ',str(int(prediccion)))
+            return prediccion
 
 
 
@@ -77,7 +77,6 @@ class UtilidadesTensorFlow():
             resValue = slope * i + y_intercept
             best_fit.append(resValue)
 
-        #Graph.mostrarGrafo(self, x_vals, y_vals, best_fit)
         return slope * year + y_intercept
 
 

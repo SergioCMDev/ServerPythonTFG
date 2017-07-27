@@ -19,7 +19,7 @@ class TestTuristasEntrantesAenaController(BaseTestCase):
         query_string = [('CiudadDestino', 'Valencia'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadCiudadRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadCiudadRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -32,7 +32,7 @@ class TestTuristasEntrantesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadEntrantesRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadEntrantesRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -45,7 +45,7 @@ class TestTuristasEntrantesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadOrigenRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadOrigenRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -58,7 +58,7 @@ class TestTuristasEntrantesAenaController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadOrigenRangoAniosMeses/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadOrigenRangoAniosMeses/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -67,11 +67,11 @@ class TestTuristasEntrantesAenaController(BaseTestCase):
         """
         Test case for obtener_cantidad_rango_anios_meses
 
-        Dado un pais destino obtiene la cantidad de personas que viajan hacia el organizado por años
+        Dado un pais destino obtiene la cantidad de personas que viajan hacia el organizado por años y meses
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadRangoAniosMeses/{Pais}'.format(Pais='Pais_example'),
+        response = self.client.open('/server/Aena/TuristasEntrantes/ObtenerCantidadRangoAniosMeses/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

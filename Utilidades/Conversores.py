@@ -5,7 +5,6 @@ Created on Sat Jul  1 15:10:19 2017
 @author: wesrok
 """
 from decimal import Decimal
-#import simplejson as json
 import json
 from pandas import DataFrame
 from ..Utilidades.UtilidadesMatriz import UtilidadesMatriz as UtilidadesMatriz
@@ -23,7 +22,7 @@ class Conversores:
         
     def convertirAJson(self, data):
 #        retval =  json.dumps(cursor, use_decimal = True)
-        retval =  json.dumps(data, default=self.default)
+        retval =  json.dumps(data, default=self.default, separators=(',', ':'))
 
         return retval 
     

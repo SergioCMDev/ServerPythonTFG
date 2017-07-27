@@ -161,7 +161,7 @@ paths:
         400:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.vuelos entrantes aena_controller"
-  /Aena/VuelosEntrantes//ObtenerCantidadMensual/{PaisDestino}:
+  /Aena/VuelosEntrantes/ObtenerCantidadMensual/{PaisDestino}:
     get:
       tags:
       - "Vuelos Entrantes Aena"
@@ -914,12 +914,12 @@ paths:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
         \ aena_controller"
-  /Aena/TuristasEntrantes/ObtenerCantidadRangoAniosMeses/{Pais}:
+  /Aena/TuristasEntrantes/ObtenerCantidadRangoAniosMeses/{PaisDestino}:
     get:
       tags:
       - "Turistas Entrantes Aena"
       summary: "Dado un pais destino obtiene la cantidad de personas que viajan hacia\
-        \ el organizado por años"
+        \ el organizado por años y meses"
       description: "Dado un pais destino obtiene la cantidad de personas que viajan\
         \ hacia el y sus localizaciones organizado por años y meses"
       operationId: "obtener_cantidad_rango_anios_meses"
@@ -927,9 +927,9 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "Pais"
+      - name: "PaisDestino"
         in: "path"
-        description: "Pais"
+        description: "Pais al que llegan los turistas"
         required: true
         type: "string"
       - name: "AnioInicio"
@@ -2112,12 +2112,6 @@ paths:
         required: true
         type: "string"
         default: "Spain"
-      - name: "CiudadDestino"
-        in: "query"
-        description: "Ciudad a la que llegan los vuelos"
-        required: true
-        type: "string"
-        default: "Valencia"
       - name: "Mes"
         in: "query"
         description: "Mes"
@@ -2637,4 +2631,59 @@ paths:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
         \ amadeus_controller"
-definitions: {}
+  /Calculos/ObtenerProgresionLineal/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener la prediccion para un año dado el año a predecir y los datos\
+        \ de varios años anteriores"
+      description: "Obtener la prediccion para un año dado el año a predecir y los\
+        \ datos de varios años anteriores"
+      operationId: "obtener_progresion_lineal"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "AnioPrediccion"
+        in: "query"
+        description: "Año para predecir la cantidad"
+        required: true
+        type: "string"
+        default: "2009"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+definitions:
+  Datos:
+    type: "object"
+    properties:
+      anio:
+        type: "integer"
+        format: "int64"
+      cantidad:
+        type: "integer"
+        format: "int64"
+  body:
+    properties:
+      anio:
+        type: "integer"
+        format: "int64"
+      cantidad:
+        type: "integer"
+        format: "int64"

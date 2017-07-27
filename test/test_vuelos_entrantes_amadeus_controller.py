@@ -19,7 +19,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         query_string = [('CiudadDestino', 'Valencia'),
                         ('Mes', 'Enero'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosPaisEnCiudadEnMesEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosPaisEnCiudadEnMesEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -32,7 +32,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         """
         query_string = [('CiudadDestino', 'Valencia'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosPaisEnCiudadMensualEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosPaisEnCiudadMensualEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -46,7 +46,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         query_string = [('CiudadDestino', 'Valencia'),
                         ('Mes', 'Enero'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosTotalesPaisEnCiudadEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosTotalesPaisEnCiudadEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -57,10 +57,9 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
 
         Dado un pais, un mes y un año obtiene la cantidad total de vuelos que llegan a ese pais durante ese año y mes
         """
-        query_string = [('CiudadDestino', 'Valencia'),
-                        ('Mes', 'Enero'),
+        query_string = [('Mes', 'Enero'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosTotalesPaisEnMesEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadTotalVuelosTotalesPaisEnMesEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -74,7 +73,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         query_string = [('Mes', 'Enero'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -87,7 +86,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         """
         query_string = [('Mes', 'Enero'),
                         ('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadPaisEnMesEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadPaisEnMesEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -99,7 +98,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         Dado un pais y un año obtiene la cantidad de vuelos que llegan a ese pais durante ese año divividos por ciudades
         """
         query_string = [('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadesPaisEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosCiudadesPaisEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -111,7 +110,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         Dado un pais y un año obtiene la cantidad de vuelos que llegan a ese pais durante ese año
         """
         query_string = [('Anio', 2009)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnAnio/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnAnio/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -126,7 +125,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
                         ('Mes', 'Enero'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -140,7 +139,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         query_string = [('CiudadDestino', 'Valencia'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadEnRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -154,7 +153,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         query_string = [('CiudadDestino', 'Valencia'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadMensualEnRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnCiudadMensualEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -168,7 +167,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         query_string = [('Mes', 'Enero'),
                         ('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnMesEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
@@ -181,7 +180,7 @@ class TestVuelosEntrantesAmadeusController(BaseTestCase):
         """
         query_string = [('AnioInicio', 2009),
                         ('AnioFin', 2015)]
-        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnRangoAnios/{PaisDestino}'.format(PaisDestino='Spain'),
+        response = self.client.open('/server/Amadeus/VuelosEntrantes/ObtenerCantidadVuelosPaisEnRangoAnios/{PaisDestino}'.format(PaisDestino='PaisDestino_example'),
                                     method='GET',
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))

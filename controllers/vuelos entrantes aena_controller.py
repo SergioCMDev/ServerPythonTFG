@@ -1,7 +1,7 @@
 from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
 from ..Utilidades.Conversores import Conversores as Conversor
-from ..Utilidades.UtilidadesTensorFlow import UtilidadesTensorFlow as Tensorflow
-tensorflow = Tensorflow()
+from ..encoder import JSONEncoder
+
 
 def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio):
     """
@@ -21,8 +21,21 @@ def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio):
 
     cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(PaisDestino, CiudadDestino, Anio)
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
-
-    retval = conversor.convertirAJson(arrayTuplas)
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+#    print(matriz)
+    test = matriz.to_json(orient ='table')
+#    print(test+"\n")
+    pos = test.find('"data": ')
+#    print(pos)
+    tamRestante = len(test) - pos
+#    print(tamRestante)
+    retval = test[pos+8 :pos + tamRestante-1]
+#    print(retval)
+#    
+#    retval = conversor.convertirAJson(arrayTuplas)
+#
+    return retval
+#    retval = conversor.convertirAJson(arrayTuplas)
 
     
     return retval
@@ -203,11 +216,18 @@ def obtener_cantidad_mes(PaisDestino, Mes, AnioInicio, AnioFin):
     cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaEnUnMesDadoPaisDestinoMesAnioMinMax(PaisDestino, Mes, AnioInicio, AnioFin)
 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
-
-
-    tensorflow.ObtenerProgresionLineal(arrayTuplas, 2017)
-
-    retval = conversor.convertirAJson(arrayTuplas)
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    print(matriz)
+    test = matriz.to_json(orient ='table')
+#    print(test+"\n")
+    pos = test.find('"data": ')
+#    print(pos)
+    tamRestante = len(test) - pos
+#    print(tamRestante)
+    retval = test[pos+8 :pos + tamRestante-1]
+#    print(ne)
+    
+#    retval = conversor.convertirAJson(arrayTuplas)
 
     return retval
 
