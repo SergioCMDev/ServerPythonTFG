@@ -1193,7 +1193,7 @@ paths:
         description: "Anio FIn"
         required: true
         type: "integer"
-        default: 2009
+        default: 2015
         format: "int64"
       responses:
         200:
@@ -2675,7 +2675,7 @@ paths:
         description: "Ciudad a la que llegan los turistas"
         required: true
         type: "string"
-        default: "Amberes"
+        default: "Valencia"
       - name: "Mes"
         in: "query"
         description: "Mes"
@@ -2687,7 +2687,7 @@ paths:
         description: "Anio"
         required: true
         type: "integer"
-        default: 2009
+        default: 2012
         format: "int64"
       responses:
         200:
@@ -2720,7 +2720,7 @@ paths:
         description: "Anio"
         required: true
         type: "integer"
-        default: 2009
+        default: 2012
         format: "int64"
       responses:
         200:
@@ -2800,6 +2800,59 @@ paths:
         400:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInliersAniosCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \ y unos valores a tratar"
+      description: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \ y unos valores a tratar"
+      operationId: "obtener_outliers_inliers"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "AnioInicio"
+        in: "query"
+        description: "Año inicial de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2009
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Año final de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2014
+        format: "int64"
+      - name: "AnioAComprobar"
+        in: "query"
+        description: "Año a comprobar de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2015
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
 definitions:
   body1:
     type: "object"
@@ -2807,7 +2860,7 @@ definitions:
       Anio:
         type: "integer"
         format: "int64"
-      Numero_Vuelos:
+      Cantidad:
         type: "integer"
         format: "int64"
   body2:
@@ -2938,6 +2991,6 @@ definitions:
       Anio:
         type: "integer"
         format: "int64"
-      Numero_Vuelos:
+      Cantidad:
         type: "integer"
         format: "int64"

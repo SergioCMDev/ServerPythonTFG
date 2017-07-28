@@ -4,6 +4,55 @@ from ..Utilidades.UtilidadesTensorFlow import UtilidadesTensorFlow as Tensorflow
 tensorflow = Tensorflow()
 from ..Utilidades.Conversores import Conversores 
 conversor = Conversores()
+from ..Utilidades.DeteccionOutliers import DeteccionOutliers
+outliers = DeteccionOutliers()
+import json
+
+def obtener_outliers_inliers(AnioInicio, AnioFin, AnioAComprobar, body):
+    """
+    Obtener los valores fuera de lo comun dado unos valores iniciales y unos valores a tratar
+    Obtener los valores fuera de lo comun dado unos valores iniciales y unos valores a tratar
+    :param AnioInicio: Año inicial de la matriz de datos
+    :type AnioInicio: str
+    :param AnioFin: Año final de la matriz de datos
+    :type AnioFin: str
+    :param AnioAComprobar: Año a comprobar de la matriz de datos
+    :type AnioAComprobar: str
+    :param body: Datos de entrada obtenidos previamente
+    :type body: list | bytes
+
+    :rtype: Dict[str, int]
+    """
+    if connexion.request.is_json:
+        body = [Body.from_dict(d) for d in connexion.request.get_json()]
+        listaValores = list()
+        listaLabels = list()
+#        print(body)
+        for item in body:
+            if(hasattr(item, 'anio') and hasattr(item, 'cantidad')):
+
+                tupla = (item.anio, item.cantidad)
+                listaValores.append(tupla)
+                if 'Anio' not in listaLabels and 'Cantidad' not in listaLabels:
+                    
+                    listaLabels.append('Anio')
+                    listaLabels.append('Cantidad')
+
+
+        matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels, AnioFin, AnioFin )
+#        print(lista)
+#        outliers.showOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
+
+        outlierse, inliers = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
+        print(outlierse.toList())
+        print(type(outlierse[0]))
+#        print(inliers)
+#        return conversor.convertirAJson(outlierse)
+        return outlierse[0]
+
+
+
+
 
 
 """

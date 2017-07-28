@@ -16,14 +16,14 @@ class Graphics():
                    listaFilas.append(valor)
         return listaFilas
 
-         
-    def showOutliersInliers(self, datosOriginales, datosATestear):
+    def showOutliersInliers(self, datosOriginales, datosATestear, labels, listaColumnas):
         max_Y = np.amax(datosOriginales)
+#        print(datosOriginales)
 
+        #   Obtenemos las fronteras de datos basandonos en los datos originales
 
-    #   Obtenemos las fronteras de datos basandonos en los datos originales
-        xx1, yy1 = np.meshgrid(np.linspace(-1, 13, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        
-        clf = EllipticEnvelope(contamination=0.26161)
+        xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        
+        clf = EllipticEnvelope(contamination=0.46161)
         clf.fit(datosOriginales)
         Z1 = clf.decision_function(np.c_[xx1.ravel(), yy1.ravel()])
         Z1 = Z1.reshape(xx1.shape)
@@ -31,10 +31,11 @@ class Graphics():
         pred_test = clf.predict(datosATestear)
         plt.figure(1)  # two clusters
         plt.title("Deteccion de Outliers")
-        valores_originales = plt.scatter(datosOriginales[:, 0], datosOriginales[:, 1], color='black', label='Valores Originales')
-    
         
-    #   Iteramos los valores marcando en rojo los elementos que sean outliers y en verde los inliners
+        valores_originales = plt.scatter(datosOriginales[:, 0], datosOriginales[:, 1], color='black', label='Valores Originales')
+        inliers = plt.scatter(-2, -2)
+#        print(pred_test)
+        #   Iteramos los valores marcando en rojo los elementos que sean outliers y en verde los inliners
         for i in np.arange(0,len(pred_test)):
             if pred_test[i] == -1:
                 color = 'red'
@@ -42,16 +43,62 @@ class Graphics():
             else:
                 color = 'green'
                 inliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Inliners')
-    #   Definimos valores de la grafica
-        plt.xlim((xx1.min(), xx1.max()))
+        #   Definimos valores de la grafica
+        plt.xlim(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1)
         plt.ylim((yy1.min(), yy1.max()))
-    
+        
         plt.ylabel("Valores")
-        plt.xlabel("Meses")
+        plt.xlabel(labels[0])
         plt.legend(handles=[valores_originales, outliers, inliers])
-    
+        
         plt.show()
-        savefig('grafica.png')
+        plt.savefig('grafica.png')     
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    #NO TOCAR
+#    def showOutliersInliers(self, datosOriginales, datosATestear):
+#        max_Y = np.amax(datosOriginales)
+#
+#
+#    #   Obtenemos las fronteras de datos basandonos en los datos originales
+#        xx1, yy1 = np.meshgrid(np.linspace(-1, 13, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        
+#        clf = EllipticEnvelope(contamination=0.26161)
+#        clf.fit(datosOriginales)
+#        Z1 = clf.decision_function(np.c_[xx1.ravel(), yy1.ravel()])
+#        Z1 = Z1.reshape(xx1.shape)
+#        plt.contour(xx1, yy1, Z1, levels=[0], linewidths=1, colors='m')
+#        pred_test = clf.predict(datosATestear)
+#        plt.figure(1)  # two clusters
+#        plt.title("Deteccion de Outliers")
+#        valores_originales = plt.scatter(datosOriginales[:, 0], datosOriginales[:, 1], color='black', label='Valores Originales')
+#        inliers = plt.scatter(-1, -1)
+#        
+#    #   Iteramos los valores marcando en rojo los elementos que sean outliers y en verde los inliners
+#        for i in np.arange(0,len(pred_test)):
+#            if pred_test[i] == -1:
+#                color = 'red'
+#                outliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Outliers')
+#            else:
+#                color = 'green'
+#                inliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Inliners')
+#    #   Definimos valores de la grafica
+#        plt.xlim((xx1.min(), xx1.max()))
+#        plt.ylim((yy1.min(), yy1.max()))
+#    
+#        plt.ylabel("Valores")
+#        plt.xlabel("Meses")
+#        plt.legend(handles=[valores_originales, outliers, inliers])
+#    
+#        plt.show()
+#        savefig('grafica.png')
 
 
     def get_cmap(self, n, name='hsv'):

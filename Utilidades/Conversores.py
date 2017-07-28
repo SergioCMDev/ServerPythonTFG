@@ -9,6 +9,7 @@ import json
 from pandas import DataFrame
 from ..Utilidades.UtilidadesMatriz import UtilidadesMatriz as UtilidadesMatriz
 matrix = UtilidadesMatriz()
+import numpy
 
 class Conversores:   
     def __init__(self):
@@ -51,6 +52,8 @@ class Conversores:
         
         return retVal
 
+
+    
     def ConvertirTuplasToMatriz(self, tuplas, labels, anioInicio, anioFin):
 #        print(labels)
 #        print(tuplas)
@@ -70,6 +73,19 @@ class Conversores:
             Y_values.append(int(pares[1]))
         return (X_values, Y_values)
     
+class MyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, numpy.integer):
+            return int(obj)
+        elif isinstance(obj, numpy.floating):
+            return float(obj)
+        elif isinstance(obj, numpy.ndarray):
+            return obj.tolist()
+        if isinstance(obj, Decimal):
+            return str(obj)
+        else:
+            return super(MyEncoder, self).default(obj)
+        
 class DecimalEncoder(json.JSONEncoder):
     def _iterencode(self, obj, markers=None):
          if isinstance(obj, Decimal):

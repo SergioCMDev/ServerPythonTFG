@@ -66,12 +66,6 @@ class UtilidadesMatriz:
         #Obtenemos valores a introducir en matriz
         posValores = len(columnas)-1
         valores = self.obtenerValoresMatriz(tuples, posValores, columnas)
-#        print(listaFilas)
-#        print("\n")
-#        print(len(listaColumnas))
-#        print("\n")
-#        print(valores)
-#        print("\n")
         np.set_printoptions(threshold='nan')
 
         #Creamos y Rellenamos matriz
