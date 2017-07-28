@@ -169,7 +169,7 @@ def obtener_cantidad_turistas_y_ciudades_origen_en_pais_en_rango_anios(PaisDesti
 
 
 
-def obtener_cantidad_turistas_y_pais_origen_en_ciudad_en_mes_en_anio(PaisDestino, CiudadDestino, Mes, Anio): #MIRAR
+def obtener_cantidad_turistas_y_pais_origen_en_ciudad_en_mes_en_anio(PaisDestino, CiudadDestino, Mes, Anio): #OK
     """
     Dado un pais, una ciudad destino, un mes y un año obtiene la cantidad total de personas que llegan a esa ciudad separando por pais de origen
     Dado un pais, una ciudad destino, un mes y un año obtiene la cantidad total de personas que llegan a esa ciudad separando por pais de origen
@@ -203,7 +203,7 @@ def obtener_cantidad_turistas_y_pais_origen_en_ciudad_en_mes_en_anio(PaisDestino
     return retval
 
 
-def obtener_cantidad_turistas_y_paises_en_pais_en_anio(PaisDestino, Anio): #MIRAR
+def obtener_cantidad_turistas_y_paises_en_pais_en_anio(PaisDestino, Anio): #OK
     """
     Dado un pais y un año obtiene la cantidad total de personas que llegan a ese pais en ese año
     Dado un pais, una ciudad destino y un año obtiene la cantidad total de personas que llegan a esa ciudad separando por meses
@@ -233,7 +233,7 @@ def obtener_cantidad_turistas_y_paises_en_pais_en_anio(PaisDestino, Anio): #MIRA
     return retval
 
 
-def obtener_cantidad_turistas_y_paises_mensual_en_pais_en_anio(PaisDestino, Anio): #MIRAR
+def obtener_cantidad_turistas_y_paises_mensual_en_pais_en_anio(PaisDestino, Anio): #OK
     """
     Dado un pais y un año obtiene la cantidad total de personas que llegan a ese pais en ese año separadas por meses
     Dado un pais, una ciudad destino y un año obtiene la cantidad total de personas que llegan a esa ciudad separando por meses
@@ -253,11 +253,11 @@ def obtener_cantidad_turistas_y_paises_mensual_en_pais_en_anio(PaisDestino, Anio
 
 
     ##Mostrar JSON Extendido
-#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
-#    retval = conversor.ObtenerDataJSONExtendido(matriz)
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
 
-#    return retval
+    return retval
 
     ##Mostrar JSON Reducido
-    retval = conversor.convertirAJson(arrayTuplas)
-    return retval
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval

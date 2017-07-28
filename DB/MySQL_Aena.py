@@ -295,13 +295,23 @@ class MySQLAccessAena:
         self.cursor.execute(self.query,(PaisDestino, Year, cityDestino))
         return self.cursor
 
-    #Mostrar numero de turistas que viajan desde un PaisDestino a city entre MinYear y MaxYear en un MismoMes
+    #Mostrar numero de turistas que viajan hacia  PaisDestino y city entre MinYear y MaxYear en un Mismo Mes
     def ObtenerDatosTuristasAenaDadoPaisCiudadMesAnioMinMax(self, PaisDestino, cityDestino, Mes, MinYear, MaxYear): #MIRAR
 #        #connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
         self.cursor = self.connection.cursor()
         Mes = self.ObtenerNumeroMesDadoNombre(Mes)        
         self.query = str("SELECT YEAR(`date`) AS Anio, SUM(travelers)  AS Numero_Turistas FROM aena_vuelos_airline ava JOIN airport ap_destino ON ava.destination_id = ap_destino.id JOIN country country_Destino ON ap_destino.country_id = country_Destino.id JOIN city city_destino ON city_destino.id = ap_destino.city_id WHERE country_Destino.name = %s  AND year(`date`) >= %s AND YEAR(`date`) <= %s  AND city_destino.name= %s  AND MONTH(`date`) =%s  GROUP BY YEAR(`date`), city_destino.name, Month(`date`)")
         self.cursor.execute(self.query,(PaisDestino, MinYear, MaxYear, cityDestino, Mes))
+        return self.cursor
+    
+    
+        #Mostrar numero de turistas que viajan salen de una ciudad de un Pais en Year en Mes
+    def ObtenerNumeroTuristasAenaDadoPaisOrigenCiudadOrigenMesAnio(self, paisOrigin, CiudadOrigen,  Mes, Year): 
+#        #connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='tfgtesting')
+        self.cursor = self.connection.cursor()
+        Mes = self.ObtenerNumeroMesDadoNombre(Mes)        
+        self.query = str("SELECT SUM(travelers) AS Numero_Turistas FROM aena_vuelos ava JOIN airport ap_origin ON ava.origin_id = ap_origin.id JOIN country country_Origin ON ap_origin.country_id = country_Origin.id JOIN city ciudadOrigen on ciudadOrigen.country_id = country_Origin.id WHERE country_Origin.name = %s AND ciudadOrigen.name=%s AND MONTH(`date`)= %s AND year(`date`) = %s   GROUP BY  ciudadOrigen.name, Month(`date`)")
+        self.cursor.execute(self.query,(paisOrigin, CiudadOrigen,  Mes, Year))
         return self.cursor
     
     

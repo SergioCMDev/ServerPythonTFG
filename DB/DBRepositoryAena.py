@@ -69,7 +69,7 @@ class DBRepositoryAena():
         return (self.db.ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(paisDestino, CiudadDestino, str(Anio)), self.labels )
   
     #####################################################################################################################################################################
-    ##################################SALIENTES####################################################
+    ##################################VUELOS SALIENTES####################################################
     #####################################################################################################################################################################
 
     def ObtenerCantidadVuelosAenaSalientesDadoPaisOrigenAnioMinMax(self, PaisOrigen, anioInicio, anioFin):
@@ -175,7 +175,10 @@ class DBRepositoryAena():
 
 
 
-
+    def ObtenerNumeroTuristasAenaDadoPaisOrigenCiudadOrigenMesAnio(self, paisDestino, CiudadDestino,  Mes, Anio): 
+        self.db = DBContext() 
+        self.labels   = ['Numero_Turistas']
+        return (self.db.ObtenerNumeroTuristasAenaDadoPaisOrigenCiudadOrigenMesAnio(paisDestino, CiudadDestino, Mes, str(Anio)), self.labels )
 
 
 

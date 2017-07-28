@@ -97,7 +97,7 @@ def obtener_cantidad_ciudad_en_anio(PaisOrigen, CiudadOrigen, Anio): #OK
 #    return retval
 
 
-def obtener_cantidad_ciudad_en_mes_en_anio(PaisOrigen, CiudadOrigen, Mes,  Anio):
+def obtener_cantidad_ciudad_en_mes_en_anio(PaisOrigen, CiudadOrigen, Mes,  Anio): #OK
     """
     Obtiene la cantidad de personas que salen de una ciudad de un pais en un año durante un mismo mes y devuelve las cantidades
     Obtiene la cantidad de personas que salen de una ciudad de un pais en un año durante un mismo mes y devuelve las cantidades
@@ -110,12 +110,28 @@ def obtener_cantidad_ciudad_en_mes_en_anio(PaisOrigen, CiudadOrigen, Mes,  Anio)
 
     :rtype: None
     """
-    return 'do some magic!'
+    conversor = Conversor()
+    repository = DBRepository()
+
+    cursor, labels = repository.ObtenerNumeroTuristasAenaDadoPaisOrigenCiudadOrigenMesAnio(PaisOrigen, CiudadOrigen,  Mes, Anio)
+
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
+
+    ##Mostrar JSON Extendido
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas, labels, Anio, Anio)
+#    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
+#    return retval
+
+    ##Mostrar JSON Reducido
+    retval = conversor.convertirAJson(arrayTuplas)
+    return retval
 
 
 
 
-def obtener_cantidad_ciudad_en_mes_en_rango_anios(PaisOrigen, CiudadOrigen, Mes,  AnioInicio, AnioFin):
+
+def obtener_cantidad_ciudad_en_mes_en_rango_anios(PaisOrigen, CiudadOrigen, Mes,  AnioInicio, AnioFin): #OK
     """
     Obtiene la cantidad de personas que salen de una ciudad de un pais en un rango de años durante un mismo mes y devuelve las cantidades
     Obtiene la cantidad de personas que salen de una ciudad de un pais en un rango de años durante un mismo mes y devuelve las cantidades
@@ -128,11 +144,27 @@ def obtener_cantidad_ciudad_en_mes_en_rango_anios(PaisOrigen, CiudadOrigen, Mes,
 
     :rtype: None
     """
-    return 'do some magic!'
+    conversor = Conversor()
+    repository = DBRepository()
+
+    cursor, labels = repository.ObtenerDatosTuristasAenaDadoPaisCiudadMesAnioMinMax(PaisOrigen, CiudadOrigen, Mes, AnioInicio, AnioFin)
+
+    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
+
+    ##Mostrar JSON Extendido
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    retval = conversor.ObtenerDataJSONExtendido(matriz)
+
+    return retval
+
+    ##Mostrar JSON Reducido
+#    retval = conversor.convertirAJson(arrayTuplas)
+#    return retval
+
 
 def obtener_cantidad_ciudad_mensualmente_en_anio(PaisOrigen, AnioInicio, AnioFin): #OK
     """
-    Obtiene la cantidad de personas que salen de un pais durante un rango de años y lo organiza anualmente
+    Obtiene la cantidad de personas que salen de un pais durante un rango de años y lo organiza mensualmente
     Obtiene la cantidad de personas que salen de un pais durante un rango de años y lo organizas mensualmente
     :param PaisOrigen: Pais del que salen los turistas
     :type PaisOrigen: str

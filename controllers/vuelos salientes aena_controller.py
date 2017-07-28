@@ -127,35 +127,6 @@ def obtener_cantidad_ciudades_en_anio(PaisOrigen, Anio):
 #    retval = conversor.convertirAJson(arrayTuplas)
 #    return retval
 
-#def obtener_cantidad_ciudades(PaisOrigen, AnioInicio, AnioFin):
-#    """
-#    Obtener cantidad de vuelos salientes de un pais en un rango de años
-#    Obtener cantidad de vuelos salientes de un pais en un rango de años
-#    :param PaisOrigen: Pais
-#    :type PaisOrigen: str
-#    :param AnioInicio: Año Inicio
-#    :type AnioInicio: int
-#    :param AnioFin: Año Fin
-#    :type AnioFin: int
-#
-#    :rtype: None
-#    """
-#    conversor = Conversor()
-#    repository = DBRepository()
-#
-#    cursor, labels = repository.ObtenerCantidadVuelosAenaSalientesDadoPaisOrigenAnioMinMax(PaisOrigen, AnioInicio, AnioFin)
-#    arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
-#
-#    ##Mostrar JSON Extendido
-#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
-#    retval = conversor.ObtenerDataJSONExtendido(matriz)
-#
-#    return retval
-#
-#    ##Mostrar JSON Reducido
-##    retval = conversor.convertirAJson(arrayTuplas)
-##    return retval
-
 
 def obtener_cantidad_entrantes_ciudad(PaisOrigen, CiudadDestino, Anio):
     """

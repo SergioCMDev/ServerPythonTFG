@@ -52,9 +52,11 @@ class Conversores:
         return retVal
 
     def ConvertirTuplasToMatriz(self, tuplas, labels, anioInicio, anioFin):
+#        print(labels)
+#        print(tuplas)
         tuplasMatriz = DataFrame(tuplas, columns = labels)
         
-        print(tuplasMatriz)
+#        print(tuplasMatriz)
         
         matriz, lista = matrix.getMatrizDatos(tuplasMatriz, labels, anioInicio, anioFin)
         return matriz, lista
