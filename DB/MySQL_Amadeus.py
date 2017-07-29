@@ -8,7 +8,7 @@ import mysql.connector
 
 class MySQLAccessAmadeus:
     
-    connection = mysql.connector.connect(user='root', host='127.0.0.1', database='tfgtesting')
+    connection = mysql.connector.connect(user='root', host='127.0.0.1', database='databaseTFG')
     def __init__(self):
 #        super(MySQLAccess, self).__init__()
         print("Clase MYSQL Amadeus Cargada Correctamente ")
