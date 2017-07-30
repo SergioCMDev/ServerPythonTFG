@@ -9,3 +9,5 @@ class Constantes:
     DB_Name = 'DatabaseTFG'
     IP_BD = '127.0.0.1'
     UsuarioBD = 'root'
+
+    ContaminacionEllipticEnvelope = 0.46161

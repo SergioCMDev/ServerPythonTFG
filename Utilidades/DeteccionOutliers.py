@@ -1,7 +1,7 @@
 import numpy as np
 from ..Utilidades.Graphics import Graphics as Graphics
 from sklearn.covariance import EllipticEnvelope
-
+from ..Utilidades.Constantes import Constantes
 
 import pandas as pd
 
@@ -105,7 +105,7 @@ class DeteccionOutliers:
     def getOutliersMedianteEnvolturaElipticaDadosDatos(self, datosOriginales, datosATestear):
 
 #        print("El tipo elegido es ", tipo)
-        clf = EllipticEnvelope(contamination=0.26161)
+        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
     
         clf.fit(datosOriginales)
         pred_test = clf.predict(datosATestear)

@@ -23,7 +23,7 @@ class Graphics():
         #   Obtenemos las fronteras de datos basandonos en los datos originales
 
         xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        
-        clf = EllipticEnvelope(contamination=0.46161)
+        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
         clf.fit(datosOriginales)
         Z1 = clf.decision_function(np.c_[xx1.ravel(), yy1.ravel()])
         Z1 = Z1.reshape(xx1.shape)
