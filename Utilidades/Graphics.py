@@ -1,8 +1,13 @@
 import pylab
 from ..Utilidades.Constantes import Constantes
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
-from sklearn.covariance import EllipticEnvelope
+from sklearn.covariance import EllipticEnvelope, EmpiricalCovariance, MinCovDet
+from scipy import stats
+from sklearn import svm
+from sklearn.ensemble import IsolationForest
+rng = np.random.RandomState(42)
 
 class Graphics():
     def __init__(self):
@@ -17,52 +22,88 @@ class Graphics():
         return listaFilas
 
     def showOutliersInliers(self, datosOriginales, datosATestear, labels, listaColumnas):
-        max_Y = np.amax(datosOriginales)
+        print (1)
+#        self.testMethod(datosOriginales, datosATestear, labels, listaColumnas)
+#        max_Y = np.amax(datosOriginales)
 #        print(datosOriginales)
 
         #   Obtenemos las fronteras de datos basandonos en los datos originales
 
-        xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        
-        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
-        clf.fit(datosOriginales)
-        Z1 = clf.decision_function(np.c_[xx1.ravel(), yy1.ravel()])
-        Z1 = Z1.reshape(xx1.shape)
-        plt.contour(xx1, yy1, Z1, levels=[0], linewidths=1, colors='m')
-        pred_test = clf.predict(datosATestear)
-        plt.figure(1)  # two clusters
-        plt.title("Deteccion de Outliers")
+#        xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-1, max_Y*2, 500)) #Seteamos a 13 debido a los meses        
+#        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
+#        clf.fit(datosOriginales)
+#        Z1 = clf.decision_function(np.c_[xx1.ravel(), yy1.ravel()])
+#        Z1 = Z1.reshape(xx1.shape)
+#        plt.contour(xx1, yy1, Z1, levels=[0], linewidths=1, colors='m')
+#        pred_test = clf.predict(datosATestear)
+#        plt.figure(1)  # two clusters
+#        plt.title("Deteccion de Outliers")
+#        
+#        valores_originales = plt.scatter(datosOriginales[:, 0], datosOriginales[:, 1], color='black', label='Valores Originales')
+#        inliers = plt.scatter(-2, -2)
+##        print(pred_test)
+#        #   Iteramos los valores marcando en rojo los elementos que sean outliers y en verde los inliners
+#        for i in np.arange(0,len(pred_test)):
+#            if pred_test[i] == -1:
+#                color = 'red'
+#                outliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Outliers')
+#            else:
+#                color = 'green'
+#                inliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Inliners')
+#        #   Definimos valores de la grafica
+#        plt.xlim(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1)
+#        plt.ylim((yy1.min(), yy1.max()))
+#        
+#        plt.ylabel("Valores")
+#        plt.xlabel(labels[0])
+#        plt.legend(handles=[valores_originales, outliers, inliers])
+#        
+#        plt.show()
+#        plt.savefig('grafica.png')     
         
+        
+   
+        
+        
+    def MostrarGraficaInliersOutliers(self, datosOriginales, datosATestear, labels, listaColumnas):
+
+        n_samples = len(datosOriginales)
+
+        maxValoresOriginales = np.amax(datosOriginales[:, 1])
+        maxValoresPrueba = np.amax(datosATestear[:,1])
+        maxValor = max(maxValoresOriginales, maxValoresPrueba)
+
+        xx, yy = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, len(listaColumnas)), 
+                                        np.linspace(-1, maxValor*2, len(listaColumnas)))
+
+        np.random.seed(42)
+
+        # Fit the model
+        clf = IsolationForest(max_samples=n_samples, random_state=rng)
+        clf.fit(datosOriginales)
+        y_pred_test = clf.predict(datosATestear)
+        Z = clf.decision_function(np.c_[xx.ravel(), yy.ravel()])
+        Z = Z.reshape(xx.shape)
+        plt.contourf(xx, yy, Z, cmap=plt.cm.Blues_r)
+        outliers = plt.scatter(-13, -13)
+        inliers = plt.scatter(-13, -13)
         valores_originales = plt.scatter(datosOriginales[:, 0], datosOriginales[:, 1], color='black', label='Valores Originales')
-        inliers = plt.scatter(-2, -2)
-#        print(pred_test)
+
         #   Iteramos los valores marcando en rojo los elementos que sean outliers y en verde los inliners
-        for i in np.arange(0,len(pred_test)):
-            if pred_test[i] == -1:
+        for i in np.arange(0, len(y_pred_test)):
+            if y_pred_test[i] == -1:
                 color = 'red'
                 outliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Outliers')
             else:
                 color = 'green'
                 inliers = plt.scatter(datosATestear[i, 0], datosATestear[i, 1], color=color, label='Inliners')
-        #   Definimos valores de la grafica
-        plt.xlim(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1)
-        plt.ylim((yy1.min(), yy1.max()))
-        
-        plt.ylabel("Valores")
-        plt.xlabel(labels[0])
+    #   Definimos valores de la grafica
+        plt.xlim((xx.min(), xx.max()))
+        plt.ylim((yy.min(), yy.max()))
+        plt.savefig('grafica.png')
         plt.legend(handles=[valores_originales, outliers, inliers])
-        
-        plt.show()
-        plt.savefig('grafica.png')     
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     #NO TOCAR
 #    def showOutliersInliers(self, datosOriginales, datosATestear):
 #        max_Y = np.amax(datosOriginales)
@@ -151,7 +192,7 @@ class Graphics():
         pylab.xticks(x, valoresX)
         
         pylab.legend(loc='upper right')
-        savefig("grafica.png")
+        pylab.savefig("grafica.png")
         pylab.show()
         
     

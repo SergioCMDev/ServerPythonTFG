@@ -6,7 +6,7 @@ from ..Utilidades.Conversores import Conversores
 conversor = Conversores()
 from ..Utilidades.DeteccionOutliers import DeteccionOutliers
 outliers = DeteccionOutliers()
-import json
+
 
 def obtener_outliers_inliers(AnioInicio, AnioFin, AnioAComprobar, body):
     """
@@ -43,13 +43,20 @@ def obtener_outliers_inliers(AnioInicio, AnioFin, AnioAComprobar, body):
 #        print(lista)
 #        outliers.showOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
 
-        outlierse, inliers = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
-#        print(outlierse.toList())
-        print(outlierse[0])
-#        print(inliers)
-#        return conversor.convertirAJson(outlierse)
-        return 6
+        outliersValues, inliersValues = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
 
+        if(len(inliersValues) > 0 and len(outliersValues) > 0):
+            inliersJSON = conversor.convertirNumpyArrayAJson(inliersValues)
+            outliersJSON = conversor.convertirNumpyArrayAJson(outliersValues)
+            text = 'Outliers '+ str(outliersJSON) + ' Inliers ' + str(inliersJSON)
+        elif(len(inliersValues) > 0 and len(outliersValues) == 0):
+            inliersJSON = conversor.convertirNumpyArrayAJson(inliersValues)
+            text = 'Inliers ' + str(inliersJSON)
+        elif(len(inliersValues) == 0 and len(outliersValues > 0)):
+            outliersJSON = conversor.convertirNumpyArrayAJson(outliersValues)
+            text = " Outliers "+ str(outliersJSON)
+        return text
+#
 
 
 
