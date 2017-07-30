@@ -44,11 +44,11 @@ def obtener_outliers_inliers(AnioInicio, AnioFin, AnioAComprobar, body):
 #        outliers.showOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
 
         outlierse, inliers = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
-        print(outlierse.toList())
-        print(type(outlierse[0]))
+#        print(outlierse.toList())
+        print(outlierse[0])
 #        print(inliers)
 #        return conversor.convertirAJson(outlierse)
-        return outlierse[0]
+        return 6
 
 
 
