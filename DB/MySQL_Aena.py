@@ -6,10 +6,10 @@ Created on Sat Jul  1 12:28:06 2017
 """
 #import pymysql
 import mysql.connector
-
+from ..Utilidades.Constantes import Constantes
 class MySQLAccessAena:
     
-    connection = mysql.connector.connect(user='root', host='127.0.0.1', database='databaseTFG')
+    connection = mysql.connector.connect(user=Constantes.UsuarioBD, host=Constantes.IP_BD, database=Constantes.DB_Name)
     def __init__(self):
 #        super(MySQLAccess, self).__init__()
         print("Clase MYSQL Aena Cargada Correctamente ")
