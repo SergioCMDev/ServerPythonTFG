@@ -1,5 +1,8 @@
 import connexion
 from swagger_server.models.body import Body
+from swagger_server.models.body2 import Body2
+from swagger_server.models.body13 import Body13
+
 from ..Utilidades.UtilidadesTensorFlow import UtilidadesTensorFlow as Tensorflow
 tensorflow = Tensorflow()
 from ..Utilidades.Conversores import Conversores 
@@ -39,8 +42,7 @@ def obtener_outliers_inliers(AnioInicio, AnioFin, AnioAComprobar, body):
                     listaLabels.append('Cantidad')
 
 
-        matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels, AnioFin, AnioFin )
-#        print(lista)
+        matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels, AnioInicio, AnioFin )
 #        outliers.showOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
 
         outliersValues, inliersValues = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
@@ -59,6 +61,52 @@ def obtener_outliers_inliers(AnioInicio, AnioFin, AnioAComprobar, body):
 #
 
 
+def obtener_outliers_inliers_anios_mes_cantidad(AnioInicio, AnioFin, AnioAComprobar, body):
+    """
+    Obtener los valores fuera de lo comun dado unos valores iniciales y unos valores a tratar
+    Este metodo trata los valores de cada mes de cada año y tras pasarle valores a probar decide los inliers y los outliers
+    :param AnioInicio: Año inicial de la matriz de datos
+    :type AnioInicio: int
+    :param AnioFin: Año final de la matriz de datos
+    :type AnioFin: int
+    :param AnioAComprobar: Año a comprobar de la matriz de datos
+    :type AnioAComprobar: int
+    :param body: Datos de entrada obtenidos previamente junto con los datos a testear
+    :type body: list | bytes
+
+    :rtype: Dict[str, int]
+    """
+
+    if connexion.request.is_json:
+        body = [Body13.from_dict(d) for d in connexion.request.get_json()]
+        listaValores = list()
+        listaLabels = list()
+        for item in body:
+            if(hasattr(item, 'anio') and hasattr(item, 'mes') and hasattr(item, 'numero_vuelos')):
+                if 'Anio' not in listaLabels and 'Cantidad' not in listaLabels:
+                    listaLabels.append('Anio')
+                    listaLabels.append('Mes')
+                    listaLabels.append('Numero_Vuelos')
+                tupla = (item.anio, item.mes, item.numero_vuelos)
+                listaValores.append(tupla)
+                
+        matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels, AnioInicio, AnioFin )
+
+        outliersValuesElliptic, inliersValuesElliptic = outliers.getOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, "Elliptic")
+        outliersValuesForest, inliersValuesForest = outliers.getOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, "Forest")
+        print('Eliptic')
+
+        print(outliersValuesElliptic)
+        print(inliersValuesElliptic)
+        print('FOREST')
+
+        print(outliersValuesForest)
+        print(inliersValuesForest)
+        #TODO REALIZAR AMBAS GRAFICAS
+        outliers.showOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
+        outliers.showOutliersMedianteIsolationForestDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
+
+    return 'do some magic!'
 
 
 

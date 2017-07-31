@@ -2509,6 +2509,52 @@ paths:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
         \ amadeus_controller"
+  /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasMensualmenteEnCiudadEnRangoAnios/{PaisDestino}:
+    get:
+      tags:
+      - "Turistas Entrantes Amadeus"
+      summary: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por años"
+      description: "Dado un pais y un rango de años obtiene la cantidad total de personas\
+        \ que llegan a ese pais separando por años"
+      operationId: "obtener_cantidad_turistas_mensualmente_en_ciudad_en_rango_anios"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "PaisDestino"
+        in: "path"
+        description: "Pais al que llegan los turistas"
+        required: true
+        type: "string"
+        default: "Spain"
+      - name: "CiudadDestino"
+        in: "query"
+        description: "Ciudad a la que llegan los turistas"
+        required: true
+        type: "string"
+        default: "Valencia"
+      - name: "AnioInicio"
+        in: "query"
+        description: "Anio Inicio"
+        required: true
+        type: "integer"
+        default: 2012
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Anio Fin"
+        required: true
+        type: "integer"
+        default: 2015
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.turistas entrantes\
+        \ amadeus_controller"
   /Amadeus/TuristasEntrantes/ObtenerCantidadTuristasYCiudadesOrigenEnPaisEnRangoAnios/{PaisDestino}:
     get:
       tags:
@@ -2540,7 +2586,7 @@ paths:
         description: "Anio Inicio"
         required: true
         type: "integer"
-        default: 2009
+        default: 2012
         format: "int64"
       - name: "AnioFin"
         in: "query"
@@ -2594,7 +2640,7 @@ paths:
         description: "Anio Inicio"
         required: true
         type: "integer"
-        default: 2009
+        default: 2012
         format: "int64"
       - name: "AnioFin"
         in: "query"
@@ -2635,7 +2681,7 @@ paths:
         description: "Anio Inicio"
         required: true
         type: "integer"
-        default: 2009
+        default: 2012
         format: "int64"
       - name: "AnioFin"
         in: "query"
@@ -2788,7 +2834,7 @@ paths:
         schema:
           type: "array"
           items:
-            $ref: "#/definitions/body"
+            $ref: "#/definitions/body_2"
       responses:
         200:
           description: "successful operation"
@@ -2841,7 +2887,61 @@ paths:
         schema:
           type: "array"
           items:
-            $ref: "#/definitions/body"
+            $ref: "#/definitions/body_2"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInliersAniosMesCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \ y unos valores a tratar"
+      description: "Este metodo trata los valores de cada mes de cada año y tras pasarle\
+        \ valores a probar decide los inliers y los outliers"
+      operationId: "obtener_outliers_inliers_anios_mes_cantidad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "AnioInicio"
+        in: "query"
+        description: "Año inicial de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2009
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Año final de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2014
+        format: "int64"
+      - name: "AnioAComprobar"
+        in: "query"
+        description: "Año a comprobar de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2015
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente junto con los datos a\
+          \ testear"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body13"
       responses:
         200:
           description: "successful operation"
@@ -2992,5 +3092,33 @@ definitions:
         type: "integer"
         format: "int64"
       Cantidad:
+        type: "integer"
+        format: "int64"
+  body_1:
+    properties:
+      Anio:
+        type: "integer"
+        format: "int64"
+      Ciudad:
+        type: "string"
+      Numero_Vuelos:
+        type: "integer"
+        format: "int64"
+  body_2:
+    properties:
+      Anio:
+        type: "integer"
+        format: "int64"
+      Cantidad:
+        type: "integer"
+        format: "int64"
+  body_3:
+    properties:
+      Anio:
+        type: "integer"
+        format: "int64"
+      Ciudad:
+        type: "string"
+      Numero_Vuelos:
         type: "integer"
         format: "int64"

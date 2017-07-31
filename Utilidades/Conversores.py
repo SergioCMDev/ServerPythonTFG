@@ -36,6 +36,7 @@ class Conversores:
     def ObtenerDataJSONExtendido(self, matriz):
         #    print(matriz)
         data = matriz.to_json(orient ='table')
+#        print(data)
 #        print(test+"\n")
         pos = data.find('"data": ')
 #    print(pos)
@@ -62,7 +63,6 @@ class Conversores:
     
     def ConvertirTuplasToMatriz(self, tuplas, labels, anioInicio, anioFin):
         tuplasMatriz = DataFrame(tuplas, columns = labels)
-                
         matriz, lista = matrix.getMatrizDatos(tuplasMatriz, labels, anioInicio, anioFin)
         return matriz, lista
 

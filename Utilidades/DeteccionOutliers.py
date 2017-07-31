@@ -9,35 +9,57 @@ import pandas as pd
 
 class DeteccionOutliers:
     
+    ##Llamar a este metodo
+    def getOutliersDadaMatrizAniosYTipo(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaLabels, tipo):
+        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaLabels)
+        if tipo == "Elliptic":
+            outliersValuesList, inliersValuesList =   self.GetOutliersInliersEllipticEnvelope(datosOriginales, datosATestear)
+        elif tipo == "Forest":
+            outliersValuesList, inliersValuesList =   self.ObtenerInliersOutliersIsolationForest(datosOriginales, datosATestear)
+
+        return outliersValuesList, inliersValuesList
+    
+    
+    
+    
+    
     def setDataValues(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, labels):
         if 'Anio' in labels[0] and 'Cantidad' in labels[1]:
             numColumnas = 1
-        if 'Anio' in label[0] and 'Mes' in label[1] and 'Cantidad' in label[2] #CONTINUAR
             serieDataAnios = self.joinArrayAnios(anioTrainInicio, AnioTrainFin, matriz, numColumnas )
-
 
             indices = np.arange(int(anioTrainInicio), int(AnioTrainFin)+1,1)
             
             datosOriginales = np.column_stack((indices, serieDataAnios))
 
             datosATestear = np.column_stack((AnioTest, matriz.loc[AnioTest]))
+ 
+
+            return datosOriginales, datosATestear
+        elif 'Anio' in labels[0] and 'Mes' in labels[1] and 'Cantidad' in labels[2] or 'Numero_Vuelos' in labels[2]: #CONTINUAR
+            numColumnas = 12 #Debido a que son 12 meses
+            serieDataAnios = self.joinArrayAnios(anioTrainInicio, AnioTrainFin, matriz, numColumnas )
+            indices = np.arange(0, numColumnas,1)
+            indices = np.tile(indices, AnioTrainFin - anioTrainInicio +1)
+
+
+            datosOriginales = np.column_stack((indices, serieDataAnios))
+            datosATestear = np.column_stack((np.arange(0,numColumnas,1), matriz.loc[AnioTest]))
+
             return datosOriginales, datosATestear
         
+    def showOutliersMedianteEnvolturaElipticaDadosDatos(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaFilas, listaColumnas):
         
+        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaFilas)
         
-        
-    ##Llamar a este metodo
-    def getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaLabels):
-        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaLabels)
+       
+        graphics = Graphics()
+        graphics.showOutliersInliers(datosOriginales, datosATestear, listaFilas, listaColumnas)
 
-        outliersValuesList, inliersValuesList =   self.ObtenerInliersOutliers(datosOriginales, datosATestear)
-        return outliersValuesList, inliersValuesList
         
-    
     
     
     def joinArrayAnios(self, anioInicio, AnioFin, matriz, numColumnas):
-#        numColumnas = 12
         num_anios = AnioFin - anioInicio +1
         array_1 = np.zeros(num_anios * numColumnas)
 
@@ -46,7 +68,7 @@ class DeteccionOutliers:
         
         for anio in anios:
             datos = matriz.loc[anio]
-            for i in np.arange(0,numColumnas):
+            for i in np.arange(0, numColumnas):
                 array_1[pos] = datos[i]
                 pos = pos +1
                 
@@ -55,16 +77,30 @@ class DeteccionOutliers:
         
         return s
 
-    def ObtenerInliersOutliers(self, datosOriginales, datosATestear):
+
+    def GetOutliersInliersEllipticEnvelope(self, datosOriginales, datosATestear):
+
+        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
+        clf.fit(datosOriginales)
+        pred_test = clf.predict(datosATestear)
+
+
+        listaInliers = list()
+        listaOutliers = list()
+
+    #   Iteramos los valores marcando en rojo los elementos que sean outliers y en verde los inliners
+        for i in np.arange(0,len(pred_test)):
+            if pred_test[i] == -1:
+                listaOutliers.append(datosATestear[i])
+            else:
+                listaInliers.append(datosATestear[i])
+
+        return listaOutliers, listaInliers
+
+
+    def ObtenerInliersOutliersIsolationForest(self, datosOriginales, datosATestear):
         
         n_samples = len(datosOriginales)
-
-#        maxValoresOriginales = np.amax(datosOriginales[:, 1])
-#        maxValoresPrueba = np.amax(datosATestear[:,1])
-#        maxValor = max(maxValoresOriginales, maxValoresPrueba)
-
-#        xx, yy = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, len(listaColumnas)), 
-#                                        np.linspace(-1, maxValor*2, len(listaColumnas)))
 
         np.random.seed(42)
 
@@ -137,32 +173,26 @@ class DeteccionOutliers:
         
     
     
-    def getOutliersMedianteEnvolturaElipticaDadosDatos(self, datosOriginales, datosATestear):
-
-#        print("El tipo elegido es ", tipo)
-        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
-    
-        clf.fit(datosOriginales)
-        pred_test = clf.predict(datosATestear)
+#    def getOutliersMedianteEnvolturaElipticaDadosDatos(self, datosOriginales, datosATestear):
+#
+##        print("El tipo elegido es ", tipo)
+#        clf = EllipticEnvelope(contamination=Constantes.ContaminacionEllipticEnvelope)
+#    
+#        clf.fit(datosOriginales)
+#        pred_test = clf.predict(datosATestear)
+#        
+#        outliersList = list()
+#        inliersList = list()
+#
+#    #   Iteramos los valores anadiendo inliers y outliers
+#        for i in np.arange(0,len(pred_test)):
+#            if pred_test[i] == -1:
+#                outliersList.append(datosATestear[i][1])
+#            else:
+#                inliersList.append(datosATestear[i][1])
+#
+#
+#        return outliersList, inliersList
         
-        outliersList = list()
-        inliersList = list()
 
-    #   Iteramos los valores anadiendo inliers y outliers
-        for i in np.arange(0,len(pred_test)):
-            if pred_test[i] == -1:
-                outliersList.append(datosATestear[i][1])
-            else:
-                inliersList.append(datosATestear[i][1])
-
-
-        return outliersList, inliersList
-        
-    def showOutliersMedianteEnvolturaElipticaDadosDatos(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, labels, listaColumnas):
-        
-        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, labels)
-        
-        graphics = Graphics()
-#        print(listaColumnas)
-        graphics.showOutliersInliers(datosOriginales, datosATestear, labels, listaColumnas)
 

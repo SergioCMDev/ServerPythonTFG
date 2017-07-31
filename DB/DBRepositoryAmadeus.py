@@ -169,7 +169,7 @@ class DBRepositoryAmadeus():
 
     def ObtenerDatosVuelosEntrantesAmadeusMensualmenteDadoPaisDestinoCiudadDestinoAnioMinMax(self, PaisDestino, CiudadDestino, anioInicio, anioFin):
         self.db = DBContext()
-        self.labels   = ['Anio','Mes', 'Numero_Vuelos']
+        self.labels   = ['Anio', 'Mes', 'Numero_Vuelos']
         return (self.db.ObtenerDatosVuelosEntrantesAmadeusMensualmenteDadoPaisDestinoCiudadDestinoAnioMinMax(PaisDestino, CiudadDestino, str(anioInicio), str(anioFin)), self.labels ) 
 
 
@@ -196,12 +196,7 @@ class DBRepositoryAmadeus():
         self.labels   = ['Numero_Vuelos']
         return (self.db.ObtenerDatosVuelosEntrantesAmadeusEnUnAnioDadoPaisDestinoCiudadDestinoAnio(PaisDestino, CiudadDestino, str(Anio)), self.labels ) 
     
-
-    def ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoCiudadDestinoAnio(self, PaisDestino, CiudadDestino, Anio):
-        self.db = DBContext()
-        self.labels   = ['Mes', 'Numero_Vuelos']
-        return (self.db.ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoCiudadDestinoAnio(PaisDestino, CiudadDestino, str(Anio)), self.labels ) 
-    
+   
     
     def ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoAnio(self, PaisDestino, Anio):
         self.db = DBContext()
@@ -222,14 +217,35 @@ class DBRepositoryAmadeus():
   
 
     #####################################################################################################################################################################
-    #########################################DESTINOS Y NUMERO TURISTAS SALIENTES HACIA DESTINO#########################################
+    #########################################DESTINOS Y NUMERO TURISTAS ENTRANTES EN DESTINO#########################################
     #####################################################################################################################################################################
+
+
+    def ObtenerNumeroTuristasEntrantesAnualmenteEnMesesAmadeusDadoPaisDestinoCiudadDestiniAnioMinMaxSeparado(self, PaisDestino, CiudadDestino, Anio):
+        self.db = DBContext()
+        self.labels   = ['Mes', 'Numero_Turistas']
+        return (self.db.ObtenerNumeroTuristasEntrantesAnualmenteEnMesesAmadeusDadoPaisDestinoCiudadDestiniAnioMinMaxSeparado(PaisDestino, CiudadDestino, str(Anio)), self.labels ) 
+    
+    
+    
+    
+    def ObtenerNumeroTuristasEntrantesAnualmenteEnMesesAmadeusDadoPaisDestinoCiudadDestinoAnioMinMax(self, PaisDestino, CiudadDestino, anioInicio, AnioFin):
+        self.db = DBContext()
+        self.labels   = ['Anio', 'Mes', 'Numero_Turistas']
+        return (self.db.ObtenerNumeroTuristasEntrantesAnualmenteEnMesesAmadeusDadoPaisDestinoCiudadDestinoAnioMinMax(PaisDestino, CiudadDestino, str(anioInicio), str(AnioFin)), self.labels ) 
+    
 
 
     def ObtenerPaisOrigenYNumeroTuristasAmadeusAnualmenteDadoPaisDestinoAnioMinMaxSeparadoPorCiudadesYMeses(self, PaisDestino, anioInicio, AnioFin): #OK
         self.db = DBContext()
         self.labels   = ['Anio','Mes', 'Pais_Origen', 'Ciudad_Origen','Numero_Turistas']
         return (self.db.ObtenerPaisOrigenYNumeroTuristasAmadeusAnualmenteDadoPaisDestinoAnioMinMaxSeparadoPorCiudadesYMeses(PaisDestino, str(anioInicio), str(AnioFin)), self.labels ) 
+    
+    
+    def ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoCiudadDestinoAnio(self, PaisDestino, CiudadDestino, Anio): #OK
+        self.db = DBContext()
+        self.labels   = ['Mes', 'Numero_Turistas']
+        return (self.db.ObtenerDatosVuelosEntrantesAmadeusEnUnAnioMensualmenteDadoPaisDestinoCiudadDestinoAnio(PaisDestino, CiudadDestino, str(Anio)), self.labels ) 
     
 
     def ObtenerNumeroTuristasAmadeusAnualmenteDadoPaisDestinoAnioMinMax(self, PaisDestino, anioInicio, AnioFin): #OK
