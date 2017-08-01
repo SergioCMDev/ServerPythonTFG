@@ -6,6 +6,7 @@
 from ..Utilidades.Constantes import Constantes
 import numpy as np
 from pandas import DataFrame
+import pandas as pd
 
 
 
@@ -23,6 +24,27 @@ class UtilidadesMatriz:
                     listaFilas.append(valor)
                    
         return listaFilas
+    
+    def joinArrayAnios(self, anioInicio, AnioFin, matriz, numColumnas):
+        num_anios = AnioFin - anioInicio +1
+        array_1 = np.zeros(num_anios * numColumnas)
+
+        anios = np.arange(anioInicio, AnioFin+1, 1)
+        pos = 0
+        
+        for anio in anios:
+            datos = matriz.loc[anio]
+            for i in np.arange(0, numColumnas):
+                array_1[pos] = datos[i]
+                pos = pos +1
+                
+        s = pd.Series(array_1)
+        s = s.astype(int)
+        
+        return s
+    
+    
+    
     
     
     #posicion = 1 para columnas, posicion = 0 para filas

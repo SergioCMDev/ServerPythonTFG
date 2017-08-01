@@ -2880,6 +2880,12 @@ paths:
         type: "integer"
         default: 2015
         format: "int64"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
       - in: "body"
         name: "body"
         description: "Datos de entrada obtenidos previamente"
@@ -2933,6 +2939,12 @@ paths:
         type: "integer"
         default: 2015
         format: "int64"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
       - in: "body"
         name: "body"
         description: "Datos de entrada obtenidos previamente junto con los datos a\
@@ -2941,7 +2953,7 @@ paths:
         schema:
           type: "array"
           items:
-            $ref: "#/definitions/body13"
+            $ref: "#/definitions/body_3"
       responses:
         200:
           description: "successful operation"

@@ -2,7 +2,7 @@ from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
 from ..Utilidades.Conversores import Conversores as Conversor
 
 
-def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio):
+def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio): #MIRAR
     """
     Obtener cantidades de vuelos entrantes en la ciudad del pais divididas por meses
     Obtener cantidad de vuelos entrantes en las ciudades de un pais de divididas por meses
@@ -20,16 +20,16 @@ def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio):
 
     cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(PaisDestino, CiudadDestino, Anio)
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
-    
+    print(arrayTuplas)
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
-    retval = conversor.ObtenerDataJSONExtendido(matriz)
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+#    retval = conversor.ObtenerDataJSONExtendido(matriz)
 
-    return retval
+#    return retval
 
     ##Mostrar JSON Reducido
-#    retval = conversor.convertirAJson(arrayTuplas)
-#    return retval
+    retval = conversor.convertirAJson(arrayTuplas)
+    return retval
 
     
 
