@@ -25,11 +25,29 @@ class UtilidadesMatriz:
                    
         return listaFilas
     
-    def joinArrayAnios(self, anioInicio, AnioFin, matriz, numColumnas):
-        num_anios = AnioFin - anioInicio +1
+    def JoinArrayCiudades(self, CiudadInicio, CiudadFin, matriz, numColumnas, numCiudades):
+        numCiudades = 1
+#        array_1 = np.zeros(num_Ciudades * numColumnas)
+#
+#        anios = np.arange(anioInicio, AnioFin+1, 1)
+#        pos = 0
+#        
+#        for ciudad in Ciudades:
+#            datos = matriz.loc[ciudad]
+#            for i in np.arange(0, numColumnas):
+#                array_1[pos] = datos[i]
+#                pos = pos +1
+#                
+#        s = pd.Series(array_1)
+#        s = s.astype(string)
+#        
+#        return s
+    
+    def joinArrayAnios(self, AnioInicio, AnioFin, matriz, numColumnas):
+        num_anios = AnioFin - AnioInicio +1
         array_1 = np.zeros(num_anios * numColumnas)
 
-        anios = np.arange(anioInicio, AnioFin+1, 1)
+        anios = np.arange(AnioInicio, AnioFin+1, 1)
         pos = 0
         
         for anio in anios:
@@ -45,10 +63,8 @@ class UtilidadesMatriz:
     
     
     
-    
-    
     #posicion = 1 para columnas, posicion = 0 para filas
-    def ObtenerParametros(self, columnas, tuples, posicion):
+    def obtenerParametros(self, columnas, tuples, posicion):
         listaValores = list()
         
         if columnas[posicion] == 'Mes': #OK
@@ -77,13 +93,13 @@ class UtilidadesMatriz:
         return listaValores
     
     
-    def createMatrizCantidad(self, tuples, anioInicio, anioFin, columnas):
+    def createMatrizCantidad(self, tuples, columnas):
         
         #Obtenemos datos de Filas
-        listaFilas = self.ObtenerParametros(columnas, tuples, 0)
+        listaFilas = self.obtenerParametros(columnas, tuples, 0)
         
         #Obtenemos datos de columnas
-        listaColumnas = self.ObtenerParametros(columnas, tuples, 1)
+        listaColumnas = self.obtenerParametros(columnas, tuples, 1)
         np.set_printoptions(threshold='nan')
         #Obtenemos valores a introducir en matriz
         posValores = len(columnas)-1
@@ -129,18 +145,18 @@ class UtilidadesMatriz:
     
     
     
-    def getMatrizDatos(self, tuplas, columnas, anioInicio, anioFin):
+    def ObtenerMatrizDatos(self, tuplas, columnas):
 
         num_columns = len(columnas)
         lista = list()
         matriz = []
         if num_columns == 2:
-             if ('Anio' in columnas[0] or 'Ciudad_Destino' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Mes' in columnas[0])  and ('Cantidad' in columnas[1] or 'Numero_Vuelos' in columnas[1] or 'Numero_Turistas' in columnas[1]):
-                 matriz, lista =  self.createMatrizCantidad(tuplas, anioInicio, anioFin, columnas)
+             if ('Anio' in columnas[0] or 'Ciudad_Destino' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Mes' in columnas[0] or 'Ciudad' in columnas[0])  and ('Cantidad' in columnas[1] or 'Numero_Vuelos' in columnas[1] or 'Numero_Turistas' in columnas[1]):
+                matriz, lista =  self.createMatrizCantidad(tuplas, columnas)
 
         elif  num_columns == 3:
             if ('Mes' in columnas[0] or 'Anio' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Ciudad_Destino' in columnas[0])  and  ('Pais_Origen' in columnas[1] or 'Mes' in columnas[1] or 'Ciudad_Origen' in columnas[1] or 'Ciudad_Destino' in columnas[1]) and ('Cantidad' in columnas[2] or 'Numero_Turistas' in columnas[2] or 'Numero_Vuelos' in columnas[2]):
-                matriz, lista =  self.createMatrizCantidad(tuplas, anioInicio, anioFin, columnas)
+                matriz, lista =  self.createMatrizCantidad(tuplas, columnas)
                
         return matriz, lista
 

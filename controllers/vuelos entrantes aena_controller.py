@@ -2,7 +2,7 @@ from ..DB.DBRepositoryAena import DBRepositoryAena as DBRepository
 from ..Utilidades.Conversores import Conversores as Conversor
 
 
-def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio): #MIRAR
+def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio): #OK
     """
     Obtener cantidades de vuelos entrantes en la ciudad del pais divididas por meses
     Obtener cantidad de vuelos entrantes en las ciudades de un pais de divididas por meses

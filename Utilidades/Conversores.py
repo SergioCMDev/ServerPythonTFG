@@ -60,10 +60,10 @@ class Conversores:
         return retVal
 
 
-    
-    def ConvertirTuplasToMatriz(self, tuplas, labels, anioInicio, anioFin):
+    #filaInicio y filaFin pueden ser tanto años, como paises, como ciudades
+    def ConvertirTuplasToMatriz(self, tuplas, labels):
         tuplasMatriz = DataFrame(tuplas, columns = labels)
-        matriz, lista = matrix.getMatrizDatos(tuplasMatriz, labels, anioInicio, anioFin)
+        matriz, lista = matrix.ObtenerMatrizDatos(tuplasMatriz, labels)
         return matriz, lista
 
     def json_numpy_obj_hook(self, dct):

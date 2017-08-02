@@ -472,7 +472,7 @@ paths:
         description: "Anio"
         required: true
         type: "integer"
-        default: 2009
+        default: 2016
         format: "int64"
       responses:
         200:
@@ -2834,7 +2834,7 @@ paths:
         schema:
           type: "array"
           items:
-            $ref: "#/definitions/body_2"
+            $ref: "#/definitions/body"
       responses:
         200:
           description: "successful operation"
@@ -2854,7 +2854,7 @@ paths:
         \ y unos valores a tratar"
       description: "Obtener los valores fuera de lo comun dado unos valores iniciales\
         \ y unos valores a tratar"
-      operationId: "obtener_outliers_inliers"
+      operationId: "obtener_outliers_inliers_anios_cantidad"
       produces:
       - "application/xml"
       - "application/json"
@@ -2893,7 +2893,7 @@ paths:
         schema:
           type: "array"
           items:
-            $ref: "#/definitions/body_2"
+            $ref: "#/definitions/body"
       responses:
         200:
           description: "successful operation"
@@ -2953,7 +2953,284 @@ paths:
         schema:
           type: "array"
           items:
+            $ref: "#/definitions/body_1"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInliersAniosPaisCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \ y unos valores a tratar"
+      description: "Este metodo trata los valores de cada mes de cada año y tras pasarle\
+        \ valores a probar decide los inliers y los outliers"
+      operationId: "obtener_outliers_inliers_anios_pais_cantidad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "AnioInicio"
+        in: "query"
+        description: "Año inicial de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2009
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Año final de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2014
+        format: "int64"
+      - name: "AnioAComprobar"
+        in: "query"
+        description: "Año a comprobar de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2015
+        format: "int64"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente junto con los datos a\
+          \ testear"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body_2"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInliersAniosCiudadCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \  y unos valores a tratar"
+      description: "Este metodo trata los valores de cada mes de cada año y tras pasarle\
+        \ valores a probar decide los inliers y los outliers"
+      operationId: "obtener_outliers_inliers_anios_ciudad_cantidad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "AnioInicio"
+        in: "query"
+        description: "Año inicial de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2009
+        format: "int64"
+      - name: "AnioFin"
+        in: "query"
+        description: "Año final de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2014
+        format: "int64"
+      - name: "AnioAComprobar"
+        in: "query"
+        description: "Año a comprobar de la matriz de datos"
+        required: true
+        type: "integer"
+        default: 2015
+        format: "int64"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente junto con los datos a\
+          \ testear"
+        required: true
+        schema:
+          type: "array"
+          items:
             $ref: "#/definitions/body_3"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInlierMesCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \  y unos valores a tratar"
+      description: "Este metodo trata los valores de cada mes de cada año y tras pasarle\
+        \ valores a probar decide los inliers y los outliers"
+      operationId: "obtener_outliers_inliers_mes_cantidad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "MesInicioIniciales"
+        in: "query"
+        description: "Mes inicial de la matriz de datos"
+        required: true
+        type: "string"
+        default: "Enero"
+      - name: "MesFinIniciales"
+        in: "query"
+        description: "Mes final de la matriz de datos, los siguientes se probaran\
+          \ mediante los metodos de deteccion de outliers"
+        required: true
+        type: "string"
+        default: "Junio"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente junto con los datos a\
+          \ testear"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body_4"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInlierCiudadCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \  y unos valores a tratar"
+      description: "Este metodo trata los valores de cada mes de cada año y tras pasarle\
+        \ valores a probar decide los inliers y los outliers"
+      operationId: "obtener_outliers_ciudad_cantidad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "ciudadInicioIniciales"
+        in: "query"
+        description: "Ciudad inicial de la matriz de datos"
+        required: true
+        type: "string"
+        default: "Valencia"
+      - name: "CiudadFinIniciales"
+        in: "query"
+        description: "Ciudad final de la matriz de datos, las siguientes se probaran\
+          \ mediante los metodos de deteccion de outliers"
+        required: true
+        type: "string"
+        default: "Barcelona"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente junto con los datos a\
+          \ testear"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body_5"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties:
+              type: "integer"
+              format: "int32"
+        400:
+          description: "Invalid country value"
+      x-swagger-router-controller: "swagger_server.controllers.calculos_controller"
+  /Calculos/ObtenerOutliersInlierPaisCantidad/:
+    post:
+      tags:
+      - "Calculos"
+      summary: "Obtener los valores fuera de lo comun dado unos valores iniciales\
+        \  y unos valores a tratar"
+      description: "Este metodo trata los valores de cada mes de cada año y tras pasarle\
+        \ valores a probar decide los inliers y los outliers"
+      operationId: "obtener_outliers_pais_cantidad"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "PaisInicioIniciales"
+        in: "query"
+        description: "Pais inicial de la matriz de datos"
+        required: true
+        type: "string"
+        default: "Spain"
+      - name: "PaisFinIniciales"
+        in: "query"
+        description: "Pais final de la matriz de datos, los datos siguientes se trataran\
+          \ mediante los metodos de deteccion de outliers"
+        required: true
+        type: "string"
+        default: "Belgium"
+        format: "int64"
+      - name: "Metodo"
+        in: "query"
+        description: "Metodo a usar para obtener los outliers"
+        required: true
+        type: "string"
+        default: "Elliptic"
+      - in: "body"
+        name: "body"
+        description: "Datos de entrada obtenidos previamente junto con los datos a\
+          \ testear"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/body_6"
       responses:
         200:
           description: "successful operation"
@@ -2978,124 +3255,58 @@ definitions:
   body2:
     type: "object"
     properties:
-      Anio:
-        type: "integer"
-        format: "int64"
-      Numero_Turistas:
+      Mes:
+        type: "string"
+      Cantidad:
         type: "integer"
         format: "int64"
   body3:
     type: "object"
     properties:
-      Mes:
+      Ciudad:
         type: "string"
-      Numero_Vuelos:
+      Cantidad:
         type: "integer"
         format: "int64"
   body4:
     type: "object"
     properties:
-      Mes:
+      Pais:
         type: "string"
-      Numero_Turistas:
+      Cantidad:
         type: "integer"
         format: "int64"
   body5:
     type: "object"
     properties:
-      Ciudad:
+      Anio:
+        type: "integer"
+        format: "int64"
+      Pais:
         type: "string"
-      Numero_Vuelos:
+      Cantidad:
         type: "integer"
         format: "int64"
   body6:
     type: "object"
     properties:
+      Anio:
+        type: "integer"
+        format: "int64"
       Ciudad:
         type: "string"
-      Numero_Turistas:
+      Cantidad:
         type: "integer"
         format: "int64"
   body7:
     type: "object"
     properties:
-      Pais:
-        type: "string"
-      Numero_Vuelos:
-        type: "integer"
-        format: "int64"
-  body8:
-    type: "object"
-    properties:
-      Pais:
-        type: "string"
-      Numero_Turistas:
-        type: "integer"
-        format: "int64"
-  body9:
-    type: "object"
-    properties:
-      Anio:
-        type: "integer"
-        format: "int64"
-      Pais:
-        type: "string"
-      Numero_Vuelos:
-        type: "integer"
-        format: "int64"
-  body10:
-    type: "object"
-    properties:
-      Anio:
-        type: "integer"
-        format: "int64"
-      Pais:
-        type: "string"
-      Numero_Turistas:
-        type: "integer"
-        format: "int64"
-  body11:
-    type: "object"
-    properties:
-      Anio:
-        type: "integer"
-        format: "int64"
-      Ciudad:
-        type: "string"
-      Numero_Vuelos:
-        type: "integer"
-        format: "int64"
-  body12:
-    type: "object"
-    properties:
-      Anio:
-        type: "integer"
-        format: "int64"
-      Ciudad:
-        type: "string"
-      Numero_Turistas:
-        type: "integer"
-        format: "int64"
-  body13:
-    type: "object"
-    properties:
       Anio:
         type: "integer"
         format: "int64"
       Mes:
         type: "string"
-      Numero_Vuelos:
-        type: "integer"
-        format: "int64"
-  body14:
-    type: "object"
-    properties:
-      Anio:
-        type: "integer"
-        format: "int64"
-      Mes:
-        type: "string"
-      Numero_Turistas:
+      Cantidad:
         type: "integer"
         format: "int64"
   body:
@@ -3111,9 +3322,9 @@ definitions:
       Anio:
         type: "integer"
         format: "int64"
-      Ciudad:
+      Mes:
         type: "string"
-      Numero_Vuelos:
+      Cantidad:
         type: "integer"
         format: "int64"
   body_2:
@@ -3121,6 +3332,8 @@ definitions:
       Anio:
         type: "integer"
         format: "int64"
+      Pais:
+        type: "string"
       Cantidad:
         type: "integer"
         format: "int64"
@@ -3131,6 +3344,27 @@ definitions:
         format: "int64"
       Ciudad:
         type: "string"
-      Numero_Vuelos:
+      Cantidad:
+        type: "integer"
+        format: "int64"
+  body_4:
+    properties:
+      Mes:
+        type: "string"
+      Cantidad:
+        type: "integer"
+        format: "int64"
+  body_5:
+    properties:
+      Ciudad:
+        type: "string"
+      Cantidad:
+        type: "integer"
+        format: "int64"
+  body_6:
+    properties:
+      Pais:
+        type: "string"
+      Cantidad:
         type: "integer"
         format: "int64"
