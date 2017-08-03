@@ -46,23 +46,35 @@ class Graphics():
         if 'Anio' in listaFilas[0] and 'Cantidad' in listaFilas[1]:
             valoresColumnas = listaColumnas
             x = valoresColumnas
-            xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-1, max_Y*2, 500))       
+            xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-500, max_Y*2, 500))       
             textoInferior = listaFilas[0]
-        elif 'Anio' in listaFilas[0] and 'Mes' in listaFilas[1] and 'Ciudad' in listaFilas[1] and 'Cantidad' in listaFilas[2] or 'Numero_Vuelos' in listaFilas[2]:
+        elif 'Ciudad' in listaFilas[0] and 'Cantidad' in listaFilas[1]:
+            valoresColumnas = listaColumnas
+            x = np.arange(0, len(listaColumnas)-1)
+            xx1, yy1 = np.meshgrid(np.linspace(-2, len(listaColumnas), len(listaColumnas)), np.linspace(-500, max_Y*2, len(listaColumnas)))       
+            textoInferior = listaFilas[0]    
+        elif 'Pais' in listaFilas[0] and 'Cantidad' in listaFilas[1]:
+            valoresColumnas = listaColumnas
+            x = np.arange(0, len(listaColumnas)-1)
+            xx1, yy1 = np.meshgrid(np.linspace(-2, len(listaColumnas), len(listaColumnas)), np.linspace(-500, max_Y*2, len(listaColumnas)))       
+            textoInferior = listaFilas[0]   
+
+        elif 'Anio' in listaFilas[0] and 'Mes' in listaFilas[1] or 'Ciudad' in listaFilas[1] and 'Cantidad' in listaFilas[2] or 'Numero_Vuelos' in listaFilas[2]:
             if 'Mes' in listaFilas[1]:
                 x = np.arange(0, len(Constantes.Meses))
                 valoresColumnas = Constantes.Meses
             else: #Para ciudades/paises
                 x = np.arange(0, len(listaColumnas))
                 valoresColumnas = listaColumnas
-            xx1, yy1 = np.meshgrid(np.linspace(-1, len(x), 500), np.linspace(-1, max_Y*2, 500)) 
+            xx1, yy1 = np.meshgrid(np.linspace(-1, len(x), 500), np.linspace(500, max_Y*2, 500)) 
             textoInferior = listaFilas[1]
         return valoresColumnas, textoInferior, xx1, yy1, x
     
     
     #CON MESES OK
     #CON AÑOS OK
-    #TODO CIUDAD
+    #CON CIUDAD OK
+    #TODO PAISES
     #Metodo para obtener los outliers durante varios años separado por meses
     ##listaFilas Lista Anios
     #ListaColumnas lista Meses
@@ -110,7 +122,9 @@ class Graphics():
     #   Definimos valores de la grafica
         plt.xlim((xx1.min(), xx1.max()))
         plt.ylim((yy1.min(), yy1.max()))
-        pylab.xticks(x, valoresColumnas)
+        print(valoresColumnas)
+        print(x)
+        pylab.xticks(x, valoresColumnas, size='small', rotation='vertical')
 #        plt.savefig('grafica.png')
         plt.ylabel("Cantidad")
         plt.xlabel(textoInferior)

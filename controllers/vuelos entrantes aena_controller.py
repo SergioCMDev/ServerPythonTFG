@@ -20,9 +20,9 @@ def obtener_cantidad_anio_ciudad(PaisDestino, CiudadDestino, Anio): #OK
 
     cursor, labels = repository.ObtenerDatosVuelosEntrantesAenaEnUnAnioEnUnaCiudadMensualmenteDadoPaisDestinoCiudadAnio(PaisDestino, CiudadDestino, Anio)
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
-    print(arrayTuplas)
+#    print(arrayTuplas)
     ##Mostrar JSON Extendido
-#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+#    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
 #    retval = conversor.ObtenerDataJSONExtendido(matriz)
 
 #    return retval
@@ -54,7 +54,7 @@ def obtener_cantidad_anio_por_ciudades(PaisDestino, Anio):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
     
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -86,7 +86,7 @@ def obtener_cantidad_anualmente(PaisDestino, AnioInicio, AnioFin):
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -120,7 +120,7 @@ def obtener_cantidad_ciudad(PaisDestino, CiudadDestino, AnioInicio, AnioFin):
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -148,7 +148,7 @@ def obtener_cantidad_mensual(PaisDestino, Anio):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -181,7 +181,7 @@ def obtener_cantidad_mensualmente(PaisDestino, AnioInicio, AnioFin):
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -214,7 +214,7 @@ def obtener_cantidad_mes(PaisDestino, Mes, AnioInicio, AnioFin):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
     
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -246,7 +246,7 @@ def obtener_cantidad_mes_anio_por_ciudades(PaisDestino, Anio, Mes):
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, Anio, Anio)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -282,7 +282,7 @@ def obtener_cantidad_mes_ciudad(PaisDestino, CiudadDestino, Mes, AnioInicio, Ani
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -317,7 +317,7 @@ def obtener_cantidad_mes_por_ciudades(PaisDestino, AnioInicio, AnioFin, Mes):
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 
@@ -349,7 +349,7 @@ def obtener_cantidad_entrantes_por_ciudades(PaisDestino, AnioInicio, AnioFin): #
 
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz, lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
     return retval
 

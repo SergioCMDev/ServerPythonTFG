@@ -16,14 +16,19 @@ class DeteccionOutliers:
     def ObtenerOutliersDadaMatrizAniosYTipo(self, matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaLabels, Metodo):
 
         datosOriginales, datosATestear = self.setDataValues(matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaLabels)
-#        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaLabels)
+        
+        
+        print(datosOriginales)
+        print("\n")
+        print(datosATestear)
+        
+        
+        if Metodo == "Elliptic":
+            outliersValuesList, inliersValuesList =   self.obtenerOutliersInliersEllipticEnvelope(datosOriginales, datosATestear)
+        elif Metodo == "Forest":
+            outliersValuesList, inliersValuesList =   self.obtenerInliersOutliersIsolationForest(datosOriginales, datosATestear)
 
-#        if Metodo == "Elliptic":
-#            outliersValuesList, inliersValuesList =   self.obtenerOutliersInliersEllipticEnvelope(datosOriginales, datosATestear)
-#        elif Metodo == "Forest":
-#            outliersValuesList, inliersValuesList =   self.obtenerInliersOutliersIsolationForest(datosOriginales, datosATestear)
-#
-#        return outliersValuesList, inliersValuesList
+        return outliersValuesList, inliersValuesList
     
     
     
@@ -35,11 +40,11 @@ class DeteccionOutliers:
 
         if 'Anio' in labels[0] and 'Cantidad' in labels[1]:
             numColumnas = 1
-            serieDataAnios = utilidadesMatriz.joinArrayAnios(DatoTrainInicio, DatoTrainFin, matriz, numColumnas )
+            valoresDatosIniciales = utilidadesMatriz.joinArrayAnios(DatoTrainInicio, DatoTrainFin, matriz, numColumnas ) 
 
             indices = np.arange(int(DatoTrainInicio), int(DatoTrainFin)+1,1)
             
-            datosOriginales = np.column_stack((indices, serieDataAnios))
+            datosOriginales = np.column_stack((indices, valoresDatosIniciales))
             
             if len(ValoresTest) == 1: #Un solo Año ####PROBAR PARA HACERLO DE UNA SOLO FORMA USANDO EL ELSE
                 AnioTest = ValoresTest[0]
@@ -57,19 +62,15 @@ class DeteccionOutliers:
             return datosOriginales, datosATestear
 
         elif 'Ciudad' in labels[0] and 'Cantidad' in labels[1]:
-            numColumnas = 1
-            numCiudades = len(matriz);
-#            serieDataCiudades = utilidadesMatriz.JoinArrayCiudades(DatoTrainInicio, DatoTrainFin, matriz, numColumnas, numCiudades )
-            indices = np.arange(0, numCiudades,1)
-            
-#            datosOriginales = np.column_stack((indices, serieDataCiudades))
+            numColumnas = 1           
+            valoresDatosIniciales = utilidadesMatriz.JoinArrayCiudades(DatoTrainInicio, DatoTrainFin, matriz, numColumnas)
+            indices = np.arange(0, len(valoresDatosIniciales), 1)
+            datosOriginales = np.column_stack((indices, valoresDatosIniciales))
             
             if len(ValoresTest) == 1: #Una solo Ciudad
                 ciudadTest = ValoresTest[0]
-                print(ciudadTest)
-
-                datosATestear = np.column_stack((ciudadTest, matriz.loc[ciudadTest]))
-                print(datosATestear)
+                datosATestear = np.column_stack((len(valoresDatosIniciales), matriz.loc[ciudadTest]))
+#    
             else: #Una lista de Ciudades
                 DatoTestInicio = int(ValoresTest[0])
                 DatoTestFin = int(ValoresTest[len(ValoresTest)-1])
@@ -78,7 +79,9 @@ class DeteccionOutliers:
                 serieDataTestingAnios = utilidadesMatriz.joinArrayAnios(DatoTestInicio, DatoTestFin, matriz, numColumnas )
                 datosATestear = np.column_stack((indices, serieDataTestingAnios))
             
-            
+            return datosOriginales, datosATestear
+
+        #TODO
         elif 'Anio' in labels[0] and 'Mes' in labels[1]  and 'Cantidad' in labels[2] or 'Numero_Vuelos' in labels[2]: 
             if 'Mes' in labels[1]:
                 numColumnas = 12 #Debido a que son 12 meses
@@ -99,16 +102,19 @@ class DeteccionOutliers:
         
         
         
+
+    def MostrarOutliersMedianteEnvolturaElipticaDadosDatos(self, matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaFilas, listaColumnas):
         
-    def MostrarOutliersMedianteEnvolturaElipticaDadosDatos(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaFilas, listaColumnas):
-        
-        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaFilas)
+        datosOriginales, datosATestear = self.setDataValues(matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaFilas)
 
         graphics.showOutliersInliersEllipticEnvelope(datosOriginales, datosATestear, listaFilas, listaColumnas)
 
-    def MostrarOutliersMedianteIsolationForestDadosDatos(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaFilas, listaColumnas):
+
+
+    def MostrarOutliersMedianteIsolationForestDadosDatos(self, matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaFilas, listaColumnas):
         
-        datosOriginales, datosATestear = self.setDataValues(matriz, anioTrainInicio, AnioTrainFin, AnioTest, listaFilas)
+        datosOriginales, datosATestear = self.setDataValues(matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaFilas)
+        
         graphics.MostrarGraficaInliersOutliersIsolationForest(datosOriginales, datosATestear, listaFilas, listaColumnas)
 
     

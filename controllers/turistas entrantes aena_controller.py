@@ -23,7 +23,7 @@ def obtener_cantidad_ciudad_rango_anios(PaisDestino, CiudadDestino, AnioInicio, 
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
 
     return retval
@@ -55,7 +55,7 @@ def obtener_cantidad_entrantes_rango_anios(PaisDestino, AnioInicio, AnioFin):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
 
     return retval
@@ -86,7 +86,7 @@ def obtener_cantidad_origen_rango_anios(PaisDestino, AnioInicio, AnioFin): ##MAT
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
     ##Mostrar JSON Extendido
-#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
 #    retval = conversor.ObtenerDataJSONExtendido(matriz)
 #    return retval
 
@@ -117,7 +117,7 @@ def obtener_cantidad_origen_rango_anios_meses(PaisDestino, AnioInicio, AnioFin):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
     ##Mostrar JSON Extendido
-#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+#    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
 #    retval = conversor.ObtenerDataJSONExtendido(matriz)
 #    return retval
 
@@ -148,7 +148,7 @@ def obtener_cantidad_rango_anios_meses(PaisDestino, AnioInicio, AnioFin):
     arrayTuplas =  conversor.ConvertirCursorToTuplas(cursor)
 
     ##Mostrar JSON Extendido
-    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels, AnioInicio, AnioFin)
+    matriz , lista = conversor.ConvertirTuplasToMatriz(arrayTuplas,  labels)
     retval = conversor.ObtenerDataJSONExtendido(matriz)
 
     return retval

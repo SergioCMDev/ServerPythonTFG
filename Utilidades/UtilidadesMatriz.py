@@ -24,25 +24,29 @@ class UtilidadesMatriz:
                     listaFilas.append(valor)
                    
         return listaFilas
+    #Obtenemos los valores de las ciudades que se corresponden con las ciudades iniciales
+    def JoinArrayCiudades(self, CiudadInicio, CiudadFin, matriz, numColumnas):
+        listaCiudades = list()
+
+        for filas in matriz.iterrows():
     
-    def JoinArrayCiudades(self, CiudadInicio, CiudadFin, matriz, numColumnas, numCiudades):
-        numCiudades = 1
-#        array_1 = np.zeros(num_Ciudades * numColumnas)
-#
-#        anios = np.arange(anioInicio, AnioFin+1, 1)
-#        pos = 0
-#        
-#        for ciudad in Ciudades:
-#            datos = matriz.loc[ciudad]
-#            for i in np.arange(0, numColumnas):
-#                array_1[pos] = datos[i]
-#                pos = pos +1
+            listaCiudades.append(filas[0])
+            if filas[0] == CiudadFin:
+                break
+        array_1 = np.zeros(len(listaCiudades) * numColumnas)
+        pos = 0
+        for ciudad in listaCiudades:
+            datos = matriz.loc[ciudad]
+            for i in np.arange(0, numColumnas):
+                array_1[pos] = datos[i]
+                pos = pos +1
 #                
-#        s = pd.Series(array_1)
-#        s = s.astype(string)
-#        
-#        return s
+        s = pd.Series(array_1)
+        s = s.astype(int)
+
+        return s
     
+    #Obtenemos los valores de los anios que se corresponden con los anios iniciales y los devolvemos en una serie
     def joinArrayAnios(self, AnioInicio, AnioFin, matriz, numColumnas):
         num_anios = AnioFin - AnioInicio +1
         array_1 = np.zeros(num_anios * numColumnas)
@@ -52,7 +56,7 @@ class UtilidadesMatriz:
         
         for anio in anios:
             datos = matriz.loc[anio]
-            for i in np.arange(0, numColumnas):
+            for i in np.arange(0, numColumnas): #Valido tanto para meses como columna como para una sola columna
                 array_1[pos] = datos[i]
                 pos = pos +1
                 

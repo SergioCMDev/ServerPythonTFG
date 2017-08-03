@@ -33,15 +33,42 @@ class Conversores:
         retval=json.dumps(data,cls=NumpyAwareJSONEncoder)
         return retval 
     
+    def separarValoresBody(self, body, ValorFin):
+        iniciales = True
+        listaValores = list()
+        listaValoresAComprobar = list()
+        for item in body:
+                    #TODO IR INCREMENTANDO
+                if(hasattr(item, 'anio') and hasattr(item, 'cantidad')):
+                    print(item)
+                    tupla = (item.anio, item.cantidad)
+                    valorItem = item.anio
+                elif (hasattr(item, 'ciudad') and hasattr(item, 'cantidad')):
+                    tupla = (item.ciudad, item.cantidad)
+                    valorItem = item.ciudad
+                elif (hasattr(item, 'pais') and hasattr(item, 'cantidad')):
+                    tupla = (item.pais, item.cantidad)
+                    valorItem = item.pais
+
+
+                if iniciales:
+                    listaValores.append(tupla)
+                else:
+                    listaValores.append(tupla)
+                    listaValoresAComprobar.append(valorItem)
+    
+                if valorItem == ValorFin:
+                     iniciales = False
+                        
+        return listaValores, listaValoresAComprobar
+    
+    
+    
     def ObtenerDataJSONExtendido(self, matriz):
         #    print(matriz)
         data = matriz.to_json(orient ='table')
-#        print(data)
-#        print(test+"\n")
         pos = data.find('"data": ')
-#    print(pos)
         tamRestante = len(data) - pos
-#    print(tamRestante)
         data = data[pos+8 :pos + tamRestante-1]
         return data
     

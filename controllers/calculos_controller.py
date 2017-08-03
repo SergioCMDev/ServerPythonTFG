@@ -18,7 +18,7 @@ graphics = Graphics()
 
 
 
-def obtener_outliers_ciudad_cantidad(ciudadInicioIniciales, CiudadFinIniciales, Metodo, body):
+def obtener_outliers_ciudad_cantidad(ciudadInicioIniciales, CiudadFinIniciales, Metodo, body): #OK
     """
     Obtener los valores fuera de lo comun dado unos valores iniciales  y unos valores a tratar
     Este metodo trata los valores de cada mes de cada año y tras pasarle valores a probar decide los inliers y los outliers
@@ -35,44 +35,38 @@ def obtener_outliers_ciudad_cantidad(ciudadInicioIniciales, CiudadFinIniciales, 
     """
     if connexion.request.is_json:
         body = [Body5.from_dict(d) for d in connexion.request.get_json()]
-        listaValores = list()
-        listaValoresAComprobar = list()
+#        listaValores = list()
+#        listaValoresAComprobar = list()
         listaLabels = list()
         listaLabels.append('Ciudad')
         listaLabels.append('Cantidad')
-        iniciales = True
-        for item in body:
-            if(hasattr(item, 'ciudad') and hasattr(item, 'cantidad')):
-                tupla = (item.ciudad, item.cantidad)
-                listaValores.append(tupla)
-                if iniciales:
-                    listaValores.append(tupla)
-                else:
-#                    listaValoresAComprobar.append(tupla)
-                    listaValoresAComprobar.append(item.ciudad)
+#        iniciales = True
+        listaValores, listaValoresAComprobar = conversor.separarValoresBody(body, CiudadFinIniciales)
 
-                if item.ciudad == CiudadFinIniciales:
-                    iniciales = False
-                                       
         matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels)
-        print(matriz)
+       
+        
+        
         if Metodo == "Elliptic":
             outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, ciudadInicioIniciales, CiudadFinIniciales, listaValoresAComprobar, listaLabels, Metodo)
         else:
             outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, ciudadInicioIniciales, CiudadFinIniciales, listaValoresAComprobar, listaLabels, Metodo)
         
-#        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
-#        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
-#        outliersValues, inliersValues = outliers.getOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, "Elliptic")
-##        outliersValues, inliersValues = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
-#        print(outliersValuesList)
-#        print("\n")
-#        print(inliersValuesList)
+#        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, ciudadInicioIniciales, CiudadFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
+#        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, ciudadInicioIniciales, CiudadFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
+
+        print(outliersValuesList)
+        print("\n")
+        print(inliersValuesList)
+
+
+
+
 
 """
 "[{\"Anio\":2009,\"Numero_Vuelos\":209861},{\"Anio\":2010,\"Numero_Vuelos\":208851},{\"Anio\":2011,\"Numero_Vuelos\":205476},{\"Anio\":2012,\"Numero_Vuelos\":130233},{\"Anio\":2013,\"Numero_Vuelos\":121931},{\"Anio\":2014,\"Numero_Vuelos\":126893},{\"Anio\":2015,\"Numero_Vuelos\":139735}]"
 """
-def obtener_outliers_inliers_anios_cantidad(AnioInicio, AnioFin, AnioAComprobar, Metodo,  body):
+def obtener_outliers_inliers_anios_cantidad(AnioInicio, AnioFin, Metodo,  body): #OK
     """
     Obtener los valores fuera de lo comun dado unos valores iniciales y unos valores a tratar
     Obtener los valores fuera de lo comun dado unos valores iniciales y unos valores a tratar
@@ -89,34 +83,30 @@ def obtener_outliers_inliers_anios_cantidad(AnioInicio, AnioFin, AnioAComprobar,
     """
     if connexion.request.is_json:
         body = [Body.from_dict(d) for d in connexion.request.get_json()]
-        listaValores = list()
-        listaLabels = list()
-        print(body)
-        for item in body:
-            if(hasattr(item, 'anio') and hasattr(item, 'cantidad')):
-                tupla = (item.anio, item.cantidad)
-                listaValores.append(tupla)
-                if 'Anio' not in listaLabels and 'Cantidad' not in listaLabels:
-                    
-                    listaLabels.append('Anio')
-                    listaLabels.append('Cantidad')
 
-        print(listaValores)
-        print(Metodo)
+        listaLabels = list()
+        listaLabels.append('Anio')
+        listaLabels.append('Cantidad')
+        listaValores, listaValoresAComprobar = conversor.separarValoresBody(body, AnioFin)
+
+
+        print(listaValoresAComprobar)
+#        print(Metodo)
         matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels)
         if Metodo == "Elliptic":
-            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, Metodo)
+            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, listaValoresAComprobar, listaLabels, Metodo)
         else:
-            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, Metodo)
+            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, listaValoresAComprobar, listaLabels, Metodo)
         
-        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
-        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, listaColumnas)
+        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, AnioInicio, AnioFin, listaValoresAComprobar, listaLabels, listaColumnas)
+        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, AnioInicio, AnioFin, listaValoresAComprobar, listaLabels, listaColumnas)
 #        outliersValues, inliersValues = outliers.getOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels, "Elliptic")
 ##        outliersValues, inliersValues = outliers.getOutliersMedianteEnvolturaElipticaDadaMatrizYAnios(matriz, AnioInicio, AnioFin, AnioAComprobar, listaLabels)
         print(outliersValuesList)
         print("\n")
         print(inliersValuesList)
 
+#TODO METODO PARA DEVOLVER OUTLIERS EN JSON
 #        if(len(inliersValues) > 0 and len(outliersValues) > 0):
 #            inliersJSON = conversor.convertirNumpyArrayAJson(inliersValues)
 #            outliersJSON = conversor.convertirNumpyArrayAJson(outliersValues)
@@ -146,6 +136,16 @@ def obtener_outliers_pais_cantidad(PaisInicioIniciales, PaisFinIniciales, Metodo
     """
     if connexion.request.is_json:
         body = [Body6.from_dict(d) for d in connexion.request.get_json()]
+        listaLabels = list()
+        listaLabels.append('Pais')
+        listaLabels.append('Cantidad')
+        listaValores, listaValoresAComprobar = conversor.separarValoresBody(body, PaisFinIniciales)
+        
+
+        matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels)
+        print(matriz)
+        print(listaColumnas)
+
     return 'do some magic!'
         
         
