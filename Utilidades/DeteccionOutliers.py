@@ -38,22 +38,31 @@ class DeteccionOutliers:
 #    def setDataValues(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, labels):
     def setDataValues(self, matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, labels):
 
-        if 'Anio' in labels[0] and 'Cantidad' in labels[1]:
+        if 'Anio' in labels[0] or 'Mes' in labels[0] and 'Cantidad' in labels[1]:
             numColumnas = 1
             valoresDatosIniciales = utilidadesMatriz.GetValuesArrayIntegers(DatoTrainInicio, DatoTrainFin, matriz, numColumnas ) 
-
-            indices = np.arange(int(DatoTrainInicio), int(DatoTrainFin)+1,1)
+            if 'Mes' in labels[0]:
+                indices = np.arange(0, len(valoresDatosIniciales), 1)
+                print(indices)
+            else:
+                indices = np.arange(int(DatoTrainInicio), int(DatoTrainFin)+1, 1)
             
             datosOriginales = np.column_stack((indices, valoresDatosIniciales))
             
             if len(ValoresTest) == 1: #Un solo Año ####PROBAR PARA HACERLO DE UNA SOLO FORMA USANDO EL ELSE
-                AnioTest = ValoresTest[0]
-                datosATestear = np.column_stack((AnioTest, matriz.loc[AnioTest]))
+                valorInicioTest = ValoresTest[0]
+                datosATestear = np.column_stack((valorInicioTest, matriz.loc[valorInicioTest]))
             else: #Una lista de años
-                DatoTestInicio = int(ValoresTest[0])
-                DatoTestFin = int(ValoresTest[len(ValoresTest)-1])
+                if 'Mes' in labels[0]:
+                    DatoTestInicio = ValoresTest[0]
+                    DatoTestFin = ValoresTest[len(ValoresTest)-1]
+                    indices = np.arange(len(valoresDatosIniciales), len(valoresDatosIniciales) + len(ValoresTest) , 1)
+
+                else:
+                    DatoTestInicio = int(ValoresTest[0])
+                    DatoTestFin = int(ValoresTest[len(ValoresTest)-1])
+                    indices = np.arange(int(DatoTestInicio), int(DatoTestFin)+1, 1)
                 
-                indices = np.arange(int(DatoTestInicio), int(DatoTestFin)+1, 1)
                 serieDataTestingAnios = utilidadesMatriz.GetValuesArrayIntegers(DatoTestInicio, DatoTestFin, matriz, numColumnas )
                 datosATestear = np.column_stack((indices, serieDataTestingAnios))
 

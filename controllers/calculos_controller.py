@@ -182,7 +182,17 @@ def obtener_outliers_inliers_mes_cantidad(MesInicioIniciales, MesFinIniciales, M
         listaLabels.append('Cantidad')
         listaValores, listaValoresAComprobar = conversor.separarValoresBody(body, MesFinIniciales)
         matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels)
-    return 'do some magic!'
+        if Metodo == "Elliptic":
+            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, Metodo)
+        else:
+            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, Metodo)
+        print(outliersValuesList)
+        print("\n")
+        print(inliersValuesList)    
+        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
+        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
+    #TODO METODO PARA DEVOLVER OUTLIERS EN JSON
+        return 'do some magic!'
 
 
 

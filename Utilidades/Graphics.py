@@ -42,8 +42,8 @@ class Graphics():
         valoresColumnas = list()
         textoInferior = ""
         max_Y = np.amax(datosOriginales)
-
-        if 'Anio' in listaFilas[0] and 'Cantidad' in listaFilas[1]:
+        #TODO
+        if 'Anio' in listaFilas[0] or 'Mes'in listaFilas[0] and 'Cantidad' in listaFilas[1]:
             valoresColumnas = listaColumnas
             x = valoresColumnas
             xx1, yy1 = np.meshgrid(np.linspace(listaColumnas[0]-1, listaColumnas[len(listaColumnas)-1]+1, 500), np.linspace(-500, max_Y*2, 500))       
