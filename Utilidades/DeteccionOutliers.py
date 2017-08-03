@@ -40,7 +40,7 @@ class DeteccionOutliers:
 
         if 'Anio' in labels[0] and 'Cantidad' in labels[1]:
             numColumnas = 1
-            valoresDatosIniciales = utilidadesMatriz.joinArrayAnios(DatoTrainInicio, DatoTrainFin, matriz, numColumnas ) 
+            valoresDatosIniciales = utilidadesMatriz.GetValuesArrayIntegers(DatoTrainInicio, DatoTrainFin, matriz, numColumnas ) 
 
             indices = np.arange(int(DatoTrainInicio), int(DatoTrainFin)+1,1)
             
@@ -54,51 +54,54 @@ class DeteccionOutliers:
                 DatoTestFin = int(ValoresTest[len(ValoresTest)-1])
                 
                 indices = np.arange(int(DatoTestInicio), int(DatoTestFin)+1, 1)
-                serieDataTestingAnios = utilidadesMatriz.joinArrayAnios(DatoTestInicio, DatoTestFin, matriz, numColumnas )
+                serieDataTestingAnios = utilidadesMatriz.GetValuesArrayIntegers(DatoTestInicio, DatoTestFin, matriz, numColumnas )
                 datosATestear = np.column_stack((indices, serieDataTestingAnios))
 
 
                 
             return datosOriginales, datosATestear
 
-        elif 'Ciudad' in labels[0] and 'Cantidad' in labels[1]:
+        elif 'Ciudad' in labels[0] or 'Pais' in labels[0] and 'Cantidad' in labels[1]:
             numColumnas = 1           
-            valoresDatosIniciales = utilidadesMatriz.JoinArrayCiudades(DatoTrainInicio, DatoTrainFin, matriz, numColumnas)
+            valoresDatosIniciales = utilidadesMatriz.GetValuesArrayStrings(DatoTrainInicio, DatoTrainFin, matriz, numColumnas)
+#            print(matriz.loc[DatoTrainInicio : DatoTrainFin]["Cantidad"])
             indices = np.arange(0, len(valoresDatosIniciales), 1)
+
             datosOriginales = np.column_stack((indices, valoresDatosIniciales))
-            
-            if len(ValoresTest) == 1: #Una solo Ciudad
+
+            if len(ValoresTest) == 1: #Un solo valor de testeo
                 ciudadTest = ValoresTest[0]
                 datosATestear = np.column_stack((len(valoresDatosIniciales), matriz.loc[ciudadTest]))
 #    
-            else: #Una lista de Ciudades
-                DatoTestInicio = int(ValoresTest[0])
-                DatoTestFin = int(ValoresTest[len(ValoresTest)-1])
-                
-                indices = np.arange(int(DatoTestInicio), int(DatoTestFin)+1, 1)
-                serieDataTestingAnios = utilidadesMatriz.joinArrayAnios(DatoTestInicio, DatoTestFin, matriz, numColumnas )
+            else: #Una lista de valores de testeo
+                DatoTestInicio = ValoresTest[0]
+                DatoTestFin = ValoresTest[len(ValoresTest)-1]
+
+                indices = np.arange(len(valoresDatosIniciales), len(valoresDatosIniciales) + len(ValoresTest), 1)
+                print(indices)
+                serieDataTestingAnios = utilidadesMatriz.GetValuesArrayStrings(DatoTestInicio, DatoTestFin, matriz, numColumnas )
+
                 datosATestear = np.column_stack((indices, serieDataTestingAnios))
             
             return datosOriginales, datosATestear
 
-        #TODO
-        elif 'Anio' in labels[0] and 'Mes' in labels[1]  and 'Cantidad' in labels[2] or 'Numero_Vuelos' in labels[2]: 
-            if 'Mes' in labels[1]:
-                numColumnas = 12 #Debido a que son 12 meses
-            else:
-                numColumnas = 21
-                
-            serieDataAnios = utilidadesMatriz.joinArrayAnios(anioTrainInicio, AnioTrainFin, matriz, numColumnas )
-            indices = np.arange(0, numColumnas,1)
-            indices = np.tile(indices, AnioTrainFin - anioTrainInicio +1)
-
-
-            datosOriginales = np.column_stack((indices, serieDataAnios))
-            datosATestear = np.column_stack((np.arange(0,numColumnas,1), matriz.loc[AnioTest]))
-
-            return datosOriginales, datosATestear
-        
-        
+# TODO
+#        elif 'Anio' in labels[0] and 'Mes' in labels[1]  and 'Cantidad' in labels[2] or 'Numero_Vuelos' in labels[2]: 
+#            if 'Mes' in labels[1]:
+#                numColumnas = 12 #Debido a que son 12 meses
+#            else:
+#                numColumnas = 21
+#                
+#            serieDataAnios = utilidadesMatriz.GetValuesArrayIntegers(anioTrainInicio, AnioTrainFin, matriz, numColumnas )
+#            indices = np.arange(0, numColumnas,1)
+#            indices = np.tile(indices, AnioTrainFin - anioTrainInicio +1)
+#
+#
+#            datosOriginales = np.column_stack((indices, serieDataAnios))
+#            datosATestear = np.column_stack((np.arange(0,numColumnas,1), matriz.loc[AnioTest]))
+#
+#            return datosOriginales, datosATestear
+#        
         
         
         
@@ -106,7 +109,7 @@ class DeteccionOutliers:
     def MostrarOutliersMedianteEnvolturaElipticaDadosDatos(self, matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaFilas, listaColumnas):
         
         datosOriginales, datosATestear = self.setDataValues(matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, listaFilas)
-
+        
         graphics.showOutliersInliersEllipticEnvelope(datosOriginales, datosATestear, listaFilas, listaColumnas)
 
 

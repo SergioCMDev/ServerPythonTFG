@@ -24,47 +24,55 @@ class UtilidadesMatriz:
                     listaFilas.append(valor)
                    
         return listaFilas
-    #Obtenemos los valores de las ciudades que se corresponden con las ciudades iniciales
-    def JoinArrayCiudades(self, CiudadInicio, CiudadFin, matriz, numColumnas):
-        listaCiudades = list()
-
-        for filas in matriz.iterrows():
     
-            listaCiudades.append(filas[0])
-            if filas[0] == CiudadFin:
-                break
-        array_1 = np.zeros(len(listaCiudades) * numColumnas)
-        pos = 0
-        for ciudad in listaCiudades:
-            datos = matriz.loc[ciudad]
-            for i in np.arange(0, numColumnas):
-                array_1[pos] = datos[i]
-                pos = pos +1
-#                
-        s = pd.Series(array_1)
-        s = s.astype(int)
-
-        return s
+    
+    #Obtenemos los valores de las ciudades que se corresponden con las ciudades iniciales
+    def GetValuesArrayStrings(self, valorInicial, ValorFinal, matriz, numColumnas):
+        return matriz.loc[valorInicial : ValorFinal]["Cantidad"]
+        #TODO COMPROBAR SI ALGO HA CAMBIADO
+#        listaCiudades = list()
+#        
+#        for filas in matriz.iterrows():
+#            
+#            listaCiudades.append(filas[0])
+#            if filas[0] == ValorFinal:
+#                break
+#        
+#        valoresCiudades = np.zeros(len(listaCiudades) * numColumnas)
+#        pos = 0
+#        for ciudad in listaCiudades:
+#            datos = matriz.loc[ciudad]
+#            for i in np.arange(0, numColumnas):
+#                valoresCiudades[pos] = datos[i]
+#                pos = pos +1
+##               
+#        s = pd.Series(valoresCiudades)
+#        s = s.astype(int)
+#
+#        return s
     
     #Obtenemos los valores de los anios que se corresponden con los anios iniciales y los devolvemos en una serie
-    def joinArrayAnios(self, AnioInicio, AnioFin, matriz, numColumnas):
-        num_anios = AnioFin - AnioInicio +1
-        array_1 = np.zeros(num_anios * numColumnas)
+    def GetValuesArrayIntegers(self, valorInicial, ValorFinal, matriz, numColumnas):
+        #TODO COMPROBAR SI ALGO HA CAMBIADO
 
-        anios = np.arange(AnioInicio, AnioFin+1, 1)
-        pos = 0
-        
-        for anio in anios:
-            datos = matriz.loc[anio]
-            for i in np.arange(0, numColumnas): #Valido tanto para meses como columna como para una sola columna
-                array_1[pos] = datos[i]
-                pos = pos +1
-                
-        s = pd.Series(array_1)
-        s = s.astype(int)
-        
-        return s
-    
+#        num_anios = AnioFin - AnioInicio +1
+#        array_1 = np.zeros(num_anios * numColumnas)
+#
+#        anios = np.arange(AnioInicio, AnioFin+1, 1)
+#        pos = 0
+#        
+#        for anio in anios:
+#            datos = matriz.loc[anio]
+#            for i in np.arange(0, numColumnas): #Valido tanto para meses como columna como para una sola columna
+#                array_1[pos] = datos[i]
+#                pos = pos +1
+#                
+#        s = pd.Series(array_1)
+#        s = s.astype(int)
+#        
+#        return s
+        return matriz.loc[valorInicial : ValorFinal]["Cantidad"]
+
     
     
     #posicion = 1 para columnas, posicion = 0 para filas
@@ -87,6 +95,8 @@ class UtilidadesMatriz:
             valores = tuples.Pais_Origen
         elif columnas[posicion] == 'Ciudad_Origen':
             valores = tuples.Ciudad_Origen
+        elif columnas[posicion] == 'Pais':
+            valores = tuples.Pais
         elif columnas[posicion] == 'Ciudad_Destino':
             valores = tuples.Ciudad_Destino
         else: 
@@ -155,7 +165,7 @@ class UtilidadesMatriz:
         lista = list()
         matriz = []
         if num_columns == 2:
-             if ('Anio' in columnas[0] or 'Ciudad_Destino' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Mes' in columnas[0] or 'Ciudad' in columnas[0])  and ('Cantidad' in columnas[1] or 'Numero_Vuelos' in columnas[1] or 'Numero_Turistas' in columnas[1]):
+             if ('Anio' in columnas[0] or 'Ciudad_Destino' in columnas[0] or 'Ciudad_Origen' in columnas[0] or 'Mes' in columnas[0] or 'Ciudad' in columnas[0] or 'Pais' in columnas[0])  and ('Cantidad' in columnas[1] or 'Numero_Vuelos' in columnas[1] or 'Numero_Turistas' in columnas[1]):
                 matriz, lista =  self.createMatrizCantidad(tuplas, columnas)
 
         elif  num_columns == 3:

@@ -55,7 +55,7 @@ class Graphics():
             textoInferior = listaFilas[0]    
         elif 'Pais' in listaFilas[0] and 'Cantidad' in listaFilas[1]:
             valoresColumnas = listaColumnas
-            x = np.arange(0, len(listaColumnas)-1)
+            x = np.arange(0, len(listaColumnas))
             xx1, yy1 = np.meshgrid(np.linspace(-2, len(listaColumnas), len(listaColumnas)), np.linspace(-500, max_Y*2, len(listaColumnas)))       
             textoInferior = listaFilas[0]   
 

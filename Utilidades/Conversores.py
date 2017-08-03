@@ -49,8 +49,11 @@ class Conversores:
                 elif (hasattr(item, 'pais') and hasattr(item, 'cantidad')):
                     tupla = (item.pais, item.cantidad)
                     valorItem = item.pais
-
-
+                elif (hasattr(item, 'mes') and hasattr(item, 'cantidad')):
+                    tupla = (item.mes, item.cantidad)
+                    valorItem = item.mes
+                    
+                    
                 if iniciales:
                     listaValores.append(tupla)
                 else:
