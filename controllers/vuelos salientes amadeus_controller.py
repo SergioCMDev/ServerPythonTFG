@@ -238,7 +238,7 @@ def obtener_cantidad_mes_en_rango_anios(PaisOrigen, Mes, AnioInicio, AnioFin): #
 
 
 
-def obtener_cantidad_vuelos_salienes_ciudades_en_anio(PaisOrigen, Anio): #OK
+def obtener_cantidad_vuelos_salientes_ciudades_en_anio(PaisOrigen, Anio): #OK
     """
     Dado un pais origen y un anio obtiene la cantidad de vuelos que salen de dicho pais durante ese año dividiendo por ciudades
     Dado un pais origen y un anio obtiene la cantidad de vuelos que salen de dicho pais durante ese año dividiendo por ciudades

@@ -37,10 +37,14 @@ class Conversores:
         iniciales = True
         listaValores = list()
         listaValoresAComprobar = list()
+        buffer = 0
         for item in body:
                     #TODO IR INCREMENTANDO
-                if(hasattr(item, 'anio') and hasattr(item, 'cantidad')):
-                    print(item)
+                if(hasattr(item, 'anio') and hasattr(item, 'pais') and hasattr(item, 'cantidad')):
+                    tupla = (item.anio, item.pais, item.cantidad)
+                    valorItem = item.anio
+                    buffer = 1
+                elif(hasattr(item, 'anio') and hasattr(item, 'cantidad')):
                     tupla = (item.anio, item.cantidad)
                     valorItem = item.anio
                 elif (hasattr(item, 'ciudad') and hasattr(item, 'cantidad')):
@@ -58,9 +62,10 @@ class Conversores:
                     listaValores.append(tupla)
                 else:
                     listaValores.append(tupla)
-                    listaValoresAComprobar.append(valorItem)
+                    if(valorItem not in listaValoresAComprobar):
+                        listaValoresAComprobar.append(valorItem)    
     
-                if valorItem == ValorFin:
+                if valorItem == ValorFin + buffer:
                      iniciales = False
                         
         return listaValores, listaValoresAComprobar
@@ -93,7 +98,9 @@ class Conversores:
     #filaInicio y filaFin pueden ser tanto años, como paises, como ciudades
     def ConvertirTuplasToMatriz(self, tuplas, labels):
         tuplasMatriz = DataFrame(tuplas, columns = labels)
+#        print(tuplasMatriz)
         matriz, lista = matrix.ObtenerMatrizDatos(tuplasMatriz, labels)
+#        print(tuplasMatriz)
         return matriz, lista
 
     def json_numpy_obj_hook(self, dct):

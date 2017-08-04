@@ -1495,7 +1495,7 @@ paths:
         400:
           description: "Invalid country value"
       x-swagger-router-controller: "swagger_server.controllers.vuelos salientes amadeus_controller"
-  /Amadeus/VuelosSalientes/ObtenerCantidadVuelosSalienesCiudadesEnAnio/{PaisOrigen}:
+  /Amadeus/VuelosSalientes/ObtenerCantidadVuelosSalientesCiudadesEnAnio/{PaisOrigen}:
     get:
       tags:
       - "Vuelos Salientes Amadeus"
@@ -1503,7 +1503,7 @@ paths:
         \ de dicho pais durante ese año dividiendo por ciudades"
       description: "Dado un pais origen y un anio obtiene la cantidad de vuelos que\
         \ salen de dicho pais durante ese año dividiendo por ciudades"
-      operationId: "obtener_cantidad_vuelos_salienes_ciudades_en_anio"
+      operationId: "obtener_cantidad_vuelos_salientes_ciudades_en_anio"
       produces:
       - "application/xml"
       - "application/json"
@@ -2991,13 +2991,6 @@ paths:
         required: true
         type: "integer"
         default: 2014
-        format: "int64"
-      - name: "AnioAComprobar"
-        in: "query"
-        description: "Año a comprobar de la matriz de datos"
-        required: true
-        type: "integer"
-        default: 2015
         format: "int64"
       - name: "Metodo"
         in: "query"

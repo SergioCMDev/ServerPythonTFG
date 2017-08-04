@@ -8,6 +8,7 @@ graphics = Graphics()
 from ..Utilidades.UtilidadesMatriz import UtilidadesMatriz
 utilidadesMatriz = UtilidadesMatriz()
 import pandas as pd
+from sklearn.covariance import EmpiricalCovariance, MinCovDet
 
 class DeteccionOutliers:
     
@@ -27,6 +28,8 @@ class DeteccionOutliers:
             outliersValuesList, inliersValuesList =   self.obtenerOutliersInliersEllipticEnvelope(datosOriginales, datosATestear)
         elif Metodo == "Forest":
             outliersValuesList, inliersValuesList =   self.obtenerInliersOutliersIsolationForest(datosOriginales, datosATestear)
+        elif Metodo == "Covarianza":
+            outliersValuesList, inliersValuesList =   self.obtenerOutliersMinCovarianza(datosOriginales, datosATestear)
 
         return outliersValuesList, inliersValuesList
     
@@ -38,7 +41,16 @@ class DeteccionOutliers:
 #    def setDataValues(self, matriz, anioTrainInicio, AnioTrainFin, AnioTest, labels):
     def setDataValues(self, matriz, DatoTrainInicio, DatoTrainFin, ValoresTest, labels):
 
-        if 'Anio' in labels[0] or 'Mes' in labels[0] and 'Cantidad' in labels[1]:
+        
+        print(labels)
+        if 'Anio' in labels[0] and 'Pais' in labels[1] and 'Cantidad' in labels[2]:
+            print(matriz)
+            print(labels)
+            numColumnas = 1
+            valoresDatosIniciales = utilidadesMatriz.GetValuesArrayIntegers(DatoTrainInicio, DatoTrainFin, matriz, numColumnas ) 
+
+            
+        elif  'Anio' in labels[0] or 'Mes' in labels[0] and 'Cantidad' in labels[1]:
             numColumnas = 1
             valoresDatosIniciales = utilidadesMatriz.GetValuesArrayIntegers(DatoTrainInicio, DatoTrainFin, matriz, numColumnas ) 
             if 'Mes' in labels[0]:
@@ -130,6 +142,13 @@ class DeteccionOutliers:
         graphics.MostrarGraficaInliersOutliersIsolationForest(datosOriginales, datosATestear, listaFilas, listaColumnas)
 
     
+    def obtenerOutliersMinCovarianza(self, datosOriginales, datosATestear):
+        clf = MinCovDet().fit(datosOriginales)
+        resultadoValoresATestear = clf.predict(datosATestear)
+        
+        listaOutliers, listaInliers = self.getListasOutliersInliers(resultadoValoresATestear, datosATestear)
+        return listaOutliers, listaInliers
+
 
     #Metodo Privado
     #Genera el modelo Elliptic Envelope, prueba los datos enviados y devuelve las listas de outliers y inliers
@@ -149,7 +168,7 @@ class DeteccionOutliers:
         
         n_samples = len(datosOriginales)
         np.random.seed(42)
-
+        
         # Fit the model
         clf = IsolationForest(max_samples=n_samples, random_state=rng)
         clf.fit(datosOriginales)

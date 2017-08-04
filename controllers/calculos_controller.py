@@ -160,7 +160,7 @@ def obtener_outliers_pais_cantidad(PaisInicioIniciales, PaisFinIniciales, Metodo
     return 'do some magic!'
         
         
-def obtener_outliers_inliers_mes_cantidad(MesInicioIniciales, MesFinIniciales, Metodo, body):
+def obtener_outliers_inliers_mes_cantidad(MesInicioIniciales, MesFinIniciales, Metodo, body): #OK
     """
     Obtener los valores fuera de lo comun dado unos valores iniciales  y unos valores a tratar
     Este metodo trata los valores de cada mes de cada año y tras pasarle valores a probar decide los inliers y los outliers
@@ -182,6 +182,11 @@ def obtener_outliers_inliers_mes_cantidad(MesInicioIniciales, MesFinIniciales, M
         listaLabels.append('Cantidad')
         listaValores, listaValoresAComprobar = conversor.separarValoresBody(body, MesFinIniciales)
         matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels)
+        
+        outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, "Covarianza")
+
+        
+#        OK
         if Metodo == "Elliptic":
             outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, Metodo)
         else:
@@ -189,15 +194,15 @@ def obtener_outliers_inliers_mes_cantidad(MesInicioIniciales, MesFinIniciales, M
         print(outliersValuesList)
         print("\n")
         print(inliersValuesList)    
-        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
-        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
-    #TODO METODO PARA DEVOLVER OUTLIERS EN JSON
-        return 'do some magic!'
+#        outliers.MostrarOutliersMedianteEnvolturaElipticaDadosDatos(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
+#        outliers.MostrarOutliersMedianteIsolationForestDadosDatos(matriz, MesInicioIniciales, MesFinIniciales, listaValoresAComprobar, listaLabels, listaColumnas)
+#    #TODO METODO PARA DEVOLVER OUTLIERS EN JSON
+#        return 'do some magic!'
 
 
 
 
-def obtener_outliers_inliers_anios_pais_cantidad(AnioInicio, AnioFin, AnioAComprobar, Metodo, body):
+def obtener_outliers_inliers_anios_pais_cantidad(AnioInicio, AnioFin, Metodo, body):
     """
     Obtener los valores fuera de lo comun dado unos valores iniciales y unos valores a tratar
     Este metodo trata los valores de cada mes de cada año y tras pasarle valores a probar decide los inliers y los outliers
@@ -216,6 +221,23 @@ def obtener_outliers_inliers_anios_pais_cantidad(AnioInicio, AnioFin, AnioACompr
     """
     if connexion.request.is_json:
         body = [Body2.from_dict(d) for d in connexion.request.get_json()]
+        listaLabels = list()
+        listaLabels.append('Anio')
+        listaLabels.append('Pais')
+        listaLabels.append('Cantidad')
+        listaValores, listaValoresAComprobar = conversor.separarValoresBody(body, AnioFin)
+#        print( listaValores)
+#        print("\n")
+#        print(listaValoresAComprobar)
+        matriz, listaColumnas =  conversor.ConvertirTuplasToMatriz(listaValores, listaLabels)
+        if Metodo == "Elliptic":
+            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, listaValoresAComprobar, listaLabels, Metodo)
+        else:
+            outliersValuesList, inliersValuesList = outliers.ObtenerOutliersDadaMatrizAniosYTipo(matriz, AnioInicio, AnioFin, listaValoresAComprobar, listaLabels, Metodo)
+#        print(outliersValuesList)
+#        print("\n")
+#        print(inliersValuesList)            
+#        print(matriz)
     return 'do some magic!'
 
 
